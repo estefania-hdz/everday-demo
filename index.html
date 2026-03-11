@@ -327,6 +327,7 @@ body {
 .su-th-sort:hover .su-sort-icon { color: var(--gray-500); }
 .settings-user-row:hover td { background: var(--gray-100); }
 .settings-user-name { display: flex; align-items: center; gap: 9px; font-weight: 600; }
+.settings-user-meta { font-size: 11px; font-weight: 500; color: var(--gray-400); margin-top: 1px; }
 .settings-user-avatar { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; }
 .settings-user-initials { width: 28px; height: 28px; border-radius: 50%; background: var(--purple-100); color: var(--purple-600); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; flex-shrink: 0; }
 .settings-badge { padding: 3px 9px; border-radius: 20px; font-size: 11px; font-weight: 600; }
@@ -421,6 +422,79 @@ body {
 .intel-activity-badge.integration { background: #EDE9FE; color: #6D28D9; }
 .intel-activity-badge.upload { background: #FEF3C7; color: #92400E; }
 .intel-activity-badge.manual { background: #D1FAE5; color: #065F46; }
+
+/* ── CONTEXT LIBRARY (Intelligence page) ── */
+.ctx-lib-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.ctx-lib-search { display: flex; align-items: center; gap: 8px; padding: 9px 14px; border: 1.5px solid var(--gray-200); border-radius: 10px; background: white; width: 280px; }
+.ctx-lib-search input { border: none; outline: none; font-size: 12.5px; font-family: inherit; flex: 1; color: var(--black); }
+.ctx-lib-search input::placeholder { color: var(--gray-400); }
+.ctx-lib-search svg { color: var(--gray-400); flex-shrink: 0; }
+.ctx-lib-filters { display: flex; gap: 6px; margin-bottom: 18px; }
+.ctx-lib-filter { padding: 6px 14px; border-radius: 20px; border: 1.5px solid var(--gray-200); background: white; font-size: 11px; font-weight: 700; color: var(--gray-500); cursor: pointer; transition: all var(--transition); }
+.ctx-lib-filter:hover { border-color: var(--gray-400); }
+.ctx-lib-filter.active { background: var(--black); color: white; border-color: var(--black); }
+.ctx-lib-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.ctx-lib-card { background: white; border: 1.5px solid var(--gray-200); border-radius: 14px; padding: 20px; cursor: pointer; transition: all var(--transition); }
+.ctx-lib-card:hover { border-color: var(--purple-300); box-shadow: var(--shadow-hover); }
+.ctx-lib-card-top { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.ctx-lib-card-icon { width: 36px; height: 36px; border-radius: 10px; background: var(--gray-100); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.ctx-lib-card-title { font-family: var(--font-display); font-size: 14px; font-weight: 700; color: var(--black); }
+.ctx-lib-card-type { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; padding: 2px 8px; border-radius: 4px; }
+.ctx-lib-card-type.company { background: #DBEAFE; color: #1D4ED8; }
+.ctx-lib-card-type.team { background: #D1FAE5; color: #059669; }
+.ctx-lib-card-type.project { background: #FEF3C7; color: #D97706; }
+.ctx-lib-card-type.role { background: #EDE9FE; color: #7C3AED; }
+.ctx-lib-card-type.person { background: #FEE2E2; color: #DC2626; }
+.ctx-lib-card-preview { font-size: 12px; color: var(--gray-500); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 10px; }
+.ctx-lib-card-meta { display: flex; align-items: center; gap: 8px; font-size: 10.5px; color: var(--gray-400); }
+.ctx-lib-card-meta strong { color: var(--gray-600); font-weight: 700; }
+
+/* ── CONTEXT DOC DRAWER ── */
+.ctx-doc-drawer { position: fixed; top: 0; right: -700px; width: 580px; height: 100vh; background: white; z-index: 901; box-shadow: -6px 0 32px rgba(0,0,0,0.13); transition: right 0.28s cubic-bezier(0.4,0,0.2,1); display: flex; flex-direction: column; border-left: 1px solid var(--gray-200); }
+.ctx-doc-drawer.open { right: 0; }
+.ctx-doc-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.3); z-index: 900; display: none; }
+.ctx-doc-overlay.open { display: block; }
+.ctx-doc-header { display: flex; align-items: center; gap: 10px; padding: 18px 22px; border-bottom: 1px solid var(--gray-100); flex-shrink: 0; }
+.ctx-doc-header-icon { font-size: 20px; }
+.ctx-doc-header-title { font-family: var(--font-display); font-size: 16px; font-weight: 800; color: var(--black); flex: 1; }
+.ctx-doc-edit-btn { font-size: 11px; font-weight: 700; padding: 7px 14px; background: var(--black); color: white; border-radius: 8px; cursor: pointer; border: none; display: flex; align-items: center; gap: 5px; transition: all var(--transition); }
+.ctx-doc-edit-btn:hover { opacity: .85; }
+.ctx-doc-close { width: 30px; height: 30px; border-radius: 8px; border: none; display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--gray-400); cursor: pointer; background: transparent; transition: all var(--transition); }
+.ctx-doc-close:hover { background: var(--gray-100); color: var(--black); }
+.ctx-doc-body { flex: 1; overflow-y: auto; padding: 0; }
+.ctx-doc-banner { display: flex; align-items: flex-start; gap: 10px; padding: 14px 18px; margin: 16px 22px; background: #F3F0FF; border: 1.5px solid #DDD6FE; border-radius: 12px; }
+.ctx-doc-banner-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+.ctx-doc-banner-text { font-size: 11.5px; color: #5B21B6; line-height: 1.5; }
+.ctx-doc-banner-text strong { font-weight: 800; }
+.ctx-doc-attrs { display: flex; flex-wrap: wrap; gap: 16px; padding: 14px 22px; border-bottom: 1px solid var(--gray-100); }
+.ctx-doc-attr { display: flex; flex-direction: column; gap: 2px; }
+.ctx-doc-attr-label { font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--gray-400); }
+.ctx-doc-attr-value { font-size: 12px; font-weight: 600; color: var(--black); }
+.ctx-doc-attr-entities { display: flex; gap: 4px; flex-wrap: wrap; }
+.ctx-doc-attr-entity { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px; background: var(--gray-100); color: var(--gray-600); }
+.ctx-doc-sections { padding: 16px 22px; }
+.ctx-doc-section { margin-bottom: 20px; }
+.ctx-doc-section-heading { font-family: var(--font-display); font-size: 13px; font-weight: 800; color: var(--black); margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid var(--gray-100); }
+.ctx-doc-section-content { font-size: 12.5px; color: var(--gray-600); line-height: 1.7; }
+.ctx-doc-section-content strong { color: var(--black); font-weight: 700; }
+.ctx-doc-section-content ul { padding-left: 16px; margin: 4px 0; list-style: disc; }
+.ctx-doc-section-content li { margin-bottom: 3px; }
+.ctx-doc-section-edit { width: 100%; min-height: 80px; padding: 10px 12px; border: 1.5px solid var(--gray-200); border-radius: 9px; font-size: 12.5px; font-family: inherit; line-height: 1.6; resize: vertical; outline: none; color: var(--black); }
+.ctx-doc-section-edit:focus { border-color: #7C3AED; }
+.ctx-doc-save-bar { display: flex; justify-content: flex-end; gap: 8px; padding: 14px 22px; border-top: 1px solid var(--gray-100); flex-shrink: 0; }
+.ctx-doc-save-btn { padding: 8px 20px; border-radius: 9px; font-size: 12px; font-weight: 700; cursor: pointer; border: none; transition: all var(--transition); }
+.ctx-doc-save-primary { background: var(--black); color: white; }
+.ctx-doc-save-primary:hover { opacity: .85; }
+.ctx-doc-save-secondary { background: white; border: 1.5px solid var(--gray-200); color: var(--gray-600); }
+.ctx-doc-save-secondary:hover { background: var(--gray-50); }
+
+/* Intel top tabs */
+.intel-top-tab.active { color: var(--black) !important; border-bottom-color: var(--black) !important; }
+
+/* Team context button */
+.tv-context-btn { display: flex; align-items: center; gap: 5px; padding: 7px 14px; border-radius: 9px; border: 1.5px solid #DDD6FE; background: #F3F0FF; color: #5B21B6; font-size: 11px; font-weight: 700; cursor: pointer; transition: all var(--transition); }
+.tv-context-btn:hover { background: #EDE9FE; border-color: #C4B5FD; }
+.tv-context-btn svg { width: 13px; height: 13px; }
 
 /* ── MAIN ── */
 .main {
@@ -1596,7 +1670,11 @@ body {
   border: 1px solid var(--gray-200);
   border-radius: var(--radius-lg);
   padding: 14px 16px;
+  cursor: pointer;
+  transition: border-color .15s, box-shadow .15s;
 }
+.wf-kpi:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-color: var(--purple-300); }
+.wf-kpi.active { border-color: var(--purple-500); box-shadow: 0 0 0 3px rgba(139,92,246,.1); }
 .wf-kpi-label {
   font-size: 10.5px; font-weight: 700; color: var(--gray-400);
   text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 5px;
@@ -1610,6 +1688,26 @@ body {
 .wf-kpi-trend.up { color: var(--green-600); }
 .wf-kpi-trend.down { color: var(--red-500); }
 .wf-kpi-trend.warn { color: var(--orange-500); }
+
+/* WF KPI chart panel */
+.wf-kpi-chart-panel {
+  background: white; border: 1.5px solid var(--gray-200); border-radius: 12px;
+  padding: 20px 24px; display: none;
+}
+.wf-kpi-chart-panel.open { display: block; animation: fadeInUp 0.3s ease both; }
+
+/* WF Skill Map section */
+.wf-skill-map-section {
+  background: var(--white); border: 1.5px solid var(--gray-200); border-radius: 12px;
+  padding: 18px 22px; display: none;
+}
+.wf-skill-map-section.open { display: block; animation: fadeInUp 0.3s ease both; }
+.wf-skill-map-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.wf-skill-map-title { font-size: 13px; font-weight: 800; color: var(--black); display: flex; align-items: center; gap: 8px; }
+.wf-skill-map-title svg { color: var(--purple-500); }
+.wf-skill-map-hint { font-size: 10.5px; color: var(--gray-400); font-weight: 500; }
+.wf-skill-map-close { background: none; border: none; cursor: pointer; color: var(--gray-400); font-size: 20px; padding: 0 4px; line-height: 1; transition: color .15s; }
+.wf-skill-map-close:hover { color: var(--gray-600); }
 
 /* WF main layout */
 .wf-layout {
@@ -2043,8 +2141,8 @@ body {
 .tv-kpi-period-tabs { display: flex; gap: 2px; background: var(--gray-100); border-radius: 8px; padding: 3px; }
 .tv-kpi-period-tab { font-size: 11px; font-weight: 700; color: var(--gray-500); background: none; border: none; padding: 4px 10px; border-radius: 6px; cursor: pointer; font-family: inherit; transition: background .12s, color .12s; }
 .tv-kpi-period-tab.active { background: white; color: var(--black); box-shadow: 0 1px 3px rgba(0,0,0,.1); }
-.tv-kpi-chart-wrap { position: relative; height: 140px; }
-.tv-kpi-chart-svg { width: 100%; height: 140px; }
+.tv-kpi-chart-wrap { position: relative; height: 200px; }
+.tv-kpi-chart-svg { width: 100%; height: 200px; }
 .tv-kpi-chart-labels { display: flex; justify-content: space-between; margin-top: 6px; padding: 0 4px; }
 .tv-kpi-chart-label { font-size: 10px; color: var(--gray-400); font-weight: 600; text-align: center; flex: 1; }
 
@@ -3231,7 +3329,11 @@ body {
 .rse-level-btn { width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid var(--gray-200); background: white; font-size: 11px; font-weight: 700; color: var(--gray-400); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .12s; margin-left: 4px; }
 .rse-level-btn:hover { border-color: var(--purple-300); color: var(--purple-600); }
 .rse-level-btn.active { background: var(--purple-600); border-color: var(--purple-600); color: white; }
-.rse-remove { width: 24px; height: 24px; border: none; background: none; color: var(--gray-300); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; margin-left: 10px; flex-shrink: 0; transition: color .12s; }
+.rse-priority { width: 26px; height: 26px; border: none; background: none; color: var(--gray-300); cursor: pointer; display: flex; align-items: center; justify-content: center; margin-left: 8px; flex-shrink: 0; transition: all .15s; }
+.rse-priority:hover { color: #F59E0B; }
+.rse-priority.active { color: #F59E0B; }
+.rse-priority svg { width: 16px; height: 16px; }
+.rse-remove { width: 24px; height: 24px; border: none; background: none; color: var(--gray-300); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; margin-left: 4px; flex-shrink: 0; transition: color .12s; }
 .rse-remove:hover { color: #EF4444; }
 .rse-footer { padding: 16px 28px; border-top: 1.5px solid var(--gray-100); flex-shrink: 0; }
 .rse-confirm-btn { width: 100%; padding: 13px; border: none; border-radius: 12px; background: var(--purple-600); color: white; font-size: 14px; font-weight: 800; cursor: pointer; font-family: var(--font-display); transition: background .15s; }
@@ -3558,10 +3660,24 @@ body {
 
 /* Match cells */
 .tm-cell-match { background: #F0FDF4; }
+.tm-cell-match.tm-cell-expert { background: #F0FDF4; }
+.tm-cell-match.tm-cell-advanced { background: #F0FDF4; }
+.tm-cell-match.tm-cell-intermediate { background: #F5F3FF; }
+.tm-cell-match.tm-cell-beginner { background: #FFF7ED; }
 .tm-cell-none { background: white; }
+.tm-cell-nodata { background: #FAFAFA; }
 .tm-cell-inner { display: flex; align-items: center; justify-content: center; min-height: 50px; }
 .tm-check { width: 28px; height: 28px; border-radius: 50%; background: #22C55E; display: flex; align-items: center; justify-content: center; }
+.tm-check.tm-lvl-expert { background: #22C55E; }
+.tm-check.tm-lvl-advanced { background: #22C55E; }
+.tm-check.tm-lvl-intermediate { background: #7C3AED; }
+.tm-check.tm-lvl-beginner { background: #F59E0B; }
 .tm-check svg { width: 14px; height: 14px; stroke: white; stroke-width: 3; fill: none; }
+.tm-check-upgrade { width: 28px; height: 28px; border-radius: 50%; background: #7C3AED; display: flex; align-items: center; justify-content: center; }
+.tm-check-upgrade svg { width: 14px; height: 14px; stroke: white; stroke-width: 2.5; fill: none; }
+.tm-check-warn { width: 28px; height: 28px; border-radius: 50%; background: #F59E0B; display: flex; align-items: center; justify-content: center; }
+.tm-check-warn svg { width: 14px; height: 14px; stroke: white; stroke-width: 2.5; fill: none; }
+.tm-nodata-label { font-size: 10.5px; font-weight: 600; color: var(--gray-400); }
 .tm-dash { color: var(--gray-300); font-size: 18px; font-weight: 700; }
 
 /* Add skill inline row */
@@ -3573,14 +3689,14 @@ body {
 .tm-add-skill-cancel { background: none; border: none; cursor: pointer; color: var(--gray-400); font-size: 17px; line-height: 1; padding: 2px; flex-shrink: 0; }
 
 /* Footer score row */
-.tm-matrix tfoot tr { border-top: 2px solid var(--gray-200); background: var(--gray-50); }
-.tm-match-footer-label { padding: 12px 14px; font-size: 12px; font-weight: 800; color: var(--gray-600); display: block; }
-.tm-match-footer-cell { text-align: center; padding: 10px 6px; }
-.tm-match-pct { font-size: 20px; font-weight: 900; }
-.tm-match-pct.hi { color: #16A34A; }
-.tm-match-pct.mid { color: #D97706; }
-.tm-match-pct.lo { color: #DC2626; }
-.tm-match-pct-lbl { font-size: 9px; font-weight: 700; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; }
+.tm-matrix tfoot tr { border-top: 2px solid var(--gray-200); background: white; }
+.tm-match-footer-label { padding: 14px 14px; font-size: 12.5px; font-weight: 800; color: var(--gray-600); display: block; }
+.tm-match-footer-cell { text-align: center; padding: 14px 6px; }
+.tm-match-pct { font-size: 18px; font-weight: 900; letter-spacing: -0.02em; }
+.tm-match-pct.hi { color: var(--black); }
+.tm-match-pct.mid { color: var(--black); }
+.tm-match-pct.lo { color: var(--black); }
+.tm-match-pct-lbl { font-size: 9px; font-weight: 700; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 3px; }
 
 /* ── Talent Match: JD picker ── */
 .tm-picker-options { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 28px; }
@@ -3683,13 +3799,23 @@ body {
 .tm-ss-stat-label { font-size: 11px; color: var(--gray-500); margin-top: 2px; font-weight: 600; }
 .tm-ss-people-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
 .tm-ss-people-title { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; color: var(--gray-500); }
-.tm-ss-person-row { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: white; border: 1.5px solid var(--gray-200); border-radius: 13px; margin-bottom: 8px; }
-.tm-ss-person-photo { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
-.tm-ss-person-name { font-size: 13px; font-weight: 800; color: var(--black); }
-.tm-ss-person-role { font-size: 11px; color: var(--gray-500); }
-.tm-ss-skill-list { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 4px; }
+.tm-ss-person-row { display: flex; align-items: center; gap: 14px; padding: 14px 18px; background: white; border: 1.5px solid var(--gray-200); border-radius: 13px; margin-bottom: 8px; }
+.tm-ss-person-photo { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+.tm-ss-person-name { font-size: 13.5px; font-weight: 800; color: var(--black); display: flex; align-items: center; gap: 7px; }
+.tm-ss-person-role { font-size: 11.5px; color: var(--gray-600); font-weight: 600; margin-top: 1px; }
+.tm-ss-person-team { font-size: 11px; color: var(--gray-400); font-weight: 600; }
+.tm-ss-skill-list { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 6px; }
 .tm-ss-skill-chip { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 7px; background: #DCFCE7; color: #15803D; }
-.tm-ss-level-badge { margin-left: auto; background: var(--purple-100); color: var(--purple-700); font-size: 11px; font-weight: 800; padding: 3px 10px; border-radius: 8px; white-space: nowrap; flex-shrink: 0; }
+.tm-ss-right-col { margin-left: auto; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; flex-shrink: 0; }
+.tm-ss-level-badge { background: var(--purple-100); color: var(--purple-700); font-size: 11px; font-weight: 800; padding: 3px 10px; border-radius: 8px; white-space: nowrap; }
+.tm-ss-seniority-badge { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 6px; white-space: nowrap; text-transform: uppercase; letter-spacing: .04em; }
+.tm-ss-seniority-junior { background: #DBEAFE; color: #1D4ED8; }
+.tm-ss-seniority-mid { background: #FEF3C7; color: #92400E; }
+.tm-ss-seniority-senior { background: #F0FDF4; color: #15803D; }
+.tm-ss-match-bar-wrap { display: flex; align-items: center; gap: 6px; margin-top: 6px; }
+.tm-ss-match-bar { width: 60px; height: 5px; border-radius: 3px; background: var(--gray-200); overflow: hidden; }
+.tm-ss-match-bar-fill { height: 100%; border-radius: 3px; }
+.tm-ss-match-pct { font-size: 11px; font-weight: 800; }
 .tm-ss-empty { text-align: center; padding: 32px 20px; color: var(--gray-400); font-size: 13px; line-height: 1.6; }
 .tm-ss-featured { margin-bottom: 10px; }
 .tm-ss-featured-title { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; color: var(--gray-500); margin-bottom: 10px; }
@@ -4957,35 +5083,161 @@ body {
 
     <!-- KPI Strip -->
     <div class="wf-kpi-strip">
-      <div class="wf-kpi">
+      <div class="wf-kpi" onclick="wfToggleKpiChart('people', this)">
         <div class="wf-kpi-label">Total People</div>
         <div class="wf-kpi-val" style="color:var(--blue-500)">44</div>
         <div class="wf-kpi-sub">5 teams</div>
         <div class="wf-kpi-trend up">↑ +3 this quarter</div>
       </div>
-      <div class="wf-kpi">
+      <div class="wf-kpi" onclick="wfToggleKpiChart('assessed', this)">
         <div class="wf-kpi-label">Assessed</div>
         <div class="wf-kpi-val" style="color:var(--purple-600)">38<span style="font-size:14px;font-weight:500;color:var(--gray-400)">/44</span></div>
         <div class="wf-kpi-sub">86% coverage</div>
         <div class="wf-kpi-trend up">↑ +6 vs last Q</div>
       </div>
-      <div class="wf-kpi">
+      <div class="wf-kpi" onclick="wfToggleKpiChart('rolematch', this)">
         <div class="wf-kpi-label">Avg Role Match</div>
         <div class="wf-kpi-val" style="color:var(--orange-500)">72<span style="font-size:14px;font-weight:500;color:var(--gray-400)">%</span></div>
         <div class="wf-kpi-sub">Target: 85%</div>
         <div class="wf-kpi-trend warn">↓ −4pts vs Q4</div>
       </div>
-      <div class="wf-kpi">
+      <div class="wf-kpi" onclick="wfToggleKpiChart('gaps', this)">
         <div class="wf-kpi-label">Critical Gaps</div>
         <div class="wf-kpi-val" style="color:var(--red-500)">5</div>
         <div class="wf-kpi-sub">Across 3 teams</div>
         <div class="wf-kpi-trend down">↑ +2 new gaps</div>
       </div>
-      <div class="wf-kpi">
-        <div class="wf-kpi-label">Attrition Risk</div>
-        <div class="wf-kpi-val" style="color:var(--red-500)">4</div>
-        <div class="wf-kpi-sub">2 high · 2 medium</div>
-        <div class="wf-kpi-trend warn">Watch Sandra B.</div>
+      <div class="wf-kpi" onclick="wfToggleSkillMap(this)">
+        <div class="wf-kpi-label">Skill Coverage</div>
+        <div class="wf-kpi-val" style="color:var(--purple-600)">68<span style="font-size:14px;font-weight:500;color:var(--gray-400)">%</span></div>
+        <div class="wf-kpi-sub">Across 8 skill areas</div>
+        <div class="wf-kpi-trend down">↓ 2 critical gaps</div>
+      </div>
+    </div>
+
+    <!-- WF KPI chart panel (hidden by default) -->
+    <div class="wf-kpi-chart-panel" id="wf-kpi-chart-panel">
+      <div class="tv-kpi-chart-header">
+        <div class="tv-kpi-chart-title" id="wf-kpi-chart-title">Total People</div>
+        <div class="tv-kpi-period-tabs" id="wf-kpi-period-tabs">
+          <button class="tv-kpi-period-tab" onclick="wfSetKpiPeriod('monthly',this)">Monthly</button>
+          <button class="tv-kpi-period-tab active" onclick="wfSetKpiPeriod('quarterly',this)">Quarterly</button>
+          <button class="tv-kpi-period-tab" onclick="wfSetKpiPeriod('yearly',this)">Yearly</button>
+        </div>
+      </div>
+      <div class="tv-kpi-chart-wrap">
+        <svg class="tv-kpi-chart-svg" id="wf-kpi-chart-svg" viewBox="0 0 600 200" preserveAspectRatio="none"></svg>
+      </div>
+      <div class="tv-kpi-chart-labels" id="wf-kpi-chart-labels"></div>
+    </div>
+
+    <!-- WF Company Skill Map (hidden by default) -->
+    <div class="wf-skill-map-section" id="wf-skill-map-section">
+      <div class="wf-skill-map-header">
+        <div class="wf-skill-map-title">
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg>
+          Company Skill Map
+          <span class="wf-skill-map-hint">Click a category to expand</span>
+        </div>
+        <button class="wf-skill-map-close" onclick="wfCloseSkillMap()">&times;</button>
+      </div>
+
+      <div class="tv-cat-cloud">
+        <div class="tv-cat-bubble cat-xl col-green" onclick="wfToggleSkillCat('wf-cat-engineering')">
+          <div class="tv-cat-name">Engineering</div>
+          <div class="tv-cat-count">142/176</div>
+        </div>
+        <div class="tv-cat-bubble cat-lg col-green" onclick="wfToggleSkillCat('wf-cat-leadership')">
+          <div class="tv-cat-name">Leadership</div>
+          <div class="tv-cat-count">14/20</div>
+        </div>
+        <div class="tv-cat-bubble cat-lg col-blue" onclick="wfToggleSkillCat('wf-cat-product')">
+          <div class="tv-cat-name">Product</div>
+          <div class="tv-cat-count">32/44</div>
+        </div>
+        <div class="tv-cat-bubble cat-md col-blue" onclick="wfToggleSkillCat('wf-cat-data')">
+          <div class="tv-cat-name">Data &amp; Analytics</div>
+          <div class="tv-cat-count">22/28</div>
+        </div>
+        <div class="tv-cat-bubble cat-md col-orange" onclick="wfToggleSkillCat('wf-cat-cs')">
+          <div class="tv-cat-name">Customer Success</div>
+          <div class="tv-cat-count">18/40</div>
+        </div>
+        <div class="tv-cat-bubble cat-sm col-orange" onclick="wfToggleSkillCat('wf-cat-design')">
+          <div class="tv-cat-name">Design</div>
+          <div class="tv-cat-count">9/16</div>
+        </div>
+        <div class="tv-cat-bubble cat-sm col-red" onclick="wfToggleSkillCat('wf-cat-security')">
+          <div class="tv-cat-name">Security</div>
+          <div class="tv-cat-count">4/20</div>
+        </div>
+      </div>
+
+      <div class="tv-bubble-legend" style="margin-top:12px;margin-bottom:8px">
+        <div class="tv-bubble-legend-item"><div class="tv-bubble-legend-dot" style="background:#10B981"></div>Healthy (&gt;75%)</div>
+        <div class="tv-bubble-legend-item"><div class="tv-bubble-legend-dot" style="background:#6366F1"></div>Growing (50–75%)</div>
+        <div class="tv-bubble-legend-item"><div class="tv-bubble-legend-dot" style="background:#F97316"></div>Needs attention (&lt;50%)</div>
+        <div class="tv-bubble-legend-item"><div class="tv-bubble-legend-dot" style="background:#EF4444"></div>Critical gap (&lt;25%)</div>
+      </div>
+
+      <!-- Sub-skill panels -->
+      <div class="tv-cat-panel" id="wf-cat-engineering">
+        <div class="tv-cat-panel-title">Engineering — company-wide skills</div>
+        <div class="tv-cat-sub-skill"><span class="tv-cat-sub-name">Python</span><div class="tv-cat-sub-bar-wrap"><div class="tv-cat-sub-bar" style="width:90%;background:var(--green-500)"></div></div><span class="tv-cat-sub-count" style="color:var(--green-600)">40/44</span></div>
+        <div class="tv-cat-sub-skill"><span class="tv-cat-sub-name">REST APIs</span><div class="tv-cat-sub-bar-wrap"><div class="tv-cat-sub-bar" style="width:82%;background:var(--green-500)"></div></div><span class="tv-cat-sub-count" style="color:var(--green-600)">36/44</span></div>
+        <div class="tv-cat-sub-skill"><span class="tv-cat-sub-name">System Design</span><div class="tv-cat-sub-bar-wrap"><div class="tv-cat-sub-bar" style="width:55%;background:var(--blue-500)"></div></div><span class="tv-cat-sub-count" style="color:var(--blue-500)">24/44</span></div>
+        <div class="tv-cat-sub-skill"><span class="tv-cat-sub-name">Cloud Architecture</span><div class="tv-cat-sub-bar-wrap"><div class="tv-cat-sub-bar" style="width:18%;background:var(--red-500)"></div></div><span class="tv-cat-sub-count" style="color:var(--red-500)">8/44</span></div>
+        <div class="tv-cat-sub-skill"><span class="tv-cat-sub-name">React / Frontend</span><div class="tv-cat-sub-bar-wrap"><div class="tv-cat-sub-bar" style="width:55%;background:var(--blue-500)"></div></div><span class="tv-cat-sub-count" style="color:var(--blue-500)">24/44</span></div>
+        <div class="tv-cat-hint">Aggregated across Backend Squad, Frontend, DevOps, QA, Data teams</div>
+      </div>
+
+      <div class="tv-cat-panel" id="wf-cat-leadership">
+        <div class="tv-cat-panel-title">Leadership — company-wide skills</div>
+        <div class="tv-cat-sub-skill"><span class="tv-cat-sub-name">Team Leadership</span><div class="tv-cat-sub-bar-wrap"><div class="tv-cat-sub-bar" style="width:70%;background:var(--green-500)"></div></div><span class="tv-cat-sub-count" style="color:var(--green-600)">14/20</span></div>
+        <div class="tv-cat-sub-skill"><span class="tv-cat-sub-name">Stakeholder Mgmt</span><div class="tv-cat-sub-bar-wrap"><div class="tv-cat-sub-bar" style="width:60%;background:var(--blue-500)"></div></div><span class="tv-cat-sub-count" style="color:var(--blue-500)">12/20</span></div>
+        <div class="tv-cat-sub-skill"><span class="tv-cat-sub-name">Strategic Planning</span><div class="tv-cat-sub-bar-wrap"><div class="tv-cat-sub-bar" style="width:35%;background:var(--orange-500)"></div></div><span class="tv-cat-sub-count" style="color:var(--orange-500)">7/20</span></div>
+        <div class="tv-cat-sub-skill"><span class="tv-cat-sub-name">Change Management</span><div class="tv-cat-sub-bar-wrap"><div class="tv-cat-sub-bar" style="width:25%;background:var(--orange-500)"></div></div><span class="tv-cat-sub-count" style="color:var(--orange-500)">5/20</span></div>
+        <div class="tv-cat-hint">Across all teams and levels</div>
+      </div>
+
+      <div class="tv-cat-panel" id="wf-cat-product">
+        <div class="tv-cat-panel-title">Product — company-wide skills</div>
+        <div class="tv-cat-sub-skill"><span class="tv-cat-sub-name">Roadmapping</span><div class="tv-cat-sub-bar-wrap"><div class="tv-cat-sub-bar" style="width:82%;background:var(--green-500)"></div></div><span class="tv-cat-sub-count" style="color:var(--green-600)">36/44</span></div>
+        <div class="tv-cat-sub-skill"><span class="tv-cat-sub-name">Technical Planning</span><div class="tv-cat-sub-bar-wrap"><div class="tv-cat-sub-bar" style="width:68%;background:var(--blue-500)"></div></div><span class="tv-cat-sub-count" style="color:var(--blue-500)">30/44</span></div>
+        <div class="tv-cat-sub-skill"><span class="tv-cat-sub-name">User Research</span><div class="tv-cat-sub-bar-wrap"><div class="tv-cat-sub-bar" style="width:36%;background:var(--orange-500)"></div></div><span class="tv-cat-sub-count" style="color:var(--orange-500)">16/44</span></div>
+        <div class="tv-cat-hint">Product, Engineering, and Design teams</div>
+      </div>
+
+      <div class="tv-cat-panel" id="wf-cat-data">
+        <div class="tv-cat-panel-title">Data & Analytics — company-wide skills</div>
+        <div class="tv-cat-sub-skill"><span class="tv-cat-sub-name">SQL</span><div class="tv-cat-sub-bar-wrap"><div class="tv-cat-sub-bar" style="width:78%;background:var(--green-500)"></div></div><span class="tv-cat-sub-count" style="color:var(--green-600)">22/28</span></div>
+        <div class="tv-cat-sub-skill"><span class="tv-cat-sub-name">Data Pipelines</span><div class="tv-cat-sub-bar-wrap"><div class="tv-cat-sub-bar" style="width:50%;background:var(--blue-500)"></div></div><span class="tv-cat-sub-count" style="color:var(--blue-500)">14/28</span></div>
+        <div class="tv-cat-sub-skill"><span class="tv-cat-sub-name">Data Visualization</span><div class="tv-cat-sub-bar-wrap"><div class="tv-cat-sub-bar" style="width:32%;background:var(--orange-500)"></div></div><span class="tv-cat-sub-count" style="color:var(--orange-500)">9/28</span></div>
+        <div class="tv-cat-hint">Engineering and Product teams</div>
+      </div>
+
+      <div class="tv-cat-panel" id="wf-cat-cs">
+        <div class="tv-cat-panel-title">Customer Success — company-wide skills <span style="color:var(--red-500);font-weight:800">⚠ Below target</span></div>
+        <div class="tv-cat-sub-skill"><span class="tv-cat-sub-name">Account Management</span><div class="tv-cat-sub-bar-wrap"><div class="tv-cat-sub-bar" style="width:45%;background:var(--orange-500)"></div></div><span class="tv-cat-sub-count" style="color:var(--orange-500)">18/40</span></div>
+        <div class="tv-cat-sub-skill"><span class="tv-cat-sub-name">Product Knowledge</span><div class="tv-cat-sub-bar-wrap"><div class="tv-cat-sub-bar" style="width:65%;background:var(--blue-500)"></div></div><span class="tv-cat-sub-count" style="color:var(--blue-500)">26/40</span></div>
+        <div class="tv-cat-sub-skill"><span class="tv-cat-sub-name">Negotiation</span><div class="tv-cat-sub-bar-wrap"><div class="tv-cat-sub-bar" style="width:20%;background:var(--red-500)"></div></div><span class="tv-cat-sub-count" style="color:var(--red-500)">8/40</span></div>
+        <div class="tv-cat-hint">⚠ CS team 27pts below target — contributing to Q3 delivery risk</div>
+      </div>
+
+      <div class="tv-cat-panel" id="wf-cat-design">
+        <div class="tv-cat-panel-title">Design — company-wide skills</div>
+        <div class="tv-cat-sub-skill"><span class="tv-cat-sub-name">Figma</span><div class="tv-cat-sub-bar-wrap"><div class="tv-cat-sub-bar" style="width:56%;background:var(--blue-500)"></div></div><span class="tv-cat-sub-count" style="color:var(--blue-500)">9/16</span></div>
+        <div class="tv-cat-sub-skill"><span class="tv-cat-sub-name">UX Research</span><div class="tv-cat-sub-bar-wrap"><div class="tv-cat-sub-bar" style="width:31%;background:var(--orange-500)"></div></div><span class="tv-cat-sub-count" style="color:var(--orange-500)">5/16</span></div>
+        <div class="tv-cat-sub-skill"><span class="tv-cat-sub-name">Design Systems</span><div class="tv-cat-sub-bar-wrap"><div class="tv-cat-sub-bar" style="width:25%;background:var(--orange-500)"></div></div><span class="tv-cat-sub-count" style="color:var(--orange-500)">4/16</span></div>
+        <div class="tv-cat-hint">Design and Product teams</div>
+      </div>
+
+      <div class="tv-cat-panel" id="wf-cat-security">
+        <div class="tv-cat-panel-title">Security — company-wide skills <span style="color:var(--red-500);font-weight:800">⚠ Critical gap</span></div>
+        <div class="tv-cat-sub-skill"><span class="tv-cat-sub-name">Security Auditing</span><div class="tv-cat-sub-bar-wrap"><div class="tv-cat-sub-bar" style="width:20%;background:var(--red-500)"></div></div><span class="tv-cat-sub-count" style="color:var(--red-500)">4/20</span></div>
+        <div class="tv-cat-sub-skill"><span class="tv-cat-sub-name">Penetration Testing</span><div class="tv-cat-sub-bar-wrap"><div class="tv-cat-sub-bar" style="width:10%;background:var(--red-500)"></div></div><span class="tv-cat-sub-count" style="color:var(--red-500)">2/20</span></div>
+        <div class="tv-cat-sub-skill"><span class="tv-cat-sub-name">Compliance</span><div class="tv-cat-sub-bar-wrap"><div class="tv-cat-sub-bar" style="width:15%;background:var(--red-500)"></div></div><span class="tv-cat-sub-count" style="color:var(--red-500)">3/20</span></div>
+        <div class="tv-cat-hint">⚠ Major gap — only 4 people with any security skills across the org</div>
       </div>
     </div>
 
@@ -7020,6 +7272,10 @@ body {
                 <div class="tv-lead-name">Maria G.</div>
                 <div class="tv-lead-role">Backend Lead</div>
               </div>
+              <button class="tv-context-btn" onclick="openCtxDoc('ctx-team-backend')">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                Context
+              </button>
               <button class="tv-add-member-btn">
                 <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                 Add Member
@@ -7078,7 +7334,7 @@ body {
           </div>
         </div>
         <div class="tv-kpi-chart-wrap">
-          <svg class="tv-kpi-chart-svg" id="tv-kpi-chart-svg" viewBox="0 0 600 140" preserveAspectRatio="none"></svg>
+          <svg class="tv-kpi-chart-svg" id="tv-kpi-chart-svg" viewBox="0 0 600 200" preserveAspectRatio="none"></svg>
         </div>
         <div class="tv-kpi-chart-labels" id="tv-kpi-chart-labels"></div>
       </div>
@@ -9231,7 +9487,7 @@ body {
           <div class="jf2-toggles">
             <label class="jf2-toggle-item"><input type="checkbox" id="jf2-show-crit" checked onchange="renderJF2()"> ⚡ Show Criticality</label>
             <label class="jf2-toggle-item"><input type="checkbox" id="jf2-show-level" checked onchange="renderJF2()"> # Show Proficiency</label>
-            <span style="margin-left:auto;font-size:10.5px;color:var(--gray-400)"><span class="jf-custom-badge">Custom</span> = company-specific skill</span>
+            <span style="margin-left:auto;font-size:10.5px;color:var(--gray-400)"><span class="jf-custom-badge">Critical</span> = company-critical skill</span>
           </div>
           <!-- Matrix -->
           <div class="jf2-matrix-wrap">
@@ -9278,6 +9534,7 @@ body {
         <button class="rse-close" onclick="closeRoleSkillEditor()">✕</button>
       </div>
       <input type="text" class="rse-search" placeholder="Search skills" oninput="filterRSESkills(this.value)">
+      <div style="display:flex;align-items:center;gap:6px;margin-top:10px;font-size:10.5px;color:var(--gray-400)"><svg width="13" height="13" viewBox="0 0 24 24" fill="#F59E0B" stroke="#F59E0B" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> = priority skill for talent matching</div>
     </div>
     <div class="rse-body" id="rse-body">
       <!-- Skills rendered by JS -->
@@ -9338,6 +9595,17 @@ body {
                   </div>
                 </div>
               </div>
+              <div class="ps-form-row2">
+                <div class="ps-form-field">
+                  <label class="ps-label">Budget <span style="font-weight:500;color:var(--gray-400)">optional</span></label>
+                  <div style="display:flex;align-items:center;gap:4px">
+                    <span style="font-size:13px;font-weight:700;color:var(--gray-400)">$</span>
+                    <input class="ps-input" type="number" id="psf-budget" placeholder="e.g. 180" min="0" style="flex:1">
+                    <span style="font-size:11px;font-weight:600;color:var(--gray-400)">K</span>
+                  </div>
+                </div>
+                <div class="ps-form-field"></div>
+              </div>
               <div class="ps-form-field">
                 <label class="ps-label">Priority</label>
                 <div class="ps-priority-row">
@@ -9353,6 +9621,28 @@ body {
               <div class="ps-form-field">
                 <label class="ps-label">Project description</label>
                 <textarea class="ps-brief-area" id="ps-desc" style="min-height:72px;font-size:12px" placeholder="e.g. We need to build a Stripe payments integration. Backend heavy, REST APIs. ~3 months, Q3 2026. Also need QA."></textarea>
+              </div>
+            </div>
+
+            <!-- Project Context -->
+            <div class="ps-form-section">
+              <div class="ps-form-field">
+                <label class="ps-label" style="display:flex;align-items:center;gap:6px">
+                  Project context
+                  <span style="font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;background:#F3F0FF;color:#5B21B6">AI-powered</span>
+                </label>
+                <!-- Auto-create info banner -->
+                <div style="display:flex;align-items:flex-start;gap:8px;padding:10px 12px;background:#F3F0FF;border:1px solid #DDD6FE;border-radius:9px;margin-bottom:10px">
+                  <span style="font-size:13px;flex-shrink:0">✨</span>
+                  <div style="font-size:11px;color:#5B21B6;line-height:1.4"><strong>Everday will auto-generate a context doc</strong> from the project name, description, and required skills when you save this project.</div>
+                </div>
+                <!-- Or use existing project context -->
+                <div style="font-size:11px;font-weight:600;color:var(--gray-400);margin-bottom:6px">Or use existing project context <span style="font-weight:400;color:var(--gray-300)">(optional)</span></div>
+                <select class="ps-input" style="font-size:12px;padding:8px 10px;cursor:pointer" onchange="if(this.value) openCtxDoc(this.value)">
+                  <option value="">Select a project context...</option>
+                  <option value="ctx-project-payments">💳 Payments v2</option>
+                  <option value="ctx-project-datamigration">📊 Data Platform Migration</option>
+                </select>
               </div>
             </div>
 
@@ -9976,20 +10266,25 @@ body {
           </div>
         </div>
 
-        <!-- Company Values -->
-        <div class="settings-card">
-          <div class="settings-card-title">
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            Company Values
+        <!-- Organizational Context -->
+        <div class="settings-card" style="border-color:#DDD6FE;background:#F3F0FF">
+          <div class="settings-card-title" style="color:#5B21B6">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            Organizational Context
           </div>
-          <p style="font-size:12px;color:var(--gray-500);margin-bottom:12px">These values feed into employee value-alignment and culture fit analysis.</p>
-          <div class="settings-chip-list" id="company-values-list">
-            <span class="settings-chip">Transparency <span class="chip-remove" onclick="this.parentElement.remove()">×</span></span>
-            <span class="settings-chip">Customer obsession <span class="chip-remove" onclick="this.parentElement.remove()">×</span></span>
-            <span class="settings-chip">Bias for action <span class="chip-remove" onclick="this.parentElement.remove()">×</span></span>
-            <span class="settings-chip">Growth mindset <span class="chip-remove" onclick="this.parentElement.remove()">×</span></span>
-            <span class="settings-chip">Ownership <span class="chip-remove" onclick="this.parentElement.remove()">×</span></span>
-            <span class="settings-add-chip" onclick="settingsAddValue()">+ Add value</span>
+          <p style="font-size:12px;color:var(--gray-600);margin-bottom:14px;line-height:1.5">
+            Your company context document feeds Everday AI. The more detail you provide about your mission, culture, values, and structure, the smarter skill matching and growth path recommendations become.
+          </p>
+          <div style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:white;border:1.5px solid var(--gray-200);border-radius:12px;margin-bottom:12px;cursor:pointer" onclick="openCtxDoc('ctx-company-1')">
+            <div style="font-size:22px">🏢</div>
+            <div style="flex:1">
+              <div style="font-size:13px;font-weight:800;color:var(--black)">ACME Corporation</div>
+              <div style="font-size:11px;color:var(--gray-500);margin-top:2px">4 sections &middot; Last edited Mar 10 by Sarah H.</div>
+            </div>
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="var(--gray-400)" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          </div>
+          <div style="font-size:11px;color:#5B21B6;font-weight:700;cursor:pointer" onclick="switchPage('intelligence')">
+            View all context docs in Intelligence →
           </div>
         </div>
 
@@ -10128,7 +10423,7 @@ body {
             <tbody>
               <!-- Maria — Admin, multi-team, expandable -->
               <tr class="settings-user-row" onclick="suToggleTeams('su-teams-maria', this)">
-                <td><div class="settings-user-name"><img class="settings-user-avatar" src="https://randomuser.me/api/portraits/women/44.jpg" alt="">Maria Gonzalez</div></td>
+                <td><div class="settings-user-name"><img class="settings-user-avatar" src="https://randomuser.me/api/portraits/women/44.jpg" alt=""><div>Maria Gonzalez<div class="settings-user-meta">Co-founder · Product</div></div></div></td>
                 <td><span class="su-since">Sep 22</span></td>
                 <td><span class="settings-badge settings-badge-admin">Admin</span></td>
                 <td>
@@ -10158,7 +10453,7 @@ body {
 
               <!-- James — Admin, multi-team -->
               <tr class="settings-user-row" onclick="suToggleTeams('su-teams-james', this)">
-                <td><div class="settings-user-name"><img class="settings-user-avatar" src="https://randomuser.me/api/portraits/men/32.jpg" alt="">James Chen</div></td>
+                <td><div class="settings-user-name"><img class="settings-user-avatar" src="https://randomuser.me/api/portraits/men/32.jpg" alt=""><div>James Chen<div class="settings-user-meta">CTO · Engineering</div></div></div></td>
                 <td><span class="su-since">Sep 22</span></td>
                 <td><span class="settings-badge settings-badge-admin">Admin</span></td>
                 <td>
@@ -10189,7 +10484,7 @@ body {
 
               <!-- Sarah — single team -->
               <tr class="settings-user-row" onclick="suToggleTeams('su-teams-sarah', this)">
-                <td><div class="settings-user-name"><div class="settings-user-initials">SL</div>Sarah Lee</div></td>
+                <td><div class="settings-user-name"><div class="settings-user-initials">SL</div><div>Sarah Lee<div class="settings-user-meta">People Manager · People & Culture</div></div></div></td>
                 <td><span class="su-since">Sep 22</span></td>
                 <td><span class="settings-badge settings-badge-member">Member</span></td>
                 <td>
@@ -10214,7 +10509,7 @@ body {
 
               <!-- Tomás — multi-team, expandable -->
               <tr class="settings-user-row" onclick="suToggleTeams('su-teams-tomas', this)">
-                <td><div class="settings-user-name"><div class="settings-user-initials">TK</div>Tomás Kowalski</div></td>
+                <td><div class="settings-user-name"><div class="settings-user-initials">TK</div><div>Tomás Kowalski<div class="settings-user-meta">Sr. Engineer · Backend Squad</div></div></div></td>
                 <td><span class="su-since">Oct 6</span></td>
                 <td><span class="settings-badge settings-badge-member">Member</span></td>
                 <td>
@@ -10245,7 +10540,7 @@ body {
 
               <!-- Aisha — single team -->
               <tr class="settings-user-row">
-                <td><div class="settings-user-name"><div class="settings-user-initials">AP</div>Aisha Patel</div></td>
+                <td><div class="settings-user-name"><div class="settings-user-initials">AP</div><div>Aisha Patel<div class="settings-user-meta">Design Lead · Product Design</div></div></div></td>
                 <td><span class="su-since">Oct 6</span></td>
                 <td><span class="settings-badge settings-badge-member">Member</span></td>
                 <td>
@@ -10257,7 +10552,7 @@ body {
 
               <!-- Gabrielle — Member, assigned -->
               <tr class="settings-user-row">
-                <td><div class="settings-user-name"><div class="settings-user-initials">GS</div>Gabrielle Slorach</div></td>
+                <td><div class="settings-user-name"><div class="settings-user-initials">GS</div><div>Gabrielle Slorach<div class="settings-user-meta">CS Manager · Customer Success</div></div></div></td>
                 <td><span class="su-since">Sep 22</span></td>
                 <td><span class="settings-badge settings-badge-member">Member</span></td>
                 <td>
@@ -10269,7 +10564,7 @@ body {
 
               <!-- Pending invites -->
               <tr class="settings-user-row">
-                <td><div class="settings-user-name"><div class="settings-user-initials">DP</div>Diana Petrov</div></td>
+                <td><div class="settings-user-name"><div class="settings-user-initials">DP</div><div>Diana Petrov<div class="settings-user-meta">Data Analyst · Data & Analytics</div></div></div></td>
                 <td><span class="su-since">Nov 23</span></td>
                 <td><span class="settings-badge settings-badge-member">Member</span></td>
                 <td>
@@ -10280,7 +10575,7 @@ body {
               </tr>
 
               <tr class="settings-user-row">
-                <td><div class="settings-user-name"><div class="settings-user-initials">KN</div>Kenji Nakamura</div></td>
+                <td><div class="settings-user-name"><div class="settings-user-initials">KN</div><div>Kenji Nakamura<div class="settings-user-meta">Security Engineer · Infrastructure</div></div></div></td>
                 <td><span class="su-since">Nov 23</span></td>
                 <td><span class="settings-badge settings-badge-member">Member</span></td>
                 <td>
@@ -10314,7 +10609,7 @@ body {
               </thead>
               <tbody>
                 <tr class="settings-user-row">
-                  <td><div class="settings-user-name"><div class="settings-user-initials">JF</div>Joris Fonteijn</div></td>
+                  <td><div class="settings-user-name"><div class="settings-user-initials">JF</div><div>Joris Fonteijn<div class="settings-user-meta">Product Designer · Design</div></div></div></td>
                   <td><span class="su-since">Sep 22</span></td>
                   <td><span style="font-size:11.5px;color:var(--gray-500)">LinkedIn import</span></td>
                   <td style="text-align:right"><button class="su-assign-btn" onclick="alert('Assign Joris to a user account')"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M20 8v6M23 11h-6"/></svg> Assign to user</button></td>
@@ -10328,7 +10623,7 @@ body {
                   <td style="text-align:right"><div class="su-actions"><button class="su-actions-btn" onclick="suToggleMenu(this)">⋮</button><div class="su-actions-menu"><button class="su-actions-item" onclick="alert('Edit Patrick Oberstadt')"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>Modify</button><button class="su-actions-item su-actions-item-danger" onclick="alert('Delete Patrick Oberstadt')"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>Delete</button></div></div></td>
                 </tr>
                 <tr class="settings-user-row">
-                  <td><div class="settings-user-name"><div class="settings-user-initials">IB</div>Ikram Benaziza</div></td>
+                  <td><div class="settings-user-name"><div class="settings-user-initials">IB</div><div>Ikram Benaziza<div class="settings-user-meta">Data Engineer · Engineering</div></div></div></td>
                   <td><span class="su-since">Sep 22</span></td>
                   <td><span style="font-size:11.5px;color:var(--gray-500)">CV upload</span></td>
                   <td style="text-align:right"><button class="su-assign-btn" onclick="alert('Assign Ikram to a user account')"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M20 8v6M23 11h-6"/></svg> Assign to user</button></td>
@@ -10349,14 +10644,14 @@ body {
                   <td style="text-align:right"><div class="su-actions"><button class="su-actions-btn" onclick="suToggleMenu(this)">⋮</button><div class="su-actions-menu"><button class="su-actions-item" onclick="alert('Edit Rodger Buijvoets')"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>Modify</button><button class="su-actions-item su-actions-item-danger" onclick="alert('Delete Rodger Buijvoets')"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>Delete</button></div></div></td>
                 </tr>
                 <tr class="settings-user-row">
-                  <td><div class="settings-user-name"><div class="settings-user-initials">MG</div>Marie Guiet</div></td>
+                  <td><div class="settings-user-name"><div class="settings-user-initials">MG</div><div>Marie Guiet<div class="settings-user-meta">Marketing Lead · Growth</div></div></div></td>
                   <td><span class="su-since">Sep 22</span></td>
                   <td><span style="font-size:11.5px;color:var(--gray-500)">CV upload</span></td>
                   <td style="text-align:right"><button class="su-assign-btn" onclick="alert('Assign Marie to a user account')"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M20 8v6M23 11h-6"/></svg> Assign to user</button></td>
                   <td style="text-align:right"><div class="su-actions"><button class="su-actions-btn" onclick="suToggleMenu(this)">⋮</button><div class="su-actions-menu"><button class="su-actions-item" onclick="alert('Edit Marie Guiet')"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>Modify</button><button class="su-actions-item su-actions-item-danger" onclick="alert('Delete Marie Guiet')"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>Delete</button></div></div></td>
                 </tr>
                 <tr class="settings-user-row">
-                  <td><div class="settings-user-name"><div class="settings-user-initials">CP</div>Camila Perez</div></td>
+                  <td><div class="settings-user-name"><div class="settings-user-initials">CP</div><div>Camila Perez<div class="settings-user-meta">Account Executive · Sales</div></div></div></td>
                   <td><span class="su-since">Sep 22</span></td>
                   <td><span style="font-size:11.5px;color:var(--gray-500)">LinkedIn import</span></td>
                   <td style="text-align:right"><button class="su-assign-btn" onclick="alert('Assign Camila to a user account')"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M20 8v6M23 11h-6"/></svg> Assign to user</button></td>
@@ -10474,12 +10769,53 @@ body {
 
       <div class="intel-header">
         <h1>Intelligence</h1>
-        <p>Your workforce data foundation. Higher data quality unlocks better insights across your organisation. Connect your tools to build a comprehensive view.</p>
+        <p>Your organizational intelligence layer. Feed context to Everday AI and connect your tools for smarter skill matching, growth paths, and staffing recommendations.</p>
       </div>
 
-      <!-- Quick Start Section -->
+      <!-- Intelligence top tabs -->
+      <div class="intel-top-tabs" style="display:flex;gap:0;border-bottom:2px solid var(--gray-200);margin-bottom:24px">
+        <button class="intel-top-tab active" onclick="intelTopTab('sources',this)" style="padding:10px 20px;font-size:13px;font-weight:700;color:var(--gray-400);background:none;border:none;cursor:pointer;border-bottom:2.5px solid transparent;margin-bottom:-2px;transition:all .15s;display:flex;align-items:center;gap:6px">
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          Sources & Integrations
+        </button>
+        <button class="intel-top-tab" onclick="intelTopTab('context',this)" style="padding:10px 20px;font-size:13px;font-weight:700;color:var(--gray-400);background:none;border:none;cursor:pointer;border-bottom:2.5px solid transparent;margin-bottom:-2px;transition:all .15s;display:flex;align-items:center;gap:6px">
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Context Library
+        </button>
+      </div>
+
+      <!-- TAB: Context Library -->
+      <div id="intel-tab-context" style="display:none">
+        <div class="intel-section">
+          <div class="ctx-lib-header">
+            <div style="display:flex;align-items:center;gap:8px">
+              <div class="ctx-lib-search">
+                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                <input type="text" placeholder="Search context docs..." oninput="filterCtxLibrary(this.value)">
+              </div>
+            </div>
+            <button class="intel-conn-btn intel-conn-btn-dark" onclick="openNewCtxDocFlow()" style="white-space:nowrap">
+              <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+              New doc
+            </button>
+          </div>
+          <div class="ctx-lib-filters" id="ctx-lib-filters">
+            <span class="ctx-lib-filter active" onclick="setCtxFilter('all',this)">All</span>
+            <span class="ctx-lib-filter" onclick="setCtxFilter('company',this)">Company</span>
+            <span class="ctx-lib-filter" onclick="setCtxFilter('team',this)">Teams</span>
+            <span class="ctx-lib-filter" onclick="setCtxFilter('project',this)">Projects</span>
+            <span class="ctx-lib-filter" onclick="setCtxFilter('role',this)">Roles</span>
+          </div>
+          <div class="ctx-lib-grid" id="ctx-lib-grid"><!-- rendered by JS --></div>
+        </div>
+      </div>
+
+      <!-- TAB: Sources & Integrations -->
+      <div id="intel-tab-sources">
+
+      <!-- Import Section -->
       <div class="intel-section">
-        <div class="intel-section-title">Get started</div>
+        <div class="intel-section-title">Import data</div>
         <div class="intel-cards-row">
           <!-- LinkedIn Quick Start -->
           <div class="intel-card">
@@ -10764,6 +11100,8 @@ body {
         </div>
       </div>
 
+      </div><!-- /intel-tab-sources -->
+
     </div>
   </div><!-- /page-intelligence -->
 
@@ -11040,7 +11378,26 @@ body {
   <div class="sp-drawer-header">
     <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" style="color:var(--purple-600);flex-shrink:0"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
     <div class="sp-drawer-title">Manage context</div>
-    <button class="sp-drawer-action-btn">+ Add context</button>
+    <div style="position:relative">
+      <button class="sp-drawer-action-btn" onclick="var m=document.getElementById('sp-ctx-add-menu');m.style.display=m.style.display==='none'?'block':'none'">+ Add context</button>
+      <!-- Dropdown menu -->
+      <div id="sp-ctx-add-menu" style="display:none;position:absolute;top:36px;right:0;width:220px;background:white;border:1.5px solid var(--gray-200);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.12);z-index:10;overflow:hidden">
+        <div style="padding:6px">
+          <div onclick="document.getElementById('sp-ctx-add-menu').style.display='none';alert('Upload document — coming soon')" style="display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:8px;cursor:pointer;transition:background .15s" onmouseover="this.style.background='var(--gray-50)'" onmouseout="this.style.background='none'">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="var(--gray-500)" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <div><div style="font-size:12px;font-weight:700;color:var(--black)">Upload document</div><div style="font-size:10px;color:var(--gray-400)">PDF, DOCX, or image</div></div>
+          </div>
+          <div onclick="document.getElementById('sp-ctx-add-menu').style.display='none';alert('Write note — coming soon')" style="display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:8px;cursor:pointer;transition:background .15s" onmouseover="this.style.background='var(--gray-50)'" onmouseout="this.style.background='none'">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="var(--gray-500)" stroke-width="2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
+            <div><div style="font-size:12px;font-weight:700;color:var(--black)">Write a note</div><div style="font-size:10px;color:var(--gray-400)">Free-form text context</div></div>
+          </div>
+          <div onclick="document.getElementById('sp-ctx-add-menu').style.display='none';alert('Add custom field — coming soon')" style="display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:8px;cursor:pointer;transition:background .15s" onmouseover="this.style.background='var(--gray-50)'" onmouseout="this.style.background='none'">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="var(--gray-500)" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+            <div><div style="font-size:12px;font-weight:700;color:var(--black)">Add custom field</div><div style="font-size:10px;color:var(--gray-400)">Goals, learning paths, etc.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
     <button class="sp-drawer-close" onclick="closeDrawers()">×</button>
   </div>
   <div class="sp-drawer-body" id="sp-ctx-drawer-body">
@@ -11048,31 +11405,262 @@ body {
     <!-- Tab bar -->
     <div class="sp-ctx-d-tabs" id="sp-ctx-tabs">
       <div class="sp-ctx-d-tab active" onclick="switchCtxTab('evidence',this)">
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline;margin-right:4px"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Evidence
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline;margin-right:4px"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile & Activity
+      </div>
+      <div class="sp-ctx-d-tab" onclick="switchCtxTab('profile',this)">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline;margin-right:4px"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>Growth
       </div>
       <div class="sp-ctx-d-tab" onclick="switchCtxTab('sources',this)">
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline;margin-right:4px"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>Sources
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline;margin-right:4px"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Sources
       </div>
     </div>
 
-    <!-- EVIDENCE TAB -->
+    <!-- GROWTH TAB -->
+    <div id="sp-ctx-profile" style="display:none">
+
+      <!-- Development paths (current) -->
+      <div style="margin-bottom:16px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+          <div style="font-size:11px;font-weight:800;color:var(--black);text-transform:uppercase;letter-spacing:.04em">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline;margin-right:3px;vertical-align:-1px"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            Development paths
+          </div>
+        </div>
+        <!-- Active path: Senior Backend Lead -->
+        <div style="padding:12px 14px;background:linear-gradient(135deg,#F5F3FF,#EDE9FE);border:1.5px solid #DDD6FE;border-radius:10px;margin-bottom:8px">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+            <div style="width:28px;height:28px;border-radius:7px;background:#7C3AED;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+              <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            </div>
+            <div style="flex:1">
+              <div style="font-size:12.5px;font-weight:800;color:#5B21B6">Senior Backend Lead</div>
+              <div style="font-size:10px;color:#7C3AED;font-weight:600">Active development path · Target Q3 2026</div>
+            </div>
+            <div style="font-size:10px;font-weight:800;color:#059669;background:#D1FAE5;padding:2px 8px;border-radius:4px">78%</div>
+          </div>
+          <!-- Mini progress timeline -->
+          <div style="display:flex;align-items:center;gap:0;margin-bottom:8px">
+            <div style="flex:1;height:4px;background:#7C3AED;border-radius:2px 0 0 2px"></div>
+            <div style="flex:1;height:4px;background:#7C3AED"></div>
+            <div style="flex:1;height:4px;background:#7C3AED"></div>
+            <div style="flex:0.22;height:4px;background:#DDD6FE;border-radius:0 2px 2px 0"></div>
+          </div>
+          <div style="display:flex;gap:4px;flex-wrap:wrap">
+            <span style="font-size:9.5px;font-weight:600;color:#059669;background:#D1FAE5;padding:2px 6px;border-radius:4px">✓ System Design</span>
+            <span style="font-size:9.5px;font-weight:600;color:#059669;background:#D1FAE5;padding:2px 6px;border-radius:4px">✓ Team Leadership</span>
+            <span style="font-size:9.5px;font-weight:600;color:#D97706;background:#FEF3C7;padding:2px 6px;border-radius:4px">↻ Cloud Architecture</span>
+            <span style="font-size:9.5px;font-weight:600;color:var(--gray-400);background:var(--gray-100);padding:2px 6px;border-radius:4px">○ Strategic Planning</span>
+          </div>
+        </div>
+        <!-- Secondary path -->
+        <div style="padding:10px 12px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:9px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <div style="width:24px;height:24px;border-radius:6px;background:var(--gray-200);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+              <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="var(--gray-500)" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            </div>
+            <div style="flex:1">
+              <div style="font-size:12px;font-weight:700;color:var(--black)">Engineering Manager</div>
+              <div style="font-size:10px;color:var(--gray-400)">Exploring · Long-term interest</div>
+            </div>
+            <div style="font-size:10px;font-weight:700;color:var(--gray-400);background:var(--gray-100);padding:2px 8px;border-radius:4px">45%</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Goals -->
+      <div style="margin-bottom:16px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+          <div style="font-size:11px;font-weight:800;color:var(--black);text-transform:uppercase;letter-spacing:.04em">
+            <span style="margin-right:3px">🎯</span> Goals
+          </div>
+          <button style="font-size:10px;font-weight:700;color:#7C3AED;background:none;border:none;cursor:pointer">+ Add</button>
+        </div>
+        <div style="padding:10px 12px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:9px;margin-bottom:6px">
+          <div style="font-size:12px;font-weight:700;color:var(--black)">Get promoted to Senior Backend Lead</div>
+          <div style="font-size:10.5px;color:var(--gray-500);margin-top:2px">Target: Q3 2026 · <span style="color:#059669;font-weight:700">On track</span></div>
+        </div>
+        <div style="padding:10px 12px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:9px">
+          <div style="font-size:12px;font-weight:700;color:var(--black)">Complete AWS Solutions Architect certification</div>
+          <div style="font-size:10.5px;color:var(--gray-500);margin-top:2px">Target: Q2 2026 · <span style="color:#D97706;font-weight:700">In progress</span></div>
+        </div>
+      </div>
+
+      <!-- Learning Paths -->
+      <div style="margin-bottom:16px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+          <div style="font-size:11px;font-weight:800;color:var(--black);text-transform:uppercase;letter-spacing:.04em">
+            <span style="margin-right:3px">📚</span> Learning paths
+          </div>
+          <button style="font-size:10px;font-weight:700;color:#7C3AED;background:none;border:none;cursor:pointer">+ Add</button>
+        </div>
+        <div style="padding:10px 12px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:9px;margin-bottom:6px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <div style="width:28px;height:28px;border-radius:6px;background:#FEF3C7;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0">☁️</div>
+            <div style="flex:1">
+              <div style="font-size:12px;font-weight:700;color:var(--black)">Cloud Architecture Fundamentals</div>
+              <div style="font-size:10.5px;color:var(--gray-500)">AWS · 12 modules</div>
+            </div>
+            <div style="font-size:10px;font-weight:800;color:#059669;background:#D1FAE5;padding:2px 8px;border-radius:4px">65%</div>
+          </div>
+        </div>
+        <div style="padding:10px 12px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:9px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <div style="width:28px;height:28px;border-radius:6px;background:#EDE9FE;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0">🏗️</div>
+            <div style="flex:1">
+              <div style="font-size:12px;font-weight:700;color:var(--black)">System Design for Tech Leads</div>
+              <div style="font-size:10.5px;color:var(--gray-500)">Internal · 8 modules</div>
+            </div>
+            <div style="font-size:10px;font-weight:800;color:var(--gray-400);background:var(--gray-100);padding:2px 8px;border-radius:4px">Not started</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Achievements -->
+      <div style="margin-bottom:16px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+          <div style="font-size:11px;font-weight:800;color:var(--black);text-transform:uppercase;letter-spacing:.04em">
+            <span style="margin-right:3px">🏆</span> Achievements
+          </div>
+          <button style="font-size:10px;font-weight:700;color:#7C3AED;background:none;border:none;cursor:pointer">+ Add</button>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <div style="display:flex;align-items:center;gap:5px;padding:6px 10px;background:#FEF3C7;border:1px solid #FDE68A;border-radius:8px;font-size:11px;font-weight:600;color:#92400E">⭐ Top performer Q4 2025</div>
+          <div style="display:flex;align-items:center;gap:5px;padding:6px 10px;background:#D1FAE5;border:1px solid #A7F3D0;border-radius:8px;font-size:11px;font-weight:600;color:#065F46">🚀 Shipped Payments v1 on time</div>
+          <div style="display:flex;align-items:center;gap:5px;padding:6px 10px;background:#EDE9FE;border:1px solid #DDD6FE;border-radius:8px;font-size:11px;font-weight:600;color:#5B21B6">🎓 AWS Cloud Practitioner</div>
+        </div>
+      </div>
+
+      <!-- Notes & Docs -->
+      <div style="margin-bottom:16px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+          <div style="font-size:11px;font-weight:800;color:var(--black);text-transform:uppercase;letter-spacing:.04em">
+            <span style="margin-right:3px">📎</span> Documents & notes
+          </div>
+          <button style="font-size:10px;font-weight:700;color:#7C3AED;background:none;border:none;cursor:pointer">+ Upload</button>
+        </div>
+        <div style="padding:8px 10px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:8px;margin-bottom:6px;display:flex;align-items:center;gap:8px">
+          <span style="font-size:13px">📄</span>
+          <div style="flex:1"><div style="font-size:11.5px;font-weight:600;color:var(--black)">Maria-2025-PerfReview.pdf</div><div style="font-size:10px;color:var(--gray-400)">Uploaded Dec 2025 · 1.2 MB</div></div>
+        </div>
+        <div style="padding:8px 10px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:8px;display:flex;align-items:center;gap:8px">
+          <span style="font-size:13px">📝</span>
+          <div style="flex:1"><div style="font-size:11.5px;font-weight:600;color:var(--black)">1:1 Notes — March 2026</div><div style="font-size:10px;color:var(--gray-400)">Added by Giorgio S. · Mar 7</div></div>
+        </div>
+      </div>
+
+      <!-- Add custom field -->
+      <button onclick="alert('Add custom field — coming soon')" style="display:flex;align-items:center;justify-content:center;gap:6px;width:100%;padding:10px;border:1.5px dashed var(--gray-200);border-radius:9px;background:none;font-size:11px;font-weight:600;color:var(--gray-400);cursor:pointer;transition:all .15s" onmouseover="this.style.borderColor='#7C3AED';this.style.color='#7C3AED'" onmouseout="this.style.borderColor='var(--gray-200)';this.style.color='var(--gray-400)'">
+        <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+        Add custom field
+      </button>
+    </div>
+
+    <!-- PROFILE & ACTIVITY TAB -->
     <div id="sp-ctx-evidence">
 
-      <!-- Manager input box -->
-      <div class="sp-ctx-mgr-box">
-        <div class="sp-ctx-mgr-box-title">Manager input</div>
-        <div class="sp-ctx-d-field" style="border:none;padding:0 0 10px">
-          <div class="sp-ctx-d-label">Manager notes</div>
-          <div class="sp-ctx-d-value">Strong delivery record. Promotion conversation opened for Q3 2026 — Giorgio S.</div>
+      <!-- Work signals (live activity) — first thing you see -->
+      <div class="sp-ctx-ev-section">
+        <div class="sp-ctx-ev-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="sp-ctx-ev-icon" style="background:#FEF3C7;color:#D97706">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <div class="sp-ctx-ev-title">Work signals</div>
+          <span style="font-size:9px;font-weight:700;color:#D97706;background:#FEF3C7;padding:1px 6px;border-radius:4px;margin-left:4px">LIVE</span>
+          <span class="sp-ctx-ev-count">4</span>
+          <span class="sp-ctx-ev-chev">▾</span>
         </div>
-        <div style="border:none;padding:0">
-          <div class="sp-ctx-d-label">Potential level</div>
-          <div class="sp-ctx-d-badge">🌟 High potential</div>
+        <div class="sp-ctx-ev-body">
+          <div class="sp-ctx-ev-item" style="border-left:2.5px solid #059669;padding-left:10px">
+            <div style="display:flex;align-items:center;gap:6px">
+              <span style="font-size:12px">✅</span>
+              <div class="sp-ctx-ev-item-title" style="font-weight:700">Completed: PAY-342 Stripe webhook refactor</div>
+            </div>
+            <div class="sp-ctx-ev-item-date">Jira · Closed Mar 8, 2026</div>
+            <div class="sp-ctx-inf-label">Influences:</div>
+            <div class="sp-ctx-inf-chips">
+              <span class="sp-ctx-inf-chip"><svg width="9" height="9" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>REST APIs</span>
+              <span class="sp-ctx-inf-chip"><svg width="9" height="9" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Stripe</span>
+              <span class="sp-ctx-inf-chip"><svg width="9" height="9" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Event-driven Architecture</span>
+            </div>
+          </div>
+          <div class="sp-ctx-ev-item" style="border-left:2.5px solid #059669;padding-left:10px">
+            <div style="display:flex;align-items:center;gap:6px">
+              <span style="font-size:12px">✅</span>
+              <div class="sp-ctx-ev-item-title" style="font-weight:700">Completed: PAY-298 Rate limiter middleware</div>
+            </div>
+            <div class="sp-ctx-ev-item-date">Jira · Closed Feb 22, 2026</div>
+            <div class="sp-ctx-inf-label">Influences:</div>
+            <div class="sp-ctx-inf-chips">
+              <span class="sp-ctx-inf-chip"><svg width="9" height="9" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Python</span>
+              <span class="sp-ctx-inf-chip"><svg width="9" height="9" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>System Design</span>
+            </div>
+          </div>
+          <div class="sp-ctx-ev-item" style="border-left:2.5px solid #3B82F6;padding-left:10px">
+            <div style="display:flex;align-items:center;gap:6px">
+              <span style="font-size:12px">💬</span>
+              <div class="sp-ctx-ev-item-title" style="font-weight:700">PR Review: Backend auth refactor</div>
+            </div>
+            <div class="sp-ctx-ev-item-date">GitHub · 12 comments · Mar 10, 2026</div>
+            <div class="sp-ctx-inf-label">Influences:</div>
+            <div class="sp-ctx-inf-chips">
+              <span class="sp-ctx-inf-chip"><svg width="9" height="9" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Code Review</span>
+              <span class="sp-ctx-inf-chip"><svg width="9" height="9" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Engineering Mentorship</span>
+            </div>
+          </div>
+          <div class="sp-ctx-ev-item" style="border-left:2.5px solid #8B5CF6;padding-left:10px">
+            <div style="display:flex;align-items:center;gap:6px">
+              <span style="font-size:12px">📊</span>
+              <div class="sp-ctx-ev-item-title" style="font-weight:700">Led sprint retrospective (Backend Squad)</div>
+            </div>
+            <div class="sp-ctx-ev-item-date">Confluence · Mar 7, 2026</div>
+            <div class="sp-ctx-inf-label">Influences:</div>
+            <div class="sp-ctx-inf-chips">
+              <span class="sp-ctx-inf-chip"><svg width="9" height="9" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Team Leadership</span>
+              <span class="sp-ctx-inf-chip"><svg width="9" height="9" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Agile</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bio -->
+      <div class="sp-ctx-ev-section">
+        <div class="sp-ctx-ev-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="sp-ctx-ev-icon">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div class="sp-ctx-ev-title">Bio</div>
+          <button onclick="event.stopPropagation();alert('Edit bio — coming soon')" style="background:none;border:none;cursor:pointer;color:var(--gray-300);padding:2px;display:flex;align-items:center;transition:color .15s;margin-left:auto;margin-right:4px" onmouseover="this.style.color='#7C3AED'" onmouseout="this.style.color='var(--gray-300)'"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></button>
+          <span class="sp-ctx-ev-chev">▾</span>
+        </div>
+        <div class="sp-ctx-ev-body">
+          <div style="font-size:12px;color:var(--gray-700);line-height:1.5;padding:2px 0">Backend engineer with 9+ years of experience across fintech and enterprise platforms. Passionate about distributed systems, team mentorship, and building scalable APIs. Based in Madrid, originally from Buenos Aires. Speaks Spanish (native) and English (fluent).</div>
+        </div>
+      </div>
+
+      <!-- Manager input -->
+      <div class="sp-ctx-ev-section">
+        <div class="sp-ctx-ev-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="sp-ctx-ev-icon" style="background:#F3F0FF;color:#7C3AED">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </div>
+          <div class="sp-ctx-ev-title">Manager input</div>
+          <button onclick="event.stopPropagation();alert('Edit manager input — coming soon')" style="background:none;border:none;cursor:pointer;color:var(--gray-300);padding:2px;display:flex;align-items:center;transition:color .15s;margin-left:auto;margin-right:4px" onmouseover="this.style.color='#7C3AED'" onmouseout="this.style.color='var(--gray-300)'"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></button>
+          <span class="sp-ctx-ev-chev">▾</span>
+        </div>
+        <div class="sp-ctx-ev-body">
+          <div class="sp-ctx-ev-item">
+            <div class="sp-ctx-d-label" style="margin-bottom:2px">Manager notes</div>
+            <div style="font-size:12px;color:var(--gray-700);line-height:1.4">Strong delivery record. Promotion conversation opened for Q3 2026 — Giorgio S.</div>
+          </div>
+          <div class="sp-ctx-ev-item">
+            <div class="sp-ctx-d-label" style="margin-bottom:2px">Potential level</div>
+            <div class="sp-ctx-d-badge">🌟 High potential</div>
+          </div>
         </div>
       </div>
 
       <!-- Work history -->
-      <div class="sp-ctx-ev-section open">
+      <div class="sp-ctx-ev-section">
         <div class="sp-ctx-ev-header" onclick="this.parentElement.classList.toggle('open')">
           <div class="sp-ctx-ev-icon">
             <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
@@ -11177,7 +11765,8 @@ body {
         </div>
       </div>
 
-    </div><!-- /evidence -->
+
+    </div><!-- /profile-activity -->
 
     <!-- SOURCES TAB (hidden by default) -->
     <div id="sp-ctx-sources" style="display:none">
@@ -11435,7 +12024,183 @@ body {
   </div>
 </div>
 
+<!-- ── CONTEXT DOC OVERLAY + DRAWER ── -->
+<div class="ctx-doc-overlay" id="ctx-doc-overlay" onclick="closeCtxDoc()"></div>
+<div class="ctx-doc-drawer" id="ctx-doc-drawer">
+  <div class="ctx-doc-header">
+    <span class="ctx-doc-header-icon" id="ctx-doc-icon"></span>
+    <div class="ctx-doc-header-title" id="ctx-doc-title"></div>
+    <button class="ctx-doc-edit-btn" id="ctx-doc-edit-btn" onclick="toggleCtxDocEdit()">
+      <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
+      Edit
+    </button>
+    <button class="ctx-doc-close" onclick="closeCtxDoc()">&#x2715;</button>
+  </div>
+  <div class="ctx-doc-body" id="ctx-doc-body"></div>
+  <div class="ctx-doc-save-bar" id="ctx-doc-save-bar" style="display:none">
+    <button class="ctx-doc-save-btn ctx-doc-save-secondary" onclick="cancelCtxDocEdit()">Cancel</button>
+    <button class="ctx-doc-save-btn ctx-doc-save-primary" onclick="saveCtxDoc()">Save changes</button>
+  </div>
+</div>
+
+<!-- New Context Doc Creation Panel -->
+<div class="ctx-doc-overlay" id="ctx-new-overlay" onclick="closeNewCtxDoc()"></div>
+<div class="ctx-doc-drawer" id="ctx-new-drawer">
+  <div class="ctx-doc-header">
+    <span class="ctx-doc-header-icon">✨</span>
+    <div class="ctx-doc-header-title">New context doc</div>
+    <button class="ctx-doc-close" onclick="closeNewCtxDoc()">&#x2715;</button>
+  </div>
+  <div class="ctx-doc-body" style="padding:20px 24px">
+    <!-- Step 1: Choose type -->
+    <div id="ctx-new-step1">
+      <div style="font-size:13px;font-weight:700;color:var(--black);margin-bottom:4px">What is this context about?</div>
+      <div style="font-size:11.5px;color:var(--gray-500);margin-bottom:16px">Choose the type of context doc you want to create. This helps Everday use it in the right way.</div>
+      <div style="display:flex;flex-direction:column;gap:8px" id="ctx-new-types">
+        <div class="ctx-new-type-card" onclick="selectNewCtxType('team',this)" style="padding:14px 16px;border:1.5px solid var(--gray-200);border-radius:10px;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:12px" onmouseover="this.style.borderColor='#7C3AED'" onmouseout="if(!this.classList.contains('selected'))this.style.borderColor='var(--gray-200)'">
+          <div style="width:36px;height:36px;border-radius:8px;background:#D1FAE5;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">👥</div>
+          <div><div style="font-size:12.5px;font-weight:700;color:var(--black)">Team</div><div style="font-size:11px;color:var(--gray-500)">How a team works, their stack, culture, and current focus</div></div>
+        </div>
+        <div class="ctx-new-type-card" onclick="selectNewCtxType('project',this)" style="padding:14px 16px;border:1.5px solid var(--gray-200);border-radius:10px;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:12px" onmouseover="this.style.borderColor='#7C3AED'" onmouseout="if(!this.classList.contains('selected'))this.style.borderColor='var(--gray-200)'">
+          <div style="width:36px;height:36px;border-radius:8px;background:#FEF3C7;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">📋</div>
+          <div><div style="font-size:12.5px;font-weight:700;color:var(--black)">Project</div><div style="font-size:11px;color:var(--gray-500)">Project scope, requirements, tech stack, and timeline</div></div>
+        </div>
+        <div class="ctx-new-type-card" onclick="selectNewCtxType('role',this)" style="padding:14px 16px;border:1.5px solid var(--gray-200);border-radius:10px;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:12px" onmouseover="this.style.borderColor='#7C3AED'" onmouseout="if(!this.classList.contains('selected'))this.style.borderColor='var(--gray-200)'">
+          <div style="width:36px;height:36px;border-radius:8px;background:#EDE9FE;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🎯</div>
+          <div><div style="font-size:12.5px;font-weight:700;color:var(--black)">Role</div><div style="font-size:11px;color:var(--gray-500)">Role expectations, required skills, and growth ladder</div></div>
+        </div>
+        <div class="ctx-new-type-card" onclick="selectNewCtxType('company',this)" style="padding:14px 16px;border:1.5px solid var(--gray-200);border-radius:10px;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:12px;opacity:0.5;pointer-events:none;position:relative" title="Only 1 company context doc allowed per organization">
+          <div style="width:36px;height:36px;border-radius:8px;background:#DBEAFE;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🏢</div>
+          <div><div style="font-size:12.5px;font-weight:700;color:var(--black)">Company <span style="font-size:9px;font-weight:700;color:#1E40AF;background:#DBEAFE;padding:1px 5px;border-radius:3px;margin-left:4px">1 per org</span></div><div style="font-size:11px;color:var(--gray-500)">Already created — ACME Corporation</div></div>
+        </div>
+      </div>
+    </div>
+    <!-- Step 2: Details -->
+    <div id="ctx-new-step2" style="display:none">
+      <button onclick="showNewCtxStep(1)" style="font-size:11px;font-weight:600;color:var(--gray-400);background:none;border:none;cursor:pointer;margin-bottom:12px;display:flex;align-items:center;gap:4px">
+        <svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back
+      </button>
+      <div id="ctx-new-type-badge" style="margin-bottom:14px"></div>
+      <div style="margin-bottom:14px">
+        <label style="font-size:11px;font-weight:700;color:var(--gray-600);display:block;margin-bottom:4px">Title</label>
+        <input type="text" id="ctx-new-title" placeholder="e.g. Frontend Squad, Payments v3..." style="width:100%;padding:10px 12px;border:1.5px solid var(--gray-200);border-radius:8px;font-size:13px;font-family:inherit;outline:none;box-sizing:border-box;transition:border .15s" onfocus="this.style.borderColor='#7C3AED'" onblur="this.style.borderColor='var(--gray-200)'">
+      </div>
+      <div style="margin-bottom:14px">
+        <label style="font-size:11px;font-weight:700;color:var(--gray-600);display:block;margin-bottom:4px">Description <span style="font-weight:400;color:var(--gray-300)">(optional)</span></label>
+        <textarea id="ctx-new-desc" rows="3" placeholder="Briefly describe what this context is about..." style="width:100%;padding:10px 12px;border:1.5px solid var(--gray-200);border-radius:8px;font-size:12px;font-family:inherit;outline:none;resize:vertical;box-sizing:border-box;transition:border .15s" onfocus="this.style.borderColor='#7C3AED'" onblur="this.style.borderColor='var(--gray-200)'"></textarea>
+      </div>
+      <div style="margin-bottom:18px">
+        <label style="font-size:11px;font-weight:700;color:var(--gray-600);display:block;margin-bottom:6px">Sections</label>
+        <div id="ctx-new-sections" style="display:flex;flex-direction:column;gap:6px">
+          <!-- Default sections will be populated by JS based on type -->
+        </div>
+        <button onclick="addNewCtxSection()" style="display:flex;align-items:center;gap:5px;margin-top:8px;padding:8px 12px;border:1.5px dashed var(--gray-200);border-radius:8px;background:none;font-size:11px;font-weight:600;color:var(--gray-400);cursor:pointer;width:100%;justify-content:center;transition:all .15s" onmouseover="this.style.borderColor='#7C3AED';this.style.color='#7C3AED'" onmouseout="this.style.borderColor='var(--gray-200)';this.style.color='var(--gray-400)'">
+          <svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+          Add section
+        </button>
+      </div>
+      <!-- Upload area -->
+      <div style="margin-bottom:18px">
+        <label style="font-size:11px;font-weight:700;color:var(--gray-600);display:block;margin-bottom:6px">Attach files <span style="font-weight:400;color:var(--gray-300)">(optional)</span></label>
+        <div style="padding:16px;border:1.5px dashed var(--gray-200);border-radius:10px;text-align:center;cursor:pointer" onmouseover="this.style.borderColor='#7C3AED'" onmouseout="this.style.borderColor='var(--gray-200)'">
+          <div style="font-size:18px;margin-bottom:4px">📎</div>
+          <div style="font-size:11px;color:var(--gray-400)">Drop files here or <span style="color:#7C3AED;font-weight:600">browse</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Bottom bar -->
+  <div id="ctx-new-bar" style="display:none;padding:12px 20px;border-top:1px solid var(--gray-200);gap:8px;justify-content:flex-end">
+    <button onclick="closeNewCtxDoc()" style="padding:8px 16px;border:1px solid var(--gray-200);border-radius:8px;background:white;font-size:12px;font-weight:600;color:var(--gray-600);cursor:pointer">Cancel</button>
+    <button onclick="createNewCtxDoc()" style="padding:8px 16px;border:none;border-radius:8px;background:var(--black);color:white;font-size:12px;font-weight:700;cursor:pointer">Create doc</button>
+  </div>
+</div>
+
 <script>
+  // ── Context Docs Data Model ──
+  const _contextDocs = [
+    {
+      id: 'ctx-company-1', type: 'company', title: 'ACME Corporation', icon: '🏢',
+      owner: 'Sarah H.', lastEdited: '2026-03-10', lastEditedBy: 'Sarah H.',
+      linkedEntities: [{ type: 'company', name: 'ACME Corporation' }],
+      sections: [
+        { id: 's1', heading: 'Mission & Vision', content: 'ACME builds workforce intelligence software that helps organizations understand their people\'s skills, grow talent, and make smarter workforce decisions.\n\nOur vision is a world where every employee has a clear, data-driven path to growth.' },
+        { id: 's2', heading: 'Culture & Values', content: '**Core values:** Transparency, Customer obsession, Bias for action, Growth mindset, Ownership\n\n**Working style:** Remote-first, async communication preferred, written decision-making, quarterly OKRs.' },
+        { id: 's3', heading: 'Org Structure', content: 'Flat hierarchy with 4 departments: Engineering (45), Product (12), Customer Success (18), Operations (10).\n\nEngineering is organized into squads: Backend, Frontend, Platform, Data.' },
+        { id: 's4', heading: 'Strategic Priorities', content: '**Q1-Q2 2026:**\n- Scale engineering to 50 by Q3\n- Launch enterprise product\n- Expand into EMEA market\n- Achieve SOC 2 compliance' }
+      ],
+      attachments: [
+        { name: 'ACME-OrgChart-2026.pdf', size: '2.4 MB', icon: '📄' },
+        { name: 'Company-Values-Handbook.docx', size: '890 KB', icon: '📘' }
+      ]
+    },
+    {
+      id: 'ctx-team-backend', type: 'team', title: 'Backend Squad', icon: '⚙️',
+      owner: 'Maria G.', lastEdited: '2026-03-08', lastEditedBy: 'Maria G.',
+      linkedEntities: [{ type: 'team', name: 'Backend Squad' }, { type: 'person', name: 'Maria G.' }],
+      sections: [
+        { id: 's1', heading: 'Team Purpose', content: 'Own ACME\'s core API layer, data pipelines, and infrastructure. We drive 80% of platform uptime SLA.' },
+        { id: 's2', heading: 'How We Work', content: '**Rituals:** Daily standup (9:15 CET), Sprint planning (Mon), Retro (Fri)\n**Communication:** Slack #backend-squad, async by default\n**Code review:** All PRs need 2 approvals, no self-merges\n**On-call:** Weekly rotation, PagerDuty integrated' },
+        { id: 's3', heading: 'Tech Stack & Architecture', content: '**Primary:** Python, Django, PostgreSQL, Redis\n**Infrastructure:** AWS (ECS, RDS, S3), Terraform\n**Monitoring:** Datadog, Sentry\n**CI/CD:** GitHub Actions → staging → production' },
+        { id: 's4', heading: 'Current Focus', content: 'Migrating to cloud-native architecture. Key initiatives:\n- Kubernetes migration (Q2 target)\n- API v2 with GraphQL layer\n- Event-driven architecture for real-time features' },
+        { id: 's5', heading: 'Growth & Gaps', content: '**Strengths:** Strong Python/Django, solid API design, good testing culture\n**Gaps:** Cloud Architecture, Kubernetes, observability at scale\n**Hiring:** Looking for 1 Senior Backend + 1 Platform Engineer in Q2' }
+      ]
+    },
+    {
+      id: 'ctx-team-frontend', type: 'team', title: 'Frontend Squad', icon: '💻',
+      owner: 'Lena K.', lastEdited: '2026-03-06', lastEditedBy: 'Lena K.',
+      linkedEntities: [{ type: 'team', name: 'Frontend Squad' }],
+      sections: [
+        { id: 's1', heading: 'Team Purpose', content: 'Build and maintain all customer-facing UI. Responsible for design system, performance, and accessibility.' },
+        { id: 's2', heading: 'How We Work', content: '**Stack:** React, TypeScript, Tailwind CSS, Storybook\n**Process:** 2-week sprints, Figma-first design handoff\n**Standards:** 90%+ test coverage, Lighthouse score > 90' },
+        { id: 's3', heading: 'Current Focus', content: 'Enterprise dashboard redesign. New component library rollout.' }
+      ]
+    },
+    {
+      id: 'ctx-project-payments', type: 'project', title: 'Payments v2', icon: '💳',
+      owner: 'Sofia M.', lastEdited: '2026-03-09', lastEditedBy: 'Sofia M.',
+      linkedEntities: [{ type: 'project', name: 'Payments v2' }, { type: 'team', name: 'Backend Squad' }],
+      sections: [
+        { id: 's1', heading: 'Project Overview', content: 'Stripe payments integration with backend API and frontend dashboard. 3-month timeline, Q2 2026.' },
+        { id: 's2', heading: 'Requirements & Tech Stack', content: '**Required skills:** Python, REST APIs, Stripe API, PostgreSQL\n**Nice to have:** TypeScript, React (for dashboard)\n**Architecture:** Event-driven payment processing, webhook handlers, idempotency' },
+        { id: 's3', heading: 'Culture Fit', content: 'Need people comfortable with high-stakes production code. Zero-downtime deployments. Strong testing discipline. Comfort with PCI compliance requirements.' }
+      ]
+    },
+    {
+      id: 'ctx-project-datamigration', type: 'project', title: 'Data Platform Migration', icon: '📊',
+      owner: 'Raj M.', lastEdited: '2026-03-04', lastEditedBy: 'Raj M.',
+      linkedEntities: [{ type: 'project', name: 'Data Platform Migration' }],
+      sections: [
+        { id: 's1', heading: 'Project Overview', content: 'Migrate legacy data warehouse to Snowflake. 4-month project, strong SQL and pipeline experience needed.' },
+        { id: 's2', heading: 'Requirements', content: '**Must have:** SQL mastery, ETL pipeline design, Snowflake or similar\n**Nice to have:** dbt, Airflow, Python' },
+        { id: 's3', heading: 'Team Dynamics', content: 'Small focused team (3 people). Autonomous decision-making. Weekly sync with data stakeholders.' }
+      ]
+    },
+    {
+      id: 'ctx-role-backendlead', type: 'role', title: 'Backend Lead', icon: '👤',
+      owner: 'Carlos L.', lastEdited: '2026-02-28', lastEditedBy: 'Carlos L.',
+      linkedEntities: [{ type: 'role', name: 'Backend Lead' }, { type: 'team', name: 'Backend Squad' }],
+      sections: [
+        { id: 's1', heading: 'Role Description', content: 'Lead a team of 5-8 backend engineers. Own technical direction, code quality, and delivery for backend services.' },
+        { id: 's2', heading: 'What Success Looks Like', content: 'Team ships on time with high quality. Engineers grow and get promoted. Architecture decisions are well-documented and forward-looking.' },
+        { id: 's3', heading: 'Required Competencies', content: '**Technical:** Python expert, system design, API architecture, database optimization\n**Leadership:** Mentoring, sprint planning, stakeholder communication, hiring' }
+      ]
+    }
+  ];
+
+  function ctxGetDocs(type) { return type ? _contextDocs.filter(d => d.type === type) : _contextDocs; }
+  function ctxGetDoc(id) { return _contextDocs.find(d => d.id === id); }
+  function ctxMarkdown(text) {
+    if (!text) return '';
+    return text
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/^- (.+)$/gm, '<li>$1</li>')
+      .replace(/(<li>[\s\S]*?<\/li>)/g, function(m) { return '<ul>' + m + '</ul>'; })
+      .replace(/<\/ul>\s*<ul>/g, '')
+      .replace(/\n/g, '<br>');
+  }
+
   // ── Page switching ──
   function switchPage(pageId) {
     // Close org chart access panel if open
@@ -11469,6 +12234,10 @@ body {
           tvToggleKpiChart('rolematch', firstCard);
         }
       }, 50);
+    }
+    // Render context library on Intelligence page
+    if (pageId === 'intelligence') {
+      setTimeout(() => renderCtxLibrary(), 50);
     }
   }
 
@@ -11511,6 +12280,7 @@ body {
     document.querySelectorAll('#sp-ctx-tabs .sp-ctx-d-tab').forEach(t => t.classList.remove('active'));
     el.classList.add('active');
     document.getElementById('sp-ctx-evidence').style.display = tab === 'evidence' ? '' : 'none';
+    document.getElementById('sp-ctx-profile').style.display  = tab === 'profile'  ? '' : 'none';
     document.getElementById('sp-ctx-sources').style.display  = tab === 'sources'  ? '' : 'none';
   }
 
@@ -11522,6 +12292,310 @@ body {
   function closeDrawers() {
     document.getElementById('sp-overlay').classList.remove('open');
     document.querySelectorAll('.sp-drawer').forEach(d => d.classList.remove('open'));
+  }
+
+  // ── Context Doc Drawer System ──
+  let _ctxDocEditMode = false;
+  let _ctxDocCurrentId = null;
+
+  function openCtxDoc(docId) {
+    const doc = ctxGetDoc(docId);
+    if (!doc) return;
+    // Close any other drawers first
+    closeDrawers();
+    _ctxDocCurrentId = docId;
+    _ctxDocEditMode = false;
+    document.getElementById('ctx-doc-icon').textContent = doc.icon;
+    document.getElementById('ctx-doc-title').textContent = doc.title;
+    document.getElementById('ctx-doc-save-bar').style.display = 'none';
+    document.getElementById('ctx-doc-edit-btn').innerHTML = '<svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg> Edit';
+    renderCtxDocBody(doc);
+    document.getElementById('ctx-doc-overlay').classList.add('open');
+    document.getElementById('ctx-doc-drawer').classList.add('open');
+  }
+
+  function closeCtxDoc() {
+    document.getElementById('ctx-doc-overlay').classList.remove('open');
+    document.getElementById('ctx-doc-drawer').classList.remove('open');
+    _ctxDocCurrentId = null;
+    _ctxDocEditMode = false;
+  }
+
+  function renderCtxDocBody(doc) {
+    const typeMeta = { company: 'Company', team: 'Team', project: 'Project', role: 'Role', person: 'Person' };
+    const entities = doc.linkedEntities.map(e =>
+      '<span class="ctx-doc-attr-entity">' + e.name + '</span>'
+    ).join('');
+
+    let sectionsHTML = doc.sections.map(s => {
+      if (_ctxDocEditMode) {
+        return '<div class="ctx-doc-section">' +
+          '<div class="ctx-doc-section-heading">' + s.heading + '</div>' +
+          '<textarea class="ctx-doc-section-edit" data-section-id="' + s.id + '">' + s.content + '</textarea>' +
+        '</div>';
+      }
+      return '<div class="ctx-doc-section">' +
+        '<div class="ctx-doc-section-heading">' + s.heading + '</div>' +
+        '<div class="ctx-doc-section-content">' + ctxMarkdown(s.content) + '</div>' +
+      '</div>';
+    }).join('');
+
+    document.getElementById('ctx-doc-body').innerHTML =
+      '<div class="ctx-doc-banner">' +
+        '<span class="ctx-doc-banner-icon">✨</span>' +
+        '<div class="ctx-doc-banner-text">' +
+          '<strong>This context helps Everday AI understand your organization better.</strong><br>' +
+          'The more detail you provide, the smarter skill matching, growth paths, and staffing recommendations become.' +
+        '</div>' +
+      '</div>' +
+      '<div class="ctx-doc-attrs">' +
+        '<div class="ctx-doc-attr">' +
+          '<span class="ctx-doc-attr-label">Type</span>' +
+          '<span class="ctx-doc-attr-value"><span class="ctx-lib-card-type ' + doc.type + '">' + typeMeta[doc.type] + '</span></span>' +
+        '</div>' +
+        '<div class="ctx-doc-attr">' +
+          '<span class="ctx-doc-attr-label">Owner</span>' +
+          '<span class="ctx-doc-attr-value">' + doc.owner + '</span>' +
+        '</div>' +
+        '<div class="ctx-doc-attr">' +
+          '<span class="ctx-doc-attr-label">Last edited</span>' +
+          '<span class="ctx-doc-attr-value">' + doc.lastEdited + ' by ' + doc.lastEditedBy + '</span>' +
+        '</div>' +
+        '<div class="ctx-doc-attr">' +
+          '<span class="ctx-doc-attr-label">Linked entities</span>' +
+          '<div class="ctx-doc-attr-entities">' + entities + '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="ctx-doc-sections">' + sectionsHTML +
+        // Add section button (always visible)
+        '<div style="margin-top:8px;padding-top:12px;border-top:1px dashed var(--gray-200)">' +
+          '<button onclick="ctxAddSection()" style="display:flex;align-items:center;gap:6px;padding:8px 14px;border:1.5px dashed var(--gray-200);border-radius:9px;background:none;font-size:11.5px;font-weight:700;color:var(--gray-400);cursor:pointer;width:100%;justify-content:center;transition:all .15s" onmouseover="this.style.borderColor=\'#7C3AED\';this.style.color=\'#7C3AED\'" onmouseout="this.style.borderColor=\'var(--gray-200)\';this.style.color=\'var(--gray-400)\'">' +
+            '<svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>' +
+            'Add section' +
+          '</button>' +
+        '</div>' +
+      '</div>' +
+      // Upload area
+      '<div style="padding:0 22px 16px">' +
+        '<div style="font-family:var(--font-display);font-size:11px;font-weight:800;color:var(--gray-400);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Attachments</div>' +
+        (doc.attachments && doc.attachments.length > 0
+          ? doc.attachments.map(function(a) {
+              return '<div style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:8px;margin-bottom:6px">' +
+                '<span style="font-size:14px">' + (a.icon || '📎') + '</span>' +
+                '<div style="flex:1;min-width:0"><div style="font-size:11.5px;font-weight:600;color:var(--black);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + a.name + '</div><div style="font-size:10px;color:var(--gray-400)">' + a.size + '</div></div>' +
+              '</div>';
+            }).join('')
+          : '') +
+        '<div onclick="alert(\'Upload documents — coming soon\')" style="display:flex;align-items:center;justify-content:center;gap:6px;padding:12px;border:1.5px dashed var(--gray-200);border-radius:9px;cursor:pointer;transition:all .15s;font-size:11px;font-weight:600;color:var(--gray-400)" onmouseover="this.style.borderColor=\'#7C3AED\';this.style.color=\'#7C3AED\'" onmouseout="this.style.borderColor=\'var(--gray-200)\';this.style.color=\'var(--gray-400)\'">' +
+          '<svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>' +
+          'Drop files here or click to upload' +
+        '</div>' +
+      '</div>';
+  }
+
+  function toggleCtxDocEdit() {
+    _ctxDocEditMode = !_ctxDocEditMode;
+    const doc = ctxGetDoc(_ctxDocCurrentId);
+    if (!doc) return;
+    renderCtxDocBody(doc);
+    document.getElementById('ctx-doc-save-bar').style.display = _ctxDocEditMode ? 'flex' : 'none';
+    document.getElementById('ctx-doc-edit-btn').innerHTML = _ctxDocEditMode
+      ? '<svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> Preview'
+      : '<svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg> Edit';
+  }
+
+  function cancelCtxDocEdit() {
+    _ctxDocEditMode = false;
+    const doc = ctxGetDoc(_ctxDocCurrentId);
+    if (doc) renderCtxDocBody(doc);
+    document.getElementById('ctx-doc-save-bar').style.display = 'none';
+    document.getElementById('ctx-doc-edit-btn').innerHTML = '<svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg> Edit';
+  }
+
+  function saveCtxDoc() {
+    const doc = ctxGetDoc(_ctxDocCurrentId);
+    if (!doc) return;
+    document.querySelectorAll('.ctx-doc-section-edit').forEach(function(ta) {
+      const sid = ta.dataset.sectionId;
+      const section = doc.sections.find(function(s) { return s.id === sid; });
+      if (section) section.content = ta.value;
+    });
+    doc.lastEdited = new Date().toISOString().split('T')[0];
+    doc.lastEditedBy = 'You';
+    _ctxDocEditMode = false;
+    renderCtxDocBody(doc);
+    document.getElementById('ctx-doc-save-bar').style.display = 'none';
+    document.getElementById('ctx-doc-edit-btn').innerHTML = '<svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg> Edit';
+    // Re-render Intelligence library if visible
+    if (document.getElementById('page-intelligence').classList.contains('active')) renderCtxLibrary();
+  }
+
+  function ctxAddSection() {
+    const doc = ctxGetDoc(_ctxDocCurrentId);
+    if (!doc) return;
+    const newId = 's' + (doc.sections.length + 1);
+    doc.sections.push({ id: newId, heading: 'New section', content: '' });
+    _ctxDocEditMode = true;
+    renderCtxDocBody(doc);
+    document.getElementById('ctx-doc-save-bar').style.display = 'flex';
+    document.getElementById('ctx-doc-edit-btn').innerHTML = '<svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> Preview';
+    // Scroll to the new section
+    setTimeout(function() {
+      var body = document.getElementById('ctx-doc-body');
+      if (body) body.scrollTop = body.scrollHeight;
+    }, 100);
+  }
+
+  // ── Context Library (Intelligence page) ──
+  let _ctxLibFilter = 'all';
+  let _ctxLibSearch = '';
+
+  function renderCtxLibrary() {
+    const grid = document.getElementById('ctx-lib-grid');
+    if (!grid) return;
+    let docs = _ctxLibFilter === 'all' ? _contextDocs.slice() : _contextDocs.filter(function(d) { return d.type === _ctxLibFilter; });
+    if (_ctxLibSearch) {
+      const q = _ctxLibSearch.toLowerCase();
+      docs = docs.filter(function(d) {
+        return d.title.toLowerCase().includes(q) || d.sections.some(function(s) { return s.content.toLowerCase().includes(q); });
+      });
+    }
+    const typeMeta = { company: 'Company', team: 'Team', project: 'Project', role: 'Role', person: 'Person' };
+    grid.innerHTML = docs.map(function(d) {
+      const preview = d.sections[0] ? d.sections[0].content.replace(/\*\*/g, '').substring(0, 120) + '...' : '';
+      const companyTag = d.type === 'company' ? '<span style="font-size:8.5px;font-weight:700;color:#1E40AF;background:#DBEAFE;padding:1px 5px;border-radius:3px;margin-left:4px">1 per org</span>' : '';
+      return '<div class="ctx-lib-card" onclick="openCtxDoc(\'' + d.id + '\')">' +
+        '<div class="ctx-lib-card-top">' +
+          '<div class="ctx-lib-card-icon">' + d.icon + '</div>' +
+          '<div style="flex:1"><div class="ctx-lib-card-title">' + d.title + '</div></div>' +
+          '<span class="ctx-lib-card-type ' + d.type + '">' + typeMeta[d.type] + companyTag + '</span>' +
+        '</div>' +
+        '<div class="ctx-lib-card-preview">' + preview + '</div>' +
+        '<div class="ctx-lib-card-meta">' +
+          '<span>Owner: <strong>' + d.owner + '</strong></span>' +
+          '<span>&middot;</span>' +
+          '<span>Edited ' + d.lastEdited + '</span>' +
+          '<span>&middot;</span>' +
+          '<span>' + d.sections.length + ' sections</span>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+    if (docs.length === 0) {
+      grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--gray-400);font-size:13px">No context docs found.</div>';
+    }
+  }
+
+  function setCtxFilter(filter, el) {
+    _ctxLibFilter = filter;
+    document.querySelectorAll('#ctx-lib-filters .ctx-lib-filter').forEach(function(f) { f.classList.remove('active'); });
+    el.classList.add('active');
+    renderCtxLibrary();
+  }
+
+  function filterCtxLibrary(q) {
+    _ctxLibSearch = q;
+    renderCtxLibrary();
+  }
+
+  // ── New Context Doc Creation Flow ──
+  let _newCtxType = '';
+  const _newCtxDefaults = {
+    team: { icon: '👥', sections: ['Team purpose', 'How we work', 'Tech stack & tools', 'Current focus'] },
+    project: { icon: '📋', sections: ['Overview', 'Requirements & scope', 'Tech stack', 'Timeline & milestones'] },
+    role: { icon: '🎯', sections: ['Role overview', 'Required skills', 'Growth expectations', 'Day-to-day responsibilities'] }
+  };
+
+  function openNewCtxDocFlow() {
+    _newCtxType = '';
+    document.getElementById('ctx-new-step1').style.display = '';
+    document.getElementById('ctx-new-step2').style.display = 'none';
+    document.getElementById('ctx-new-bar').style.display = 'none';
+    document.querySelectorAll('.ctx-new-type-card').forEach(function(c) { c.classList.remove('selected'); c.style.borderColor = 'var(--gray-200)'; });
+    document.getElementById('ctx-new-overlay').classList.add('open');
+    document.getElementById('ctx-new-drawer').style.right = '0px';
+  }
+
+  function closeNewCtxDoc() {
+    document.getElementById('ctx-new-overlay').classList.remove('open');
+    document.getElementById('ctx-new-drawer').style.right = '-580px';
+  }
+
+  function selectNewCtxType(type, el) {
+    _newCtxType = type;
+    document.querySelectorAll('.ctx-new-type-card').forEach(function(c) { c.classList.remove('selected'); c.style.borderColor = 'var(--gray-200)'; });
+    el.classList.add('selected');
+    el.style.borderColor = '#7C3AED';
+    // After short delay, go to step 2
+    setTimeout(function() { showNewCtxStep(2); }, 200);
+  }
+
+  function showNewCtxStep(step) {
+    document.getElementById('ctx-new-step1').style.display = step === 1 ? '' : 'none';
+    document.getElementById('ctx-new-step2').style.display = step === 2 ? '' : 'none';
+    document.getElementById('ctx-new-bar').style.display = step === 2 ? 'flex' : 'none';
+    if (step === 2 && _newCtxType) {
+      var d = _newCtxDefaults[_newCtxType] || { icon:'📄', sections:['Overview'] };
+      var colors = { team: '#D1FAE5', project: '#FEF3C7', role: '#EDE9FE' };
+      var labels = { team: 'Team', project: 'Project', role: 'Role' };
+      document.getElementById('ctx-new-type-badge').innerHTML = '<span style="display:inline-flex;align-items:center;gap:5px;padding:4px 10px;background:' + (colors[_newCtxType]||'var(--gray-100)') + ';border-radius:6px;font-size:11px;font-weight:700">' + d.icon + ' ' + labels[_newCtxType] + '</span>';
+      document.getElementById('ctx-new-title').value = '';
+      document.getElementById('ctx-new-desc').value = '';
+      renderNewCtxSections(d.sections);
+      document.getElementById('ctx-new-title').focus();
+    }
+  }
+
+  function renderNewCtxSections(sections) {
+    var c = document.getElementById('ctx-new-sections');
+    c.innerHTML = sections.map(function(s, i) {
+      return '<div style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:7px">' +
+        '<svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="var(--gray-300)" stroke-width="2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>' +
+        '<input type="text" value="' + s + '" style="flex:1;border:none;background:none;font-size:12px;font-weight:600;color:var(--black);outline:none;font-family:inherit">' +
+        '<button onclick="this.parentElement.remove()" style="background:none;border:none;cursor:pointer;color:var(--gray-300);font-size:14px;line-height:1;padding:0" title="Remove">×</button>' +
+      '</div>';
+    }).join('');
+  }
+
+  function addNewCtxSection() {
+    var c = document.getElementById('ctx-new-sections');
+    var div = document.createElement('div');
+    div.style.cssText = 'display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:7px';
+    div.innerHTML = '<svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="var(--gray-300)" stroke-width="2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>' +
+      '<input type="text" value="" placeholder="Section name..." style="flex:1;border:none;background:none;font-size:12px;font-weight:600;color:var(--black);outline:none;font-family:inherit">' +
+      '<button onclick="this.parentElement.remove()" style="background:none;border:none;cursor:pointer;color:var(--gray-300);font-size:14px;line-height:1;padding:0" title="Remove">×</button>';
+    c.appendChild(div);
+    div.querySelector('input').focus();
+  }
+
+  function createNewCtxDoc() {
+    var title = document.getElementById('ctx-new-title').value.trim();
+    if (!title) { document.getElementById('ctx-new-title').style.borderColor = '#EF4444'; return; }
+    var desc = document.getElementById('ctx-new-desc').value.trim();
+    var sectionInputs = document.querySelectorAll('#ctx-new-sections input');
+    var sections = [];
+    sectionInputs.forEach(function(inp) {
+      var val = inp.value.trim();
+      if (val) sections.push({ id: 's' + (sections.length + 1), heading: val, content: desc ? desc : '' });
+    });
+    if (sections.length === 0) sections.push({ id: 's1', heading: 'Overview', content: desc || '' });
+    var d = _newCtxDefaults[_newCtxType] || { icon: '📄' };
+    var newDoc = {
+      id: 'ctx-' + _newCtxType + '-' + Date.now(),
+      type: _newCtxType,
+      title: title,
+      icon: d.icon,
+      owner: 'You',
+      lastEdited: new Date().toISOString().slice(0, 10),
+      lastEditedBy: 'You',
+      linkedEntities: [],
+      sections: sections,
+      attachments: []
+    };
+    _contextDocs.push(newDoc);
+    closeNewCtxDoc();
+    renderCtxLibrary();
+    // Open the new doc in edit mode
+    setTimeout(function() { openCtxDoc(newDoc.id); }, 300);
   }
 
   // ── Workforce: 3-view toggle (People / Functions / Org Chart) ──
@@ -11979,8 +13053,9 @@ body {
   // ── Skill 3-rater: render dots from data-level / data-type / data-gap ──
   // ── Skills v2 JS ──
 
-  // Init: collapse group bodies + inject delete buttons
+  // Init: render context library + collapse group bodies + inject delete buttons
   document.addEventListener('DOMContentLoaded', function() {
+    renderCtxLibrary();
     document.querySelectorAll('.sp-skill3-group.collapsed').forEach(g => {
       const body = document.getElementById(g.id + '-body');
       if (body) body.style.display = 'none';
@@ -12277,30 +13352,32 @@ body {
     const labels = periodData.labels;
     document.getElementById('tv-kpi-chart-title').textContent = d.title;
 
-    const W = 600, H = 140, PAD = 20, BOTTOM = 30;
+    const W = 600, H = 200, PADL = 75, PADR = 20, PADT = 30, PADB = 30;
     const minV = Math.min(...values) * 0.85;
     const maxV = Math.max(...values) * 1.05;
     const n = values.length;
-    const xStep = (W - PAD * 2) / (n - 1);
-    const yScale = v => BOTTOM + (H - BOTTOM - PAD) * (1 - (v - minV) / (maxV - minV));
+    const xStep = (W - PADL - PADR) / (n - 1);
+    const yScale = v => PADT + (H - PADT - PADB) * (1 - (v - minV) / (maxV - minV));
 
-    const pts = values.map((v, i) => [PAD + i * xStep, yScale(v)]);
+    const pts = values.map((v, i) => [PADL + i * xStep, yScale(v)]);
     const linePath = pts.map((p, i) => (i === 0 ? `M` : `L`) + p[0].toFixed(1) + ',' + p[1].toFixed(1)).join(' ');
-    const areaPath = `${linePath} L${pts[n-1][0].toFixed(1)},${H} L${PAD},${H} Z`;
+    const areaPath = `${linePath} L${pts[n-1][0].toFixed(1)},${H} L${PADL},${H} Z`;
 
     // Horizontal grid lines
     const gridLines = [0, 0.25, 0.5, 0.75, 1].map(t => {
-      const y = BOTTOM + (H - BOTTOM - PAD) * t;
+      const y = PADT + (H - PADT - PADB) * t;
       const val = Math.round(maxV - t * (maxV - minV));
-      return `<line x1="${PAD}" y1="${y.toFixed(1)}" x2="${W - PAD}" y2="${y.toFixed(1)}" stroke="#F3F4F6" stroke-width="1"/>
-              <text x="${PAD - 4}" y="${(y + 4).toFixed(1)}" text-anchor="end" font-size="9" fill="#9CA3AF">${val}${d.unit}</text>`;
+      return `<line x1="${PADL}" y1="${y.toFixed(1)}" x2="${W - PADR}" y2="${y.toFixed(1)}" stroke="#F3F4F6" stroke-width="1"/>
+              <text x="${PADL - 8}" y="${(y + 4).toFixed(1)}" text-anchor="end" font-size="9" fill="#9CA3AF">${val}${d.unit}</text>`;
     }).join('');
 
     // Dots + value labels
-    const dots = pts.map((p, i) => `
+    const dots = pts.map((p, i) => {
+      const anchor = i === 0 ? 'start' : i === n - 1 ? 'end' : 'middle';
+      return `
       <circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="4" fill="${d.color}" stroke="white" stroke-width="2"/>
-      <text x="${p[0].toFixed(1)}" y="${(p[1] - 9).toFixed(1)}" text-anchor="middle" font-size="9.5" font-weight="700" fill="${d.color}">${values[i]}${d.unit}</text>
-    `).join('');
+      <text x="${p[0].toFixed(1)}" y="${(p[1] - 10).toFixed(1)}" text-anchor="${anchor}" font-size="9.5" font-weight="700" fill="${d.color}">${values[i]}${d.unit}</text>
+    `;}).join('');
 
     document.getElementById('tv-kpi-chart-svg').innerHTML = `
       <defs>
@@ -12318,6 +13395,144 @@ body {
     document.getElementById('tv-kpi-chart-labels').innerHTML = labels.map(l =>
       `<span class="tv-kpi-chart-label">${l}</span>`
     ).join('');
+  }
+
+  // ── Workforce KPI Chart ──────────────────────────────────────
+  const _wfKpiData = {
+    people: {
+      title: 'Total People', color: '#3B82F6', unit: '',
+      monthly:   { labels: ['Oct','Nov','Dec','Jan','Feb','Mar'], values: [39,40,41,42,43,44] },
+      quarterly: { labels: ["Q1 '25","Q2 '25","Q3 '25","Q4 '25","Q1 '26"], values: [32,35,38,41,44] },
+      yearly:    { labels: ['2023','2024','2025','2026'], values: [22,30,38,44] }
+    },
+    assessed: {
+      title: 'Assessed', color: '#7C3AED', unit: '',
+      monthly:   { labels: ['Oct','Nov','Dec','Jan','Feb','Mar'], values: [28,30,32,34,36,38] },
+      quarterly: { labels: ["Q1 '25","Q2 '25","Q3 '25","Q4 '25","Q1 '26"], values: [18,24,30,32,38] },
+      yearly:    { labels: ['2023','2024','2025','2026'], values: [8,18,30,38] }
+    },
+    rolematch: {
+      title: 'Avg Role Match', color: '#F97316', unit: '%',
+      monthly:   { labels: ['Oct','Nov','Dec','Jan','Feb','Mar'], values: [74,74,75,73,72,72] },
+      quarterly: { labels: ["Q1 '25","Q2 '25","Q3 '25","Q4 '25","Q1 '26"], values: [68,72,75,76,72] },
+      yearly:    { labels: ['2023','2024','2025','2026'], values: [58,65,74,72] }
+    },
+    gaps: {
+      title: 'Critical Gaps', color: '#EF4444', unit: '',
+      monthly:   { labels: ['Oct','Nov','Dec','Jan','Feb','Mar'], values: [3,3,3,4,4,5] },
+      quarterly: { labels: ["Q1 '25","Q2 '25","Q3 '25","Q4 '25","Q1 '26"], values: [4,3,3,3,5] },
+      yearly:    { labels: ['2023','2024','2025','2026'], values: [7,5,3,5] }
+    }
+  };
+  let _wfActiveKpi = null;
+  let _wfKpiPeriod = 'quarterly';
+
+  function wfToggleKpiChart(key, cardEl) {
+    const panel = document.getElementById('wf-kpi-chart-panel');
+    if (!panel) return;
+    document.querySelectorAll('.wf-kpi').forEach(c => c.classList.remove('active'));
+    // Close skill map if open
+    const skillMap = document.getElementById('wf-skill-map-section');
+    if (skillMap) skillMap.classList.remove('open');
+
+    if (_wfActiveKpi === key) {
+      _wfActiveKpi = null;
+      panel.classList.remove('open');
+      return;
+    }
+    _wfActiveKpi = key;
+    cardEl.classList.add('active');
+    panel.classList.add('open');
+    _wfRenderKpiChart();
+  }
+
+  function wfSetKpiPeriod(period, btn) {
+    _wfKpiPeriod = period;
+    document.querySelectorAll('#wf-kpi-period-tabs .tv-kpi-period-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    _wfRenderKpiChart();
+  }
+
+  function _wfRenderKpiChart() {
+    const d = _wfKpiData[_wfActiveKpi];
+    if (!d) return;
+    const periodData = d[_wfKpiPeriod];
+    const values = periodData.values;
+    const labels = periodData.labels;
+    document.getElementById('wf-kpi-chart-title').textContent = d.title;
+
+    const W = 600, H = 200, PADL = 75, PADR = 20, PADT = 30, PADB = 30;
+    const minV = Math.min(...values) * 0.85;
+    const maxV = Math.max(...values) * 1.05;
+    const n = values.length;
+    const xStep = (W - PADL - PADR) / (n - 1);
+    const yScale = v => PADT + (H - PADT - PADB) * (1 - (v - minV) / (maxV - minV));
+
+    const pts = values.map((v, i) => [PADL + i * xStep, yScale(v)]);
+    const linePath = pts.map((p, i) => (i === 0 ? 'M' : 'L') + p[0].toFixed(1) + ',' + p[1].toFixed(1)).join(' ');
+    const areaPath = `${linePath} L${pts[n-1][0].toFixed(1)},${H} L${PADL},${H} Z`;
+
+    const gridLines = [0, 0.25, 0.5, 0.75, 1].map(t => {
+      const y = PADT + (H - PADT - PADB) * t;
+      const val = Math.round(maxV - t * (maxV - minV));
+      return `<line x1="${PADL}" y1="${y.toFixed(1)}" x2="${W - PADR}" y2="${y.toFixed(1)}" stroke="#F3F4F6" stroke-width="1"/>
+              <text x="${PADL - 8}" y="${(y + 4).toFixed(1)}" text-anchor="end" font-size="9" fill="#9CA3AF">${val}${d.unit}</text>`;
+    }).join('');
+
+    const dots = pts.map((p, i) => {
+      const anchor = i === 0 ? 'start' : i === n - 1 ? 'end' : 'middle';
+      return `<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="4" fill="${d.color}" stroke="white" stroke-width="2"/>
+              <text x="${p[0].toFixed(1)}" y="${(p[1] - 10).toFixed(1)}" text-anchor="${anchor}" font-size="9.5" font-weight="700" fill="${d.color}">${values[i]}${d.unit}</text>`;
+    }).join('');
+
+    document.getElementById('wf-kpi-chart-svg').innerHTML = `
+      <defs><linearGradient id="wfKpiGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="${d.color}" stop-opacity="0.15"/>
+        <stop offset="100%" stop-color="${d.color}" stop-opacity="0"/>
+      </linearGradient></defs>
+      ${gridLines}
+      <path d="${areaPath}" fill="url(#wfKpiGrad)"/>
+      <path d="${linePath}" fill="none" stroke="${d.color}" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+      ${dots}`;
+
+    document.getElementById('wf-kpi-chart-labels').innerHTML = labels.map(l =>
+      `<span class="tv-kpi-chart-label">${l}</span>`
+    ).join('');
+  }
+
+  function wfToggleSkillMap(cardEl) {
+    const section = document.getElementById('wf-skill-map-section');
+    if (!section) return;
+    document.querySelectorAll('.wf-kpi').forEach(c => c.classList.remove('active'));
+    // Close chart panel if open
+    const chartPanel = document.getElementById('wf-kpi-chart-panel');
+    if (chartPanel) { chartPanel.classList.remove('open'); _wfActiveKpi = null; }
+
+    if (section.classList.contains('open')) {
+      section.classList.remove('open');
+      return;
+    }
+    cardEl.classList.add('active');
+    section.classList.add('open');
+  }
+
+  function wfCloseSkillMap() {
+    const section = document.getElementById('wf-skill-map-section');
+    if (section) section.classList.remove('open');
+    document.querySelectorAll('.wf-kpi').forEach(c => c.classList.remove('active'));
+  }
+
+  function wfToggleSkillCat(id) {
+    const panel = document.getElementById(id);
+    if (!panel) return;
+    const isOpen = panel.classList.contains('open');
+    document.querySelectorAll('#wf-skill-map-section .tv-cat-panel').forEach(p => p.classList.remove('open'));
+    document.querySelectorAll('#wf-skill-map-section .tv-cat-bubble').forEach(b => b.classList.remove('active'));
+    if (!isOpen) {
+      panel.classList.add('open');
+      const bubble = document.querySelector(`[onclick="wfToggleSkillCat('${id}')"]`);
+      if (bubble) bubble.classList.add('active');
+    }
   }
 
   function toggleMatchHistory() {
@@ -12650,11 +13865,11 @@ body {
   // ── Role Skill Editor Drawer ────────────────────────────
   const _rseRoleSkills = {
     'principal-engineer': [
-      { name: 'Software architecture models', level: 4 },
+      { name: 'Software architecture models', level: 4, priority: true },
       { name: 'Database Technologies (e.g., SQL, NoSQL)', level: 5 },
-      { name: 'Java Platform knowledge', level: 5 },
+      { name: 'Java Platform knowledge', level: 5, priority: true },
       { name: 'Software testing principles', level: 4 },
-      { name: 'Performance optimization techniques', level: 5 },
+      { name: 'Performance optimization techniques', level: 5, priority: true },
       { name: 'Emergent technologies', level: 4 },
       { name: 'Agile frameworks', level: 4 },
       { name: 'Cross-Departmental Collaboration', level: 4 },
@@ -12662,16 +13877,16 @@ body {
       { name: 'Code Review', level: 5 },
       { name: 'Programming in Python for astrophysics', level: 4 },
       { name: 'Write C# code', level: 5 },
-      { name: 'Frameworks (React, Angular)', level: 5 },
-      { name: 'System Design', level: 5 },
+      { name: 'Frameworks (React, Angular)', level: 5, priority: true },
+      { name: 'System Design', level: 5, priority: true },
       { name: 'Cloud Architecture (AWS/GCP)', level: 4 },
       { name: 'Technical Mentoring', level: 4 }
     ],
     'backend-lead': [
-      { name: 'Node.js / TypeScript', level: 5 },
-      { name: 'REST API Design', level: 5 },
+      { name: 'Node.js / TypeScript', level: 5, priority: true },
+      { name: 'REST API Design', level: 5, priority: true },
       { name: 'Database Technologies (SQL, NoSQL)', level: 5 },
-      { name: 'System Design', level: 4 },
+      { name: 'System Design', level: 4, priority: true },
       { name: 'Docker & Kubernetes', level: 4 },
       { name: 'CI/CD Pipelines', level: 4 },
       { name: 'Performance optimization', level: 4 },
@@ -12679,16 +13894,16 @@ body {
       { name: 'Agile frameworks', level: 4 },
       { name: 'Technical Mentoring', level: 4 },
       { name: 'Cross-team Collaboration', level: 3 },
-      { name: 'Cloud Architecture (AWS)', level: 4 },
+      { name: 'Cloud Architecture (AWS)', level: 4, priority: true },
       { name: 'Security best practices', level: 3 },
       { name: 'Monitoring & Observability', level: 4 },
       { name: 'Incident Management', level: 3 }
     ],
     'senior-engineer': [
-      { name: 'Node.js / TypeScript', level: 4 },
-      { name: 'REST API Design', level: 4 },
+      { name: 'Node.js / TypeScript', level: 4, priority: true },
+      { name: 'REST API Design', level: 4, priority: true },
       { name: 'Database Technologies (SQL, NoSQL)', level: 4 },
-      { name: 'System Design', level: 3 },
+      { name: 'System Design', level: 3, priority: true },
       { name: 'Docker & Kubernetes', level: 3 },
       { name: 'CI/CD Pipelines', level: 3 },
       { name: 'Performance optimization', level: 3 },
@@ -12701,9 +13916,9 @@ body {
       { name: 'Git & Version Control', level: 4 }
     ],
     'software-engineer': [
-      { name: 'Node.js / TypeScript', level: 3 },
+      { name: 'Node.js / TypeScript', level: 3, priority: true },
       { name: 'REST API Design', level: 3 },
-      { name: 'Database Technologies (SQL)', level: 3 },
+      { name: 'Database Technologies (SQL)', level: 3, priority: true },
       { name: 'Docker basics', level: 2 },
       { name: 'Git & Version Control', level: 3 },
       { name: 'Software testing principles', level: 3 },
@@ -12715,9 +13930,9 @@ body {
       { name: 'Security best practices', level: 2 }
     ],
     'junior-engineer': [
-      { name: 'JavaScript fundamentals', level: 3 },
+      { name: 'JavaScript fundamentals', level: 3, priority: true },
       { name: 'HTML & CSS', level: 3 },
-      { name: 'Git & Version Control', level: 2 },
+      { name: 'Git & Version Control', level: 2, priority: true },
       { name: 'REST API basics', level: 2 },
       { name: 'Database basics (SQL)', level: 2 },
       { name: 'Software testing principles', level: 2 },
@@ -12726,12 +13941,12 @@ body {
       { name: 'Communication', level: 2 }
     ],
     'director-people-ops': [
-      { name: 'HR Strategy & Planning', level: 5 },
-      { name: 'Talent Acquisition', level: 5 },
+      { name: 'HR Strategy & Planning', level: 5, priority: true },
+      { name: 'Talent Acquisition', level: 5, priority: true },
       { name: 'Employee Relations', level: 5 },
       { name: 'Compensation & Benefits', level: 4 },
-      { name: 'Organizational Development', level: 5 },
-      { name: 'Performance Management', level: 5 },
+      { name: 'Organizational Development', level: 5, priority: true },
+      { name: 'Performance Management', level: 5, priority: true },
       { name: 'HR Analytics & Metrics', level: 4 },
       { name: 'Employment Law & Compliance', level: 4 },
       { name: 'Change Management', level: 4 },
@@ -12746,10 +13961,10 @@ body {
       { name: 'Culture Building', level: 4 }
     ],
     'csm': [
-      { name: 'Customer Relationship Management', level: 4 },
+      { name: 'Customer Relationship Management', level: 4, priority: true },
       { name: 'Account Planning', level: 4 },
       { name: 'Negotiation', level: 3 },
-      { name: 'Product Knowledge', level: 4 },
+      { name: 'Product Knowledge', level: 4, priority: true },
       { name: 'Data Analysis', level: 3 },
       { name: 'CRM Tools (Salesforce)', level: 4 },
       { name: 'Presentation Skills', level: 4 },
@@ -12760,9 +13975,9 @@ body {
       { name: 'Communication', level: 4 }
     ],
     'api-lead': [
-      { name: 'API Design (REST/GraphQL)', level: 5 },
-      { name: 'Node.js / TypeScript', level: 5 },
-      { name: 'Microservices Architecture', level: 4 },
+      { name: 'API Design (REST/GraphQL)', level: 5, priority: true },
+      { name: 'Node.js / TypeScript', level: 5, priority: true },
+      { name: 'Microservices Architecture', level: 4, priority: true },
       { name: 'Database Technologies', level: 4 },
       { name: 'Authentication & Authorization', level: 4 },
       { name: 'Rate Limiting & Throttling', level: 4 },
@@ -12815,9 +14030,14 @@ body {
         const active = i === sk.level ? 'active' : '';
         return `<button class="rse-level-btn ${active}" onclick="setRSELevel('${roleId}',${origIdx},${i})">${i}</button>`;
       }).join('');
+      const priActive = sk.priority ? 'active' : '';
+      const starSvg = sk.priority
+        ? '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>'
+        : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>';
       return `<div class="rse-skill-row">
         <div class="rse-skill-name">${sk.name} <span class="rse-skill-info">i</span></div>
         <div class="rse-levels">${levels}</div>
+        <button class="rse-priority ${priActive}" onclick="toggleRSEPriority('${roleId}',${origIdx})" title="Mark as priority skill">${starSvg}</button>
         <button class="rse-remove" onclick="removeRSESkill('${roleId}',${origIdx})">✕</button>
       </div>`;
     }).join('');
@@ -12826,6 +14046,14 @@ body {
   function setRSELevel(roleId, skillIdx, level) {
     if (_rseRoleSkills[roleId] && _rseRoleSkills[roleId][skillIdx]) {
       _rseRoleSkills[roleId][skillIdx].level = level;
+      const filter = document.querySelector('.rse-search')?.value || '';
+      renderRSESkills(roleId, filter);
+    }
+  }
+
+  function toggleRSEPriority(roleId, skillIdx) {
+    if (_rseRoleSkills[roleId] && _rseRoleSkills[roleId][skillIdx]) {
+      _rseRoleSkills[roleId][skillIdx].priority = !_rseRoleSkills[roleId][skillIdx].priority;
       const filter = document.querySelector('.rse-search')?.value || '';
       renderRSESkills(roleId, filter);
     }
@@ -12963,7 +14191,7 @@ body {
       html += `<tr class="jf-domain-row"><td colspan="${levels.length + 2}">${domain.name}</td></tr>`;
       domain.skills.forEach(skill => {
         const roleCount = skill.levels.filter(v => v > 0).length;
-        html += `<tr class="jf2-skill-row"><td class="jf2-skill-name-cell">${skill.name}${skill.custom ? ' <span class="jf-custom-badge">Custom</span>' : ''}</td>`;
+        html += `<tr class="jf2-skill-row"><td class="jf2-skill-name-cell">${skill.name}${skill.custom ? ' <span class="jf-custom-badge">Critical</span>' : ''}</td>`;
         html += `<td class="jf2-count-cell">${roleCount}/${levels.length}</td>`;
         if (hasTracks) {
           let ri = 0;
@@ -13025,7 +14253,7 @@ body {
         const col      = pct === null ? '#9CA3AF' : pct >= 80 ? '#22C55E' : pct >= 60 ? '#F59E0B' : '#EF4444';
 
         html += `<tr class="jf2-skill-row">`;
-        html += `<td class="jf2-skill-name-cell">${skill.name}${isCrit ? '<span class="sm-crit-tag">⚡</span>' : ''}${skill.custom ? ' <span class="jf-custom-badge">Custom</span>' : ''}</td>`;
+        html += `<td class="jf2-skill-name-cell">${skill.name}${isCrit ? '<span class="sm-crit-tag">⚡</span>' : ''}${skill.custom ? ' <span class="jf-custom-badge">Critical</span>' : ''}</td>`;
         html += `<td class="jf2-count-cell">${reqRoles}/${totalRoles}</td>`;
         if (pct === null) {
           html += `<td class="jf2-tc-agg-cell"><span style="color:var(--gray-400);font-size:12px">Not in any role</span></td>`;
@@ -13240,41 +14468,53 @@ body {
 
   // ── Staffing Module ──────────────────────────────────────
   const _staffingPeople = [
-    { name: 'Maria G.',   photo: 'https://randomuser.me/api/portraits/women/30.jpg', role: 'Backend Lead',        team: 'Engineering',       region: 'EMEA',  allocation: 80,  availability: 'soon',      availableIn: 'Jun 2026',
-      skills: ['Python', 'REST APIs', 'System Design', 'Team Leadership', 'AWS', 'Docker'],
+    { name: 'Maria G.',   photo: 'https://randomuser.me/api/portraits/women/30.jpg', role: 'Backend Lead',        team: 'Engineering',       region: 'EMEA',  allocation: 80,  availability: 'soon',      availableIn: 'Jun 2026', salary: 115,
+      skills: ['Python', 'REST APIs', 'System Design', 'Team Leadership', 'AWS', 'Docker', 'JavaScript', 'TypeScript', 'PostgreSQL', 'CI/CD', 'Kubernetes', 'Testing & QA', 'CSS', 'React', 'Technical Planning'],
+      skillLevels: { 'Python': 'Expert', 'REST APIs': 'Expert', 'System Design': 'Advanced', 'Team Leadership': 'Advanced', 'AWS': 'Intermediate', 'Docker': 'Intermediate', 'JavaScript': 'Advanced', 'TypeScript': 'Intermediate', 'PostgreSQL': 'Advanced', 'CI/CD': 'Advanced', 'Kubernetes': 'Intermediate', 'Testing & QA': 'Intermediate', 'CSS': 'Intermediate', 'React': 'Intermediate', 'Technical Planning': 'Advanced' },
       capacity: { 'Apr': 80, 'May': 80, 'Jun': 20, 'Jul': 0, 'Aug': 0, 'Sep': 0 }, roleStart: 'Sep 2024' },
-    { name: 'Jorge L.',   photo: 'https://randomuser.me/api/portraits/men/45.jpg',   role: 'Backend Lead',        team: 'Engineering',       region: 'LATAM', allocation: 30,  availability: 'available', availableIn: null,
-      skills: ['Python', 'REST APIs', 'System Design', 'Team Leadership', 'AWS', 'PostgreSQL', 'Docker'],
+    { name: 'Jorge L.',   photo: 'https://randomuser.me/api/portraits/men/45.jpg',   role: 'Backend Lead',        team: 'Engineering',       region: 'LATAM', allocation: 30,  availability: 'available', availableIn: null, salary: 105,
+      skills: ['Python', 'REST APIs', 'System Design', 'Team Leadership', 'AWS', 'PostgreSQL', 'Docker', 'JavaScript', 'TypeScript', 'CI/CD', 'Kubernetes', 'Testing & QA', 'Terraform', 'Technical Planning', 'API Design'],
+      skillLevels: { 'Python': 'Expert', 'REST APIs': 'Advanced', 'System Design': 'Advanced', 'Team Leadership': 'Intermediate', 'AWS': 'Advanced', 'PostgreSQL': 'Expert', 'Docker': 'Intermediate', 'JavaScript': 'Advanced', 'TypeScript': 'Advanced', 'CI/CD': 'Intermediate', 'Kubernetes': 'Intermediate', 'Testing & QA': 'Intermediate', 'Terraform': 'Intermediate', 'Technical Planning': 'Intermediate', 'API Design': 'Advanced' },
       capacity: { 'Apr': 30, 'May': 30, 'Jun': 30, 'Jul': 0, 'Aug': 0, 'Sep': 0 }, roleStart: 'Mar 2024' },
-    { name: 'Sandra M.',  photo: 'https://randomuser.me/api/portraits/women/68.jpg', role: 'Senior Engineer',     team: 'Engineering',       region: 'EMEA',  allocation: 20,  availability: 'available', availableIn: null,
-      skills: ['Python', 'Testing & QA', 'REST APIs', 'PostgreSQL', 'CI/CD', 'System Design'],
+    { name: 'Sandra M.',  photo: 'https://randomuser.me/api/portraits/women/68.jpg', role: 'Senior Engineer',     team: 'Engineering',       region: 'EMEA',  allocation: 20,  availability: 'available', availableIn: null, salary: 95,
+      skills: ['Python', 'Testing & QA', 'REST APIs', 'PostgreSQL', 'CI/CD', 'System Design', 'JavaScript', 'Docker', 'AWS', 'TypeScript', 'React', 'CSS', 'Automation'],
+      skillLevels: { 'Python': 'Advanced', 'Testing & QA': 'Expert', 'REST APIs': 'Advanced', 'PostgreSQL': 'Intermediate', 'CI/CD': 'Advanced', 'System Design': 'Intermediate', 'JavaScript': 'Advanced', 'Docker': 'Intermediate', 'AWS': 'Intermediate', 'TypeScript': 'Intermediate', 'React': 'Intermediate', 'CSS': 'Intermediate', 'Automation': 'Expert' },
       capacity: { 'Apr': 20, 'May': 40, 'Jun': 40, 'Jul': 20, 'Aug': 0, 'Sep': 0 }, roleStart: 'Jan 2024' },
-    { name: 'Kai T.',     photo: 'https://randomuser.me/api/portraits/men/32.jpg',   role: 'Senior Engineer',     team: 'Engineering',       region: 'NA',    allocation: 90,  availability: 'busy',      availableIn: 'Aug 2026',
-      skills: ['Python', 'System Design', 'Docker', 'AWS', 'Kubernetes'],
+    { name: 'Kai T.',     photo: 'https://randomuser.me/api/portraits/men/32.jpg',   role: 'Senior Engineer',     team: 'Engineering',       region: 'NA',    allocation: 90,  availability: 'busy',      availableIn: 'Aug 2026', salary: 98,
+      skills: ['Python', 'System Design', 'Docker', 'AWS', 'Kubernetes', 'REST APIs', 'PostgreSQL', 'CI/CD', 'JavaScript', 'TypeScript', 'Terraform', 'Testing & QA'],
+      skillLevels: { 'Python': 'Expert', 'System Design': 'Expert', 'Docker': 'Advanced', 'AWS': 'Advanced', 'Kubernetes': 'Advanced', 'REST APIs': 'Advanced', 'PostgreSQL': 'Advanced', 'CI/CD': 'Advanced', 'JavaScript': 'Intermediate', 'TypeScript': 'Intermediate', 'Terraform': 'Advanced', 'Testing & QA': 'Intermediate' },
       capacity: { 'Apr': 90, 'May': 90, 'Jun': 90, 'Jul': 90, 'Aug': 20, 'Sep': 0 }, roleStart: 'Jun 2023' },
-    { name: 'Priya S.',   photo: 'https://randomuser.me/api/portraits/women/55.jpg', role: 'Principal Engineer',  team: 'Engineering',       region: 'EMEA',  allocation: 100, availability: 'busy',      availableIn: 'Sep 2026',
-      skills: ['System Design', 'API Design', 'Team Leadership', 'Technical Planning', 'Stakeholder Mgmt', 'Python'],
+    { name: 'Priya S.',   photo: 'https://randomuser.me/api/portraits/women/55.jpg', role: 'Principal Engineer',  team: 'Engineering',       region: 'EMEA',  allocation: 100, availability: 'busy',      availableIn: 'Sep 2026', salary: 140,
+      skills: ['System Design', 'API Design', 'Team Leadership', 'Technical Planning', 'Stakeholder Mgmt', 'Python', 'REST APIs', 'Docker', 'AWS', 'Kubernetes', 'CI/CD', 'JavaScript', 'PostgreSQL'],
+      skillLevels: { 'System Design': 'Expert', 'API Design': 'Expert', 'Team Leadership': 'Expert', 'Technical Planning': 'Advanced', 'Stakeholder Mgmt': 'Advanced', 'Python': 'Intermediate', 'REST APIs': 'Advanced', 'Docker': 'Intermediate', 'AWS': 'Intermediate', 'Kubernetes': 'Intermediate', 'CI/CD': 'Intermediate', 'JavaScript': 'Intermediate', 'PostgreSQL': 'Intermediate' },
       capacity: { 'Apr': 100, 'May': 100, 'Jun': 100, 'Jul': 100, 'Aug': 100, 'Sep': 20 }, roleStart: 'Nov 2023' },
-    { name: 'Lena K.',    photo: 'https://randomuser.me/api/portraits/women/41.jpg', role: 'CSM',                 team: 'Customer Success',  region: 'EMEA',  allocation: 40,  availability: 'available', availableIn: null,
-      skills: ['CRM Systems', 'Onboarding', 'Success Planning', 'Presentation Skills', 'Executive Comms', 'Customer Analytics'],
+    { name: 'Lena K.',    photo: 'https://randomuser.me/api/portraits/women/41.jpg', role: 'CSM',                 team: 'Customer Success',  region: 'EMEA',  allocation: 40,  availability: 'available', availableIn: null, salary: 72,
+      skills: ['CRM Systems', 'Onboarding', 'Success Planning', 'Presentation Skills', 'Executive Comms', 'Customer Analytics', 'Performance Management', 'Employee Relations', 'Stakeholder Mgmt', 'Change Management'],
+      skillLevels: { 'CRM Systems': 'Expert', 'Onboarding': 'Advanced', 'Success Planning': 'Expert', 'Presentation Skills': 'Advanced', 'Executive Comms': 'Advanced', 'Customer Analytics': 'Intermediate', 'Performance Management': 'Intermediate', 'Employee Relations': 'Intermediate', 'Stakeholder Mgmt': 'Advanced', 'Change Management': 'Intermediate' },
       capacity: { 'Apr': 40, 'May': 40, 'Jun': 20, 'Jul': 0, 'Aug': 0, 'Sep': 0 }, roleStart: 'Apr 2023' },
-    { name: 'Marco R.',   photo: 'https://randomuser.me/api/portraits/men/23.jpg',   role: 'CSM',                 team: 'Customer Success',  region: 'LATAM', allocation: 60,  availability: 'available', availableIn: null,
-      skills: ['CRM Systems', 'Success Planning', 'Executive Comms', 'Presentation Skills'],
+    { name: 'Marco R.',   photo: 'https://randomuser.me/api/portraits/men/23.jpg',   role: 'CSM',                 team: 'Customer Success',  region: 'LATAM', allocation: 60,  availability: 'available', availableIn: null, salary: 65,
+      skills: ['CRM Systems', 'Success Planning', 'Executive Comms', 'Presentation Skills', 'Onboarding', 'Customer Analytics', 'Stakeholder Mgmt'],
+      skillLevels: { 'CRM Systems': 'Advanced', 'Success Planning': 'Intermediate', 'Executive Comms': 'Intermediate', 'Presentation Skills': 'Advanced', 'Onboarding': 'Intermediate', 'Customer Analytics': 'Intermediate', 'Stakeholder Mgmt': 'Intermediate' },
       capacity: { 'Apr': 60, 'May': 60, 'Jun': 60, 'Jul': 30, 'Aug': 0, 'Sep': 0 }, roleStart: 'Aug 2024' },
-    { name: 'Ilse H.',    photo: 'https://randomuser.me/api/portraits/women/12.jpg', role: 'HR Director',         team: 'HR & People',       region: 'EMEA',  allocation: 10,  availability: 'available', availableIn: null,
-      skills: ['Performance Management', 'Employee Relations', 'Strategic HR Planning', 'Change Management'],
+    { name: 'Ilse H.',    photo: 'https://randomuser.me/api/portraits/women/12.jpg', role: 'HR Director',         team: 'HR & People',       region: 'EMEA',  allocation: 10,  availability: 'available', availableIn: null, salary: 120,
+      skills: ['Performance Management', 'Employee Relations', 'Strategic HR Planning', 'Change Management', 'Stakeholder Mgmt', 'Team Leadership', 'Executive Comms', 'Presentation Skills', 'HR Analytics'],
+      skillLevels: { 'Performance Management': 'Expert', 'Employee Relations': 'Expert', 'Strategic HR Planning': 'Advanced', 'Change Management': 'Advanced', 'Stakeholder Mgmt': 'Advanced', 'Team Leadership': 'Advanced', 'Executive Comms': 'Advanced', 'Presentation Skills': 'Advanced', 'HR Analytics': 'Intermediate' },
       capacity: { 'Apr': 10, 'May': 20, 'Jun': 20, 'Jul': 10, 'Aug': 10, 'Sep': 10 }, roleStart: 'Feb 2022' },
-    { name: 'Andres M.',  photo: 'https://randomuser.me/api/portraits/men/28.jpg',   role: 'Senior Recruiter',    team: 'HR & People',       region: 'LATAM', allocation: 20,  availability: 'available', availableIn: null,
-      skills: ['Sourcing & Recruiting', 'Interviewing Skills', 'ATS Systems', 'HR Analytics'],
+    { name: 'Andres M.',  photo: 'https://randomuser.me/api/portraits/men/28.jpg',   role: 'Senior Recruiter',    team: 'HR & People',       region: 'LATAM', allocation: 20,  availability: 'available', availableIn: null, salary: 68,
+      skills: ['Sourcing & Recruiting', 'Interviewing Skills', 'ATS Systems', 'HR Analytics', 'Employee Relations', 'Performance Management', 'Presentation Skills', 'Stakeholder Mgmt'],
+      skillLevels: { 'Sourcing & Recruiting': 'Expert', 'Interviewing Skills': 'Advanced', 'ATS Systems': 'Advanced', 'HR Analytics': 'Intermediate', 'Employee Relations': 'Intermediate', 'Performance Management': 'Intermediate', 'Presentation Skills': 'Intermediate', 'Stakeholder Mgmt': 'Intermediate' },
       capacity: { 'Apr': 20, 'May': 20, 'Jun': 40, 'Jul': 40, 'Aug': 20, 'Sep': 20 }, roleStart: 'Oct 2024' },
-    { name: 'Sofia P.',   photo: 'https://randomuser.me/api/portraits/women/44.jpg', role: 'People Ops Manager',  team: 'HR & People',       region: 'EMEA',  allocation: 70,  availability: 'soon',      availableIn: 'Jul 2026',
-      skills: ['HRIS Systems', 'Compensation & Benefits', 'HR Analytics', 'Employee Relations'],
+    { name: 'Sofia P.',   photo: 'https://randomuser.me/api/portraits/women/44.jpg', role: 'People Ops Manager',  team: 'HR & People',       region: 'EMEA',  allocation: 70,  availability: 'soon',      availableIn: 'Jul 2026', salary: 82,
+      skills: ['HRIS Systems', 'Compensation & Benefits', 'HR Analytics', 'Employee Relations', 'Performance Management', 'Change Management', 'Strategic HR Planning', 'Presentation Skills'],
+      skillLevels: { 'HRIS Systems': 'Expert', 'Compensation & Benefits': 'Advanced', 'HR Analytics': 'Advanced', 'Employee Relations': 'Intermediate', 'Performance Management': 'Intermediate', 'Change Management': 'Intermediate', 'Strategic HR Planning': 'Intermediate', 'Presentation Skills': 'Intermediate' },
       capacity: { 'Apr': 70, 'May': 70, 'Jun': 70, 'Jul': 20, 'Aug': 0, 'Sep': 0 }, roleStart: 'May 2023' },
-    { name: 'Tom W.',     photo: 'https://randomuser.me/api/portraits/men/67.jpg',   role: 'Product Manager',     team: 'Product',           region: 'NA',    allocation: 60,  availability: 'available', availableIn: null,
-      skills: ['Python', 'REST APIs', 'Docker'],
+    { name: 'Tom W.',     photo: 'https://randomuser.me/api/portraits/men/67.jpg',   role: 'Product Manager',     team: 'Product',           region: 'NA',    allocation: 60,  availability: 'available', availableIn: null, salary: 110,
+      skills: ['Stakeholder Mgmt', 'Technical Planning', 'Presentation Skills', 'Roadmapping', 'Python', 'REST APIs', 'Docker', 'JavaScript', 'React', 'CSS', 'System Design'],
+      skillLevels: { 'Stakeholder Mgmt': 'Expert', 'Technical Planning': 'Advanced', 'Presentation Skills': 'Advanced', 'Roadmapping': 'Expert', 'Python': 'Intermediate', 'REST APIs': 'Intermediate', 'Docker': 'Beginner', 'JavaScript': 'Intermediate', 'React': 'Intermediate', 'CSS': 'Intermediate', 'System Design': 'Intermediate' },
       capacity: { 'Apr': 60, 'May': 60, 'Jun': 60, 'Jul': 40, 'Aug': 20, 'Sep': 0 }, roleStart: 'Jan 2025' },
-    { name: 'Nina R.',    photo: 'https://randomuser.me/api/portraits/women/25.jpg', role: 'Data Engineer',       team: 'Engineering',       region: 'EMEA',  allocation: 40,  availability: 'available', availableIn: null,
-      skills: ['SQL', 'Presentation Skills', 'CRM Systems'],
+    { name: 'Nina R.',    photo: 'https://randomuser.me/api/portraits/women/25.jpg', role: 'Data Engineer',       team: 'Engineering',       region: 'EMEA',  allocation: 40,  availability: 'available', availableIn: null, salary: 88,
+      skills: ['SQL', 'Presentation Skills', 'CRM Systems', 'Python', 'Data Pipelines', 'PostgreSQL', 'Docker', 'AWS', 'Spark', 'JavaScript', 'REST APIs'],
+      skillLevels: { 'SQL': 'Advanced', 'Presentation Skills': 'Intermediate', 'CRM Systems': 'Beginner', 'Python': 'Advanced', 'Data Pipelines': 'Advanced', 'PostgreSQL': 'Advanced', 'Docker': 'Intermediate', 'AWS': 'Intermediate', 'Spark': 'Intermediate', 'JavaScript': 'Intermediate', 'REST APIs': 'Intermediate' },
       capacity: { 'Apr': 40, 'May': 40, 'Jun': 40, 'Jul': 20, 'Aug': 0, 'Sep': 0 }, roleStart: 'Jul 2024' },
   ];
 
@@ -13298,15 +14538,15 @@ body {
 
   // ── Projects persistence ──
   const _sampleProjects = [
-    { id: 1, name: 'Payments v2', client: 'Acme Corp', priority: 'high', duration: '3 months', status: 'active',
+    { id: 1, name: 'Payments v2', client: 'Acme Corp', priority: 'high', duration: '3 months', status: 'active', budget: 180,
       plan: [{role:'Backend Engineer',icon:'⚙️',count:2},{role:'Frontend Engineer',icon:'💻',count:1},{role:'QA Engineer',icon:'🧪',count:1}],
       assigned: ['Jorge L.', 'Sandra M.'], backups: ['Lena K.'], assignedCount: 2, totalNeeded: 4,
       desc: 'Stripe payments integration with backend API and frontend dashboard.', initiatedBy: 'Sofia M.', createdAt: '3 Feb 2026' },
-    { id: 2, name: 'Data Platform Migration', client: 'Internal', priority: 'medium', duration: '4 months', status: 'team_confirmed',
+    { id: 2, name: 'Data Platform Migration', client: 'Internal', priority: 'medium', duration: '4 months', status: 'team_confirmed', budget: 240,
       plan: [{role:'Data Engineer',icon:'📊',count:2},{role:'Backend Engineer',icon:'⚙️',count:1}],
       assigned: ['Nina R.', 'Maria G.', 'Kai T.'], backups: ['Tom W.'], assignedCount: 3, totalNeeded: 3,
       desc: 'Migrate legacy data warehouse to Snowflake. Requires strong SQL and pipeline experience.', initiatedBy: 'Raj M.', createdAt: '18 Jan 2026' },
-    { id: 3, name: 'CS Portal Redesign', client: 'Internal', priority: 'low', duration: '2 months', status: 'completed',
+    { id: 3, name: 'CS Portal Redesign', client: 'Internal', priority: 'low', duration: '2 months', status: 'completed', budget: 60,
       plan: [{role:'Frontend Engineer',icon:'💻',count:1},{role:'Designer',icon:'🎨',count:1}],
       assigned: ['Ilse H.', 'Marco R.'], backups: [], assignedCount: 2, totalNeeded: 2,
       desc: 'Redesign the customer success internal portal for better usability.', initiatedBy: 'Ilse H.', createdAt: '5 Dec 2025' },
@@ -13315,11 +14555,16 @@ body {
     try {
       const stored = JSON.parse(localStorage.getItem('ev_projects') || 'null');
       if (stored && stored.length) {
-        // Merge sample data (assigned/backups) into stored projects that are missing it
+        // Merge sample data (assigned/backups/budget) into stored projects that are missing it
         return stored.map(p => {
           const sample = _sampleProjects.find(s => s.name === p.name);
-          if (sample && (!p.assigned || !p.assigned.length) && sample.assigned) {
-            return { ...p, assigned: sample.assigned, backups: sample.backups || [], assignedCount: sample.assignedCount, totalNeeded: sample.totalNeeded };
+          if (sample) {
+            const merged = { ...p };
+            if ((!p.assigned || !p.assigned.length) && sample.assigned) {
+              merged.assigned = sample.assigned; merged.backups = sample.backups || []; merged.assignedCount = sample.assignedCount; merged.totalNeeded = sample.totalNeeded;
+            }
+            if (!p.budget && sample.budget) merged.budget = sample.budget;
+            return merged;
           }
           return p;
         });
@@ -13333,13 +14578,14 @@ body {
     const client   = (document.getElementById('psf-client')?.value || '').trim() || '';
     const priority = document.querySelector('.ps-priority-btn.active')?.dataset.val || 'medium';
     const duration = (document.getElementById('psf-duration')?.value || '3') + ' ' + (document.getElementById('psf-duration-unit')?.value || 'months');
+    const budget = parseInt(document.getElementById('psf-budget')?.value) || 0;
     const existing = _loadProjects();
     const saved = existing === _sampleProjects ? [] : [...existing];
     const deduped = saved.filter(p => p.name !== name);
     const totalNeeded = _psTeamPlan.reduce((s,r) => s + r.count, 0);
     const assignedCount = _psAssigned.length;
     const autoStatus = assignedCount >= totalNeeded ? 'team_confirmed' : assignedCount > 0 ? 'in_progress' : 'active';
-    deduped.unshift({ id: Date.now(), name, client, priority, duration, status: autoStatus,
+    deduped.unshift({ id: Date.now(), name, client, priority, duration, status: autoStatus, budget,
       plan: _psTeamPlan.map(r => ({ role: r.role, icon: r.icon, count: r.count })),
       assigned: [..._psAssigned], backups: [..._psBackups], assignedCount, totalNeeded,
       desc: _psPlanDesc, initiatedBy: 'Sofia M.', createdAt: new Date().toLocaleDateString('en-GB', {day:'numeric',month:'short',year:'numeric'}) });
@@ -13412,6 +14658,15 @@ body {
                 <div style="width:100%;height:5px;background:${p.needsPeople ? '#FDE68A' : '#BBF7D0'};border-radius:3px;overflow:hidden"><div style="width:${pct}%;height:100%;background:${p.needsPeople ? '#F59E0B' : '#22C55E'};border-radius:3px;transition:width .3s"></div></div>
               </div>
             </div>` : '';
+          // Calculate project financials
+          const durationMonths = parseInt(p.duration) || 3;
+          const assignedPeople = (p.assigned || []).map(name => _staffingPeople.find(sp => sp.name === name)).filter(Boolean);
+          const totalCost = assignedPeople.reduce((s, sp) => s + (sp.salary || 0) * (durationMonths / 12), 0);
+          const budget = p.budget || 0;
+          const margin = budget > 0 ? budget - totalCost : 0;
+          const marginPct = budget > 0 ? Math.round((margin / budget) * 100) : 0;
+          const marginColor = marginPct >= 30 ? '#15803D' : marginPct >= 10 ? '#92400E' : '#DC2626';
+          const marginBg = marginPct >= 30 ? '#F0FDF4' : marginPct >= 10 ? '#FFFBEB' : '#FEF2F2';
           return `<div class="proj-card" style="cursor:pointer" onclick="reopenProject(${origIdx})">
             <div class="proj-card-header">
               <div>
@@ -13424,6 +14679,11 @@ body {
               <span style="display:inline-block;font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:20px;background:${st.bg};color:${st.color}">${st.icon} ${st.label}</span>
             </div>
             ${staffingHtml}
+            ${budget > 0 ? `<div style="display:flex;gap:0;margin-bottom:10px;border-radius:10px;overflow:hidden;border:1px solid var(--gray-200);font-size:10.5px;font-weight:700">
+              <div style="flex:1;padding:7px 10px;background:white;text-align:center"><div style="color:var(--gray-400);font-weight:600;margin-bottom:2px">Revenue</div><div style="color:var(--black)">$${budget}K</div></div>
+              <div style="flex:1;padding:7px 10px;background:var(--gray-50);text-align:center;border-left:1px solid var(--gray-200);border-right:1px solid var(--gray-200)"><div style="color:var(--gray-400);font-weight:600;margin-bottom:2px">Cost</div><div style="color:var(--black)">$${Math.round(totalCost)}K</div></div>
+              <div style="flex:1;padding:7px 10px;background:${marginBg};text-align:center"><div style="color:var(--gray-400);font-weight:600;margin-bottom:2px">Margin</div><div style="color:${marginColor}">${marginPct}% · $${Math.round(margin)}K</div></div>
+            </div>` : ''}
             <div class="proj-card-roles">
               ${p.plan.map(r => `<span class="proj-role-chip">${r.icon} ${r.role} ×${r.count}</span>`).join('')}
             </div>
@@ -13840,7 +15100,7 @@ body {
             <div style="font-size:10px;font-weight:800;color:${!showAsBackup ? 'var(--gray-400)' : 'var(--gray-300)'};min-width:16px;text-align:center">#${i+1}</div>
             <img class="ps-person-avatar" src="${p.photo}" alt="${p.name}">
             <div class="ps-person-info">
-              <div class="ps-person-name">${p.name}</div>
+              <div class="ps-person-name">${p.name}${p.salary ? `<span style="font-size:11px;font-weight:600;color:var(--gray-400);margin-left:6px">$${p.salary}K/yr</span>` : ''}</div>
               <div class="ps-person-sub">${p.role} · ${p.team} · ${p.region}</div>
               <div class="ps-person-skills">
                 ${p.matched.map(s => `<span style="padding:2px 7px;border-radius:10px;background:${isBlocked ? '#F3F4F6' : '#DCFCE7'};color:${isBlocked ? '#9CA3AF' : '#15803D'};font-size:10px;font-weight:700">${isBlocked ? '' : '✓ '}${s}</span>`).join('')}
@@ -14134,7 +15394,7 @@ body {
     people.forEach(p => {
       html += `<tr class="cap-row"><td><div class="cap-person-cell">
         <img class="cap-person-img" src="${p.photo}" alt="${p.name}">
-        <div><div class="cap-person-name">${p.name}</div><div class="cap-person-role">${p.role} · ${p.region}</div></div>
+        <div><div class="cap-person-name">${p.name}</div><div class="cap-person-role">${p.role} · ${p.region}${p.salary ? ` · <span style="color:var(--gray-500)">$${p.salary}K</span>` : ''}</div></div>
       </div></td>`;
       months.forEach(m => {
         const pct = p.capacity[m] || 0;
@@ -14192,7 +15452,7 @@ body {
         return `<div class="bench-person-row">
           <img class="ps-person-avatar" src="${p.photo}" alt="${p.name}">
           <div class="ps-person-info">
-            <div class="ps-person-name">${p.name}</div>
+            <div class="ps-person-name">${p.name}${p.salary ? `<span style="font-size:11px;font-weight:600;color:var(--gray-400);margin-left:6px">$${p.salary}K/yr</span>` : ''}</div>
             <div class="ps-person-sub">${p.role} · ${p.team} · ${p.region}</div>
             <div class="ps-person-skills" style="margin-top:6px">
               ${p.skills.slice(0, 4).map(s => `<span style="padding:2px 8px;border-radius:10px;background:var(--purple-100);color:var(--purple-700);font-size:10.5px;font-weight:700">${s}</span>`).join('')}
@@ -14917,7 +16177,21 @@ body {
       html += `<tr><td class="tm-skills-col"><div class="tm-skill-cell-inner"><button class="tm-priority-btn ${priBtnCls}" onclick="tmTogglePriority(${idx})" title="${skill.priority ? 'Remove priority' : 'Mark as priority'}">★</button><span class="tm-skill-name ${nameClass}">${skill.name}</span><span class="tm-skill-level-badge ${lvlClass}">${skill.level}</span><button class="tm-skill-del-btn" onclick="tmRemoveSkill(${idx})" title="Remove">×</button></div></td>`;
       people.forEach(p => {
         const has = _tmHasSkill(p, skill.name);
-        html += `<td class="tm-person-col ${has ? 'tm-cell-match' : 'tm-cell-none'}"><div class="tm-cell-inner">${has ? '<div class="tm-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>' : '<span class="tm-dash">—</span>'}</div></td>`;
+        if (has) {
+          const lvl = (p.skillLevels && p.skillLevels[skill.name]) || 'Intermediate';
+          const lvlLow = lvl.toLowerCase();
+          let cellIcon = '';
+          if (lvlLow === 'expert' || lvlLow === 'advanced') {
+            cellIcon = `<div class="tm-check tm-lvl-${lvlLow}"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>`;
+          } else if (lvlLow === 'intermediate') {
+            cellIcon = `<div class="tm-check-upgrade"><svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg></div>`;
+          } else {
+            cellIcon = `<div class="tm-check-warn"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1.5"/><path d="M12 8v-1"/><path d="M12 17v-1"/></svg></div>`;
+          }
+          html += `<td class="tm-person-col tm-cell-match tm-cell-${lvlLow}"><div class="tm-cell-inner">${cellIcon}</div></td>`;
+        } else {
+          html += `<td class="tm-person-col tm-cell-nodata"><div class="tm-cell-inner"><span class="tm-nodata-label">No data</span></div></td>`;
+        }
       });
       html += '</tr>';
     });
@@ -15081,6 +16355,26 @@ body {
     `;
   }
 
+  function _tmGetSeniority(person) {
+    const r = (person.role || '').toLowerCase();
+    if (/senior|lead|principal|director|head/.test(r)) return { label: 'Senior', cls: 'senior' };
+    // "Manager" only counts as senior if not "Product Manager" (which is mid-level)
+    if (/manager/.test(r) && !/product/.test(r)) return { label: 'Senior', cls: 'senior' };
+    const lvl = (_tmRoleLevels[person.role] || {}).level || 2;
+    if (lvl >= 3) return { label: 'Mid', cls: 'mid' };
+    return { label: 'Junior', cls: 'junior' };
+  }
+
+  function _tmSkillMatchPct(person, query) {
+    const roleSkills = _tmRoleSkills[person.role] || [];
+    const matchedRole = roleSkills.filter(s => s.toLowerCase().includes(query));
+    const matchedAll = person.skills.filter(s => s.toLowerCase().includes(query));
+    // Score: how many of their total skills relate to query + role skill coverage
+    const breadth = matchedAll.length;
+    const pct = Math.min(100, Math.round((breadth / Math.max(person.skills.length, 1)) * 100 + (matchedRole.length > 0 ? 30 : 0) + (breadth >= 3 ? 20 : breadth >= 2 ? 10 : 0)));
+    return Math.min(pct, 100);
+  }
+
   function _tmRenderSkillSearch() {
     const el = document.getElementById('tm-ss-results');
     if (!el) return;
@@ -15091,20 +16385,52 @@ body {
     const teamsWithSkill = [...new Set(people.map(p => p.team))].length;
     const totalOrg = _staffingPeople.length;
 
+    // Sort by skill match descending
+    const scored = people.map(p => ({ ...p, _matchPct: _tmSkillMatchPct(p, q) }))
+      .sort((a, b) => b._matchPct - a._matchPct);
+
     let html = `<div class="tm-ss-summary">
       <div class="tm-ss-stat-card"><div class="tm-ss-stat-num">${people.length}</div><div class="tm-ss-stat-label">People with this skill</div></div>
       <div class="tm-ss-stat-card"><div class="tm-ss-stat-num">${teamsWithSkill}</div><div class="tm-ss-stat-label">Teams covered</div></div>
       <div class="tm-ss-stat-card"><div class="tm-ss-stat-num">${totalOrg - people.length}</div><div class="tm-ss-stat-label">Org gap (no skill)</div></div>
     </div>`;
 
-    if (!people.length) {
+    if (!scored.length) {
       html += `<div class="tm-ss-empty">No one in the company has this skill yet.<br><strong>This may be a key hiring or training gap.</strong></div>`;
     } else {
-      html += `<div class="tm-ss-people-header"><div class="tm-ss-people-title">${people.length} people found</div></div>`;
-      people.forEach(p => {
+      html += `<div class="tm-ss-people-header"><div class="tm-ss-people-title">${scored.length} people found</div></div>`;
+      scored.forEach(p => {
         const matchedSkills = p.skills.filter(s => s.toLowerCase().includes(q));
-        const levelLabel = matchedSkills.length >= 3 ? 'Expert' : matchedSkills.length >= 2 ? 'Advanced' : 'Familiar';
-        html += `<div class="tm-ss-person-row"><img class="tm-ss-person-photo" src="${p.photo}" alt="${p.name}"><div style="flex:1;min-width:0"><div class="tm-ss-person-name">${p.name}</div><div class="tm-ss-person-role">${p.role} · ${p.team}</div><div class="tm-ss-skill-list">${matchedSkills.map(s => `<span class="tm-ss-skill-chip">${s}</span>`).join('')}</div></div><span class="tm-ss-level-badge">${levelLabel}</span></div>`;
+        // Get the highest proficiency level among matched skills
+        const levelOrder = ['Beginner', 'Intermediate', 'Advanced', 'Expert'];
+        let bestLevel = 'Intermediate';
+        if (p.skillLevels) {
+          matchedSkills.forEach(s => {
+            const lvl = p.skillLevels[s];
+            if (lvl && levelOrder.indexOf(lvl) > levelOrder.indexOf(bestLevel)) bestLevel = lvl;
+          });
+        }
+        const sen = _tmGetSeniority(p);
+        const matchPct = p._matchPct;
+        const matchColor = matchPct >= 70 ? '#16A34A' : matchPct >= 40 ? '#D97706' : '#9CA3AF';
+        html += `<div class="tm-ss-person-row">
+          <img class="tm-ss-person-photo" src="${p.photo}" alt="${p.name}">
+          <div style="flex:1;min-width:0">
+            <div class="tm-ss-person-name">${p.name} <span class="tm-ss-seniority-badge tm-ss-seniority-${sen.cls}">${sen.label}</span></div>
+            <div class="tm-ss-person-role">${p.role} · ${p.team}</div>
+            <div class="tm-ss-skill-list">${matchedSkills.map(s => {
+              const lvl = p.skillLevels ? (p.skillLevels[s] || 'Intermediate') : 'Intermediate';
+              return `<span class="tm-ss-skill-chip">${s} <span style="opacity:.6;font-weight:600">· ${lvl}</span></span>`;
+            }).join('')}</div>
+          </div>
+          <div class="tm-ss-right-col">
+            <span class="tm-ss-level-badge">${bestLevel}</span>
+            <div class="tm-ss-match-bar-wrap">
+              <div class="tm-ss-match-bar"><div class="tm-ss-match-bar-fill" style="width:${matchPct}%;background:${matchColor}"></div></div>
+              <span class="tm-ss-match-pct" style="color:${matchColor}">${matchPct}%</span>
+            </div>
+          </div>
+        </div>`;
       });
     }
     el.innerHTML = html;
@@ -15383,6 +16709,14 @@ body {
   }
 
   // ── Intelligence page ──
+  function intelTopTab(tab, el) {
+    document.querySelectorAll('.intel-top-tab').forEach(function(t) { t.classList.remove('active'); });
+    el.classList.add('active');
+    document.getElementById('intel-tab-context').style.display = tab === 'context' ? '' : 'none';
+    document.getElementById('intel-tab-sources').style.display = tab === 'sources' ? '' : 'none';
+    if (tab === 'context') renderCtxLibrary();
+  }
+
   function intelSwitchBottomTab(el, panelId) {
     el.parentElement.querySelectorAll('.intel-bottom-tab').forEach(t => t.classList.remove('active'));
     el.classList.add('active');
