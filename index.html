@@ -3805,9 +3805,17 @@ body {
 .tm-ss-person-role { font-size: 11.5px; color: var(--gray-600); font-weight: 600; margin-top: 1px; }
 .tm-ss-person-team { font-size: 11px; color: var(--gray-400); font-weight: 600; }
 .tm-ss-skill-list { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 6px; }
-.tm-ss-skill-chip { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 7px; background: #DCFCE7; color: #15803D; }
+.tm-ss-skill-chip { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 7px; }
+.tm-ss-skill-chip.chip-expert { background: #DCFCE7; color: #15803D; }
+.tm-ss-skill-chip.chip-advanced { background: var(--purple-50); color: var(--purple-700); }
+.tm-ss-skill-chip.chip-intermediate { background: #FEF3C7; color: #92400E; }
+.tm-ss-skill-chip.chip-beginner { background: var(--gray-100); color: var(--gray-500); }
 .tm-ss-right-col { margin-left: auto; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; flex-shrink: 0; }
-.tm-ss-level-badge { background: var(--purple-100); color: var(--purple-700); font-size: 11px; font-weight: 800; padding: 3px 10px; border-radius: 8px; white-space: nowrap; }
+.tm-ss-level-badge { font-size: 11px; font-weight: 800; padding: 3px 10px; border-radius: 8px; white-space: nowrap; }
+.tm-ss-level-badge.lvl-expert { background: #DCFCE7; color: #15803D; }
+.tm-ss-level-badge.lvl-advanced { background: var(--purple-100); color: var(--purple-700); }
+.tm-ss-level-badge.lvl-intermediate { background: #FEF3C7; color: #92400E; }
+.tm-ss-level-badge.lvl-beginner { background: var(--gray-100); color: var(--gray-500); }
 .tm-ss-seniority-badge { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 6px; white-space: nowrap; text-transform: uppercase; letter-spacing: .04em; }
 .tm-ss-seniority-junior { background: #DBEAFE; color: #1D4ED8; }
 .tm-ss-seniority-mid { background: #FEF3C7; color: #92400E; }
@@ -16410,25 +16418,19 @@ body {
             if (lvl && levelOrder.indexOf(lvl) > levelOrder.indexOf(bestLevel)) bestLevel = lvl;
           });
         }
-        const sen = _tmGetSeniority(p);
-        const matchPct = p._matchPct;
-        const matchColor = matchPct >= 70 ? '#16A34A' : matchPct >= 40 ? '#D97706' : '#9CA3AF';
+        const skillSen = {Expert:{label:'SENIOR',cls:'senior'},Advanced:{label:'MID',cls:'mid'},Intermediate:{label:'MID',cls:'mid'},Beginner:{label:'JUNIOR',cls:'junior'}}[bestLevel]||{label:'MID',cls:'mid'};
         html += `<div class="tm-ss-person-row">
           <img class="tm-ss-person-photo" src="${p.photo}" alt="${p.name}">
           <div style="flex:1;min-width:0">
-            <div class="tm-ss-person-name">${p.name} <span class="tm-ss-seniority-badge tm-ss-seniority-${sen.cls}">${sen.label}</span></div>
+            <div class="tm-ss-person-name">${p.name} <span class="tm-ss-seniority-badge tm-ss-seniority-${skillSen.cls}">${skillSen.label}</span></div>
             <div class="tm-ss-person-role">${p.role} · ${p.team}</div>
             <div class="tm-ss-skill-list">${matchedSkills.map(s => {
               const lvl = p.skillLevels ? (p.skillLevels[s] || 'Intermediate') : 'Intermediate';
-              return `<span class="tm-ss-skill-chip">${s} <span style="opacity:.6;font-weight:600">· ${lvl}</span></span>`;
+              return `<span class="tm-ss-skill-chip chip-${lvl.toLowerCase()}">${s}</span>`;
             }).join('')}</div>
           </div>
           <div class="tm-ss-right-col">
-            <span class="tm-ss-level-badge">${bestLevel}</span>
-            <div class="tm-ss-match-bar-wrap">
-              <div class="tm-ss-match-bar"><div class="tm-ss-match-bar-fill" style="width:${matchPct}%;background:${matchColor}"></div></div>
-              <span class="tm-ss-match-pct" style="color:${matchColor}">${matchPct}%</span>
-            </div>
+            <span class="tm-ss-level-badge lvl-${bestLevel.toLowerCase()}">${bestLevel} · ${{Expert:'5/5',Advanced:'4/5',Intermediate:'3/5',Beginner:'2/5'}[bestLevel]||'3/5'}</span>
           </div>
         </div>`;
       });
