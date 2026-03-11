@@ -3690,6 +3690,16 @@ body {
 .tm-ss-skill-list { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 4px; }
 .tm-ss-skill-chip { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 7px; background: #DCFCE7; color: #15803D; }
 .tm-ss-level-badge { margin-left: auto; background: var(--purple-100); color: var(--purple-700); font-size: 11px; font-weight: 800; padding: 3px 10px; border-radius: 8px; white-space: nowrap; flex-shrink: 0; }
+.tm-ss-person-row { align-items: flex-start !important; }
+.tm-ss-person-meta { display: flex; align-items: center; gap: 6px; margin-top: 2px; }
+.tm-ss-role-tag { font-size: 11px; font-weight: 700; color: var(--gray-700); background: var(--gray-100); padding: 2px 8px; border-radius: 6px; }
+.tm-ss-team-tag { font-size: 11px; font-weight: 600; color: var(--gray-500); }
+.tm-ss-right { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; margin-left: auto; flex-shrink: 0; }
+.tm-ss-seniority { font-size: 10px; font-weight: 800; padding: 3px 9px; border-radius: 7px; white-space: nowrap; text-transform: uppercase; letter-spacing: .04em; }
+.tm-ss-seniority.senior { background: #DCFCE7; color: #15803D; }
+.tm-ss-seniority.mid { background: #DBEAFE; color: #1D4ED8; }
+.tm-ss-seniority.junior { background: #FEF3C7; color: #92400E; }
+.tm-ss-match-pill { font-size: 10.5px; font-weight: 700; color: var(--gray-500); white-space: nowrap; }
 .tm-ss-empty { text-align: center; padding: 32px 20px; color: var(--gray-400); font-size: 13px; line-height: 1.6; }
 .tm-ss-featured { margin-bottom: 10px; }
 .tm-ss-featured-title { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; color: var(--gray-500); margin-bottom: 10px; }
@@ -15081,6 +15091,31 @@ body {
     `;
   }
 
+  function _tmSkillSeniority(person) {
+    // Derive seniority bucket from role level + tenure
+    const roleInfo = _tmRoleLevels[person.role];
+    const roleLevel = roleInfo ? roleInfo.level : 2;
+    // Tenure in years
+    let tenureYrs = 0;
+    if (person.roleStart) {
+      const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      const parts = person.roleStart.split(' ');
+      const mIdx = months.indexOf(parts[0]);
+      const yr = parseInt(parts[1]);
+      if (mIdx >= 0 && !isNaN(yr)) {
+        const start = new Date(yr, mIdx, 1);
+        const now = new Date(2026, 2, 11);
+        tenureYrs = (now - start) / (1000 * 60 * 60 * 24 * 365);
+      }
+    }
+    // Senior: role level >= 4 OR tenure >= 3 years
+    // Mid: role level 3 OR tenure >= 1 year
+    // Junior: everything else
+    if (roleLevel >= 4 || tenureYrs >= 3) return 'senior';
+    if (roleLevel >= 3 || tenureYrs >= 1) return 'mid';
+    return 'junior';
+  }
+
   function _tmRenderSkillSearch() {
     const el = document.getElementById('tm-ss-results');
     if (!el) return;
@@ -15103,8 +15138,24 @@ body {
       html += `<div class="tm-ss-people-header"><div class="tm-ss-people-title">${people.length} people found</div></div>`;
       people.forEach(p => {
         const matchedSkills = p.skills.filter(s => s.toLowerCase().includes(q));
-        const levelLabel = matchedSkills.length >= 3 ? 'Expert' : matchedSkills.length >= 2 ? 'Advanced' : 'Familiar';
-        html += `<div class="tm-ss-person-row"><img class="tm-ss-person-photo" src="${p.photo}" alt="${p.name}"><div style="flex:1;min-width:0"><div class="tm-ss-person-name">${p.name}</div><div class="tm-ss-person-role">${p.role} · ${p.team}</div><div class="tm-ss-skill-list">${matchedSkills.map(s => `<span class="tm-ss-skill-chip">${s}</span>`).join('')}</div></div><span class="tm-ss-level-badge">${levelLabel}</span></div>`;
+        const seniority = _tmSkillSeniority(p);
+        const seniorityLabel = seniority === 'senior' ? 'Senior' : seniority === 'mid' ? 'Mid' : 'Junior';
+        const matchRatio = matchedSkills.length + '/' + p.skills.length + ' skills match';
+        html += `<div class="tm-ss-person-row">
+          <img class="tm-ss-person-photo" src="${p.photo}" alt="${p.name}">
+          <div style="flex:1;min-width:0">
+            <div class="tm-ss-person-name">${p.name}</div>
+            <div class="tm-ss-person-meta">
+              <span class="tm-ss-role-tag">${p.role}</span>
+              <span class="tm-ss-team-tag">${p.team}</span>
+            </div>
+            <div class="tm-ss-skill-list">${matchedSkills.map(s => `<span class="tm-ss-skill-chip">${s}</span>`).join('')}</div>
+          </div>
+          <div class="tm-ss-right">
+            <span class="tm-ss-seniority ${seniority}">${seniorityLabel}</span>
+            <span class="tm-ss-match-pill">${matchRatio}</span>
+          </div>
+        </div>`;
       });
     }
     el.innerHTML = html;
