@@ -14501,8 +14501,8 @@ body {
       skillLevels: { 'CRM Systems': 'Expert', 'Onboarding': 'Advanced', 'Success Planning': 'Expert', 'Presentation Skills': 'Advanced', 'Executive Comms': 'Advanced', 'Customer Analytics': 'Intermediate', 'Performance Management': 'Intermediate', 'Employee Relations': 'Intermediate', 'Stakeholder Mgmt': 'Advanced', 'Change Management': 'Intermediate' },
       capacity: { 'Apr': 40, 'May': 40, 'Jun': 20, 'Jul': 0, 'Aug': 0, 'Sep': 0 }, roleStart: 'Apr 2023' },
     { name: 'Marco R.',   photo: 'https://randomuser.me/api/portraits/men/23.jpg',   role: 'CSM',                 team: 'Customer Success',  region: 'LATAM', allocation: 60,  availability: 'available', availableIn: null, salary: 65,
-      skills: ['CRM Systems', 'Success Planning', 'Executive Comms', 'Presentation Skills', 'Onboarding', 'Customer Analytics', 'Stakeholder Mgmt'],
-      skillLevels: { 'CRM Systems': 'Advanced', 'Success Planning': 'Intermediate', 'Executive Comms': 'Intermediate', 'Presentation Skills': 'Advanced', 'Onboarding': 'Intermediate', 'Customer Analytics': 'Intermediate', 'Stakeholder Mgmt': 'Intermediate' },
+      skills: ['CRM Systems', 'Success Planning', 'Presentation Skills', 'Stakeholder Mgmt'],
+      skillLevels: { 'CRM Systems': 'Advanced', 'Success Planning': 'Intermediate', 'Presentation Skills': 'Advanced', 'Stakeholder Mgmt': 'Intermediate' },
       capacity: { 'Apr': 60, 'May': 60, 'Jun': 60, 'Jul': 30, 'Aug': 0, 'Sep': 0 }, roleStart: 'Aug 2024' },
     { name: 'Ilse H.',    photo: 'https://randomuser.me/api/portraits/women/12.jpg', role: 'HR Director',         team: 'HR & People',       region: 'EMEA',  allocation: 10,  availability: 'available', availableIn: null, salary: 120,
       skills: ['Performance Management', 'Employee Relations', 'Strategic HR Planning', 'Change Management', 'Stakeholder Mgmt', 'Team Leadership', 'Executive Comms', 'Presentation Skills', 'HR Analytics'],
@@ -14521,8 +14521,8 @@ body {
       skillLevels: { 'Stakeholder Mgmt': 'Expert', 'Technical Planning': 'Advanced', 'Presentation Skills': 'Advanced', 'Roadmapping': 'Expert', 'Python': 'Intermediate', 'REST APIs': 'Intermediate', 'Docker': 'Beginner', 'JavaScript': 'Intermediate', 'React': 'Intermediate', 'CSS': 'Intermediate', 'System Design': 'Intermediate' },
       capacity: { 'Apr': 60, 'May': 60, 'Jun': 60, 'Jul': 40, 'Aug': 20, 'Sep': 0 }, roleStart: 'Jan 2025' },
     { name: 'Nina R.',    photo: 'https://randomuser.me/api/portraits/women/25.jpg', role: 'Data Engineer',       team: 'Engineering',       region: 'EMEA',  allocation: 40,  availability: 'available', availableIn: null, salary: 88,
-      skills: ['SQL', 'Presentation Skills', 'CRM Systems', 'Python', 'Data Pipelines', 'PostgreSQL', 'Docker', 'AWS', 'Spark', 'JavaScript', 'REST APIs'],
-      skillLevels: { 'SQL': 'Advanced', 'Presentation Skills': 'Intermediate', 'CRM Systems': 'Beginner', 'Python': 'Advanced', 'Data Pipelines': 'Advanced', 'PostgreSQL': 'Advanced', 'Docker': 'Intermediate', 'AWS': 'Intermediate', 'Spark': 'Intermediate', 'JavaScript': 'Intermediate', 'REST APIs': 'Intermediate' },
+      skills: ['SQL', 'Presentation Skills', 'CRM Systems', 'Python', 'PostgreSQL', 'Docker', 'AWS', 'JavaScript', 'REST APIs'],
+      skillLevels: { 'SQL': 'Advanced', 'Presentation Skills': 'Intermediate', 'CRM Systems': 'Beginner', 'Python': 'Advanced', 'PostgreSQL': 'Advanced', 'Docker': 'Intermediate', 'AWS': 'Intermediate', 'JavaScript': 'Intermediate', 'REST APIs': 'Intermediate' },
       capacity: { 'Apr': 40, 'May': 40, 'Jun': 40, 'Jul': 20, 'Aug': 0, 'Sep': 0 }, roleStart: 'Jul 2024' },
   ];
 
@@ -15502,10 +15502,10 @@ body {
     'Backend Lead':       ['Python', 'System Design', 'Team Leadership', 'REST APIs', 'AWS'],
     'Senior Engineer':    ['Python', 'REST APIs', 'PostgreSQL', 'CI/CD', 'Testing & QA'],
     'Principal Engineer': ['System Design', 'API Design', 'Team Leadership', 'Technical Planning', 'Stakeholder Mgmt'],
-    'CSM':                ['CRM Systems', 'Onboarding', 'Success Planning', 'Presentation Skills', 'Executive Comms'],
-    'HR Director':        ['Performance Management', 'Employee Relations', 'Strategic HR Planning', 'Change Management'],
-    'People Ops Manager': ['HRIS Systems', 'Compensation & Benefits', 'HR Analytics', 'Employee Relations'],
-    'Senior Recruiter':   ['Sourcing & Recruiting', 'Interviewing Skills', 'ATS Systems', 'HR Analytics'],
+    'CSM':                ['CRM Systems', 'Onboarding', 'Success Planning', 'Presentation Skills', 'Executive Comms', 'Customer Analytics'],
+    'HR Director':        ['Performance Management', 'Employee Relations', 'Strategic HR Planning', 'Change Management', 'Executive Comms', 'Team Leadership'],
+    'People Ops Manager': ['HRIS Systems', 'Compensation & Benefits', 'HR Analytics', 'Employee Relations', 'Change Management'],
+    'Senior Recruiter':   ['Sourcing & Recruiting', 'Interviewing Skills', 'ATS Systems', 'HR Analytics', 'Employee Relations'],
     'Engineering Manager':['Team Leadership', 'Stakeholder Mgmt', 'Performance Management', 'Technical Planning', 'Strategic HR Planning'],
   };
 
@@ -15572,8 +15572,11 @@ body {
     const matched = req.filter(s => _tmHasSkill(person, s)).length;
     const basePct = Math.round((matched / req.length) * 100);
     if (matched < req.length) return basePct;
+    // Extra skills show overqualification — need meaningful surplus
     const extraSkills = person.skills.length - matched;
-    return basePct + (extraSkills * 5);
+    const ratio = extraSkills / req.length;
+    if (ratio >= 1.5) return 100 + Math.round((ratio - 1.5) * 50);
+    return basePct;
   }
 
   function _tmImplicationBadge(currentRole, targetRole) {
@@ -15854,9 +15857,9 @@ body {
       if (oqScore > 100 && (bestHigher || bestLateral || bestAny)) {
         const pick = bestHigher || bestLateral || bestAny;
         overqualified.push({ person, overqualScore: oqScore, bestRole: pick.roleName, bestScore: pick.score });
-      } else if (oqScore < 50 && bestAny) {
+      } else if (oqScore < 70 && bestAny) {
         mismatched.push({ person, currentFit: oqScore, bestRole: bestAny.roleName, bestScore: bestAny.score });
-      } else if (tenureM >= 24 && oqScore >= 50 && oqScore <= 100) {
+      } else if (tenureM >= 24 && oqScore >= 70 && oqScore <= 100) {
         // Stagnated: decent fit but stuck in same role for 2+ years
         // Cap display score to feel more realistic (long tenure erodes effective fit)
         const stagnatedFit = tenureM >= 48 ? Math.min(oqScore, 65) : tenureM >= 30 ? Math.min(oqScore, 70) : oqScore;
