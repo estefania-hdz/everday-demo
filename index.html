@@ -1699,15 +1699,39 @@ body {
 /* WF Skill Map section */
 .wf-skill-map-section {
   background: var(--white); border: 1.5px solid var(--gray-200); border-radius: 12px;
-  padding: 18px 22px; display: none;
+  padding: 18px 22px; display: block;
 }
-.wf-skill-map-section.open { display: block; animation: fadeInUp 0.3s ease both; }
 .wf-skill-map-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
 .wf-skill-map-title { font-size: 13px; font-weight: 800; color: var(--black); display: flex; align-items: center; gap: 8px; }
 .wf-skill-map-title svg { color: var(--purple-500); }
 .wf-skill-map-hint { font-size: 10.5px; color: var(--gray-400); font-weight: 500; }
-.wf-skill-map-close { background: none; border: none; cursor: pointer; color: var(--gray-400); font-size: 20px; padding: 0 4px; line-height: 1; transition: color .15s; }
-.wf-skill-map-close:hover { color: var(--gray-600); }
+
+/* Capability health strip */
+.cap-health-strip { background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 10px; padding: 10px 14px; margin-bottom: 14px; }
+.cap-health-main { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-bottom: 6px; }
+.cap-health-score { font-size: 18px; font-weight: 900; color: var(--black); }
+.cap-health-label { font-size: 11px; font-weight: 600; color: var(--gray-500); }
+.cap-health-sep { color: var(--gray-300); font-size: 11px; }
+.cap-health-bench { font-size: 11px; font-weight: 600; color: var(--gray-400); }
+.cap-health-delta { font-size: 10.5px; font-weight: 800; padding: 1px 6px; border-radius: 4px; }
+.cap-health-delta.positive { color: #059669; background: #D1FAE5; }
+.cap-health-delta.negative { color: #DC2626; background: #FEE2E2; }
+.cap-health-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.cap-health-tag { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px; }
+.cap-health-tag.good { color: #065F46; background: #D1FAE5; }
+.cap-health-tag.warn { color: #9A3412; background: #FEF3C7; }
+.cap-health-tag.crit { color: #991B1B; background: #FEE2E2; }
+
+/* Capability action boxes */
+.cap-action-box { margin-top: 10px; padding: 10px 12px; background: #F8FAFC; border: 1px solid var(--gray-200); border-radius: 8px; border-left: 3px solid var(--purple-400); }
+.cap-action-box.warn { border-left-color: #F97316; background: #FFFBEB; }
+.cap-action-box.crit { border-left-color: #EF4444; background: #FEF2F2; }
+.cap-action-title { font-size: 10px; font-weight: 800; color: var(--purple-600); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px; }
+.cap-action-box.warn .cap-action-title { color: #D97706; }
+.cap-action-box.crit .cap-action-title { color: #DC2626; }
+.cap-action-item { font-size: 11.5px; color: var(--gray-700); line-height: 1.45; padding: 3px 0; display: flex; gap: 6px; align-items: baseline; }
+.cap-action-icon { flex-shrink: 0; font-size: 11px; }
+.cap-action-item.risk { color: #DC2626; }
 
 /* WF main layout */
 .wf-layout {
@@ -2270,7 +2294,7 @@ body {
 .audit-history-time { font-size:10px; color:var(--gray-400); margin-top:2px; }
 
 /* Skill category BUBBLES — true circles */
-.tv-cat-cloud { display:flex; flex-wrap:wrap; gap:16px; padding:10px 4px 8px; align-items:center; }
+.tv-cat-cloud { display:flex; flex-wrap:wrap; gap:16px; padding:10px 4px 8px; align-items:center; justify-content:center; }
 .tv-cat-bubble {
   border-radius:50%; cursor:pointer; transition:all 0.22s; border:2.5px solid transparent;
   text-align:center; display:flex; flex-direction:column; align-items:center;
@@ -2631,6 +2655,18 @@ body {
   border: 1px solid rgba(255,255,255,0.18); cursor: pointer; transition: all 0.15s;
 }
 .sp-ai-chip:hover { background: rgba(255,255,255,0.2); color: #fff; }
+
+/* Growth Combined Wrapper */
+.sp-growth-combined { margin-bottom: 16px; }
+
+/* Activity Toggle */
+.sp-activity-toggle {
+  display: block; width: 100%; padding: 10px 0; margin-top: 4px;
+  background: none; border: none; border-top: 1px solid var(--gray-100);
+  font-size: 12px; font-weight: 600; color: var(--purple-600);
+  cursor: pointer; font-family: inherit; text-align: center;
+}
+.sp-activity-toggle:hover { color: var(--purple-700); }
 
 /* Growth Path Timeline */
 .sp-growth {
@@ -5116,7 +5152,7 @@ body {
         <div class="wf-kpi-trend down">↑ +2 new gaps</div>
       </div>
       <div class="wf-kpi" onclick="wfToggleSkillMap(this)">
-        <div class="wf-kpi-label">Skill Coverage</div>
+        <div class="wf-kpi-label">Capability Overview</div>
         <div class="wf-kpi-val" style="color:var(--purple-600)">68<span style="font-size:14px;font-weight:500;color:var(--gray-400)">%</span></div>
         <div class="wf-kpi-sub">Across 8 skill areas</div>
         <div class="wf-kpi-trend down">↓ 2 critical gaps</div>
@@ -5139,16 +5175,30 @@ body {
       <div class="tv-kpi-chart-labels" id="wf-kpi-chart-labels"></div>
     </div>
 
-    <!-- WF Company Skill Map (hidden by default) -->
+    <!-- WF Capability Overview (always visible) -->
     <div class="wf-skill-map-section" id="wf-skill-map-section">
       <div class="wf-skill-map-header">
         <div class="wf-skill-map-title">
           <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg>
-          Company Skill Map
-          <span class="wf-skill-map-hint">Click a category to expand</span>
+          Capability Overview
         </div>
-        <button class="wf-skill-map-close" onclick="wfCloseSkillMap()">&times;</button>
+        <span class="wf-skill-map-hint">Click a category to expand</span>
       </div>
+
+      <div class="cap-health-strip">
+  <div class="cap-health-main">
+    <span class="cap-health-score">72%</span>
+    <span class="cap-health-label">overall readiness</span>
+    <span class="cap-health-sep">·</span>
+    <span class="cap-health-bench">Industry avg: 68%</span>
+    <span class="cap-health-delta positive">↑ 4pts above</span>
+  </div>
+  <div class="cap-health-tags">
+    <span class="cap-health-tag good">4 healthy</span>
+    <span class="cap-health-tag warn">1 needs attention</span>
+    <span class="cap-health-tag crit">2 critical gaps</span>
+  </div>
+</div>
 
       <div class="tv-cat-cloud">
         <div class="tv-cat-bubble cat-xl col-green" onclick="wfToggleSkillCat('wf-cat-engineering')">
@@ -5197,6 +5247,10 @@ body {
         <div class="tv-cat-sub-skill"><span class="tv-cat-sub-name">Cloud Architecture</span><div class="tv-cat-sub-bar-wrap"><div class="tv-cat-sub-bar" style="width:18%;background:var(--red-500)"></div></div><span class="tv-cat-sub-count" style="color:var(--red-500)">8/44</span></div>
         <div class="tv-cat-sub-skill"><span class="tv-cat-sub-name">React / Frontend</span><div class="tv-cat-sub-bar-wrap"><div class="tv-cat-sub-bar" style="width:55%;background:var(--blue-500)"></div></div><span class="tv-cat-sub-count" style="color:var(--blue-500)">24/44</span></div>
         <div class="tv-cat-hint">Aggregated across Backend Squad, Frontend, DevOps, QA, Data teams</div>
+<div class="cap-action-box">
+  <div class="cap-action-title">✦ Recommendation</div>
+  <div class="cap-action-item good"><span class="cap-action-icon">✓</span> Strong coverage — focus on deepening Cloud Architecture and React skills to reach 90%+ across all sub-areas</div>
+</div>
       </div>
 
       <div class="tv-cat-panel" id="wf-cat-leadership">
@@ -5206,6 +5260,11 @@ body {
         <div class="tv-cat-sub-skill"><span class="tv-cat-sub-name">Strategic Planning</span><div class="tv-cat-sub-bar-wrap"><div class="tv-cat-sub-bar" style="width:35%;background:var(--orange-500)"></div></div><span class="tv-cat-sub-count" style="color:var(--orange-500)">7/20</span></div>
         <div class="tv-cat-sub-skill"><span class="tv-cat-sub-name">Change Management</span><div class="tv-cat-sub-bar-wrap"><div class="tv-cat-sub-bar" style="width:25%;background:var(--orange-500)"></div></div><span class="tv-cat-sub-count" style="color:var(--orange-500)">5/20</span></div>
         <div class="tv-cat-hint">Across all teams and levels</div>
+<div class="cap-action-box">
+  <div class="cap-action-title">✦ Recommendation</div>
+  <div class="cap-action-item train"><span class="cap-action-icon">📚</span> <strong>Retrain:</strong> 4 senior engineers show leadership potential — enroll in management foundations program (8 weeks)</div>
+  <div class="cap-action-item hire"><span class="cap-action-icon">👤</span> <strong>Hire:</strong> 1 senior people manager to close Strategic Planning gap faster</div>
+</div>
       </div>
 
       <div class="tv-cat-panel" id="wf-cat-product">
@@ -5214,6 +5273,11 @@ body {
         <div class="tv-cat-sub-skill"><span class="tv-cat-sub-name">Technical Planning</span><div class="tv-cat-sub-bar-wrap"><div class="tv-cat-sub-bar" style="width:68%;background:var(--blue-500)"></div></div><span class="tv-cat-sub-count" style="color:var(--blue-500)">30/44</span></div>
         <div class="tv-cat-sub-skill"><span class="tv-cat-sub-name">User Research</span><div class="tv-cat-sub-bar-wrap"><div class="tv-cat-sub-bar" style="width:36%;background:var(--orange-500)"></div></div><span class="tv-cat-sub-count" style="color:var(--orange-500)">16/44</span></div>
         <div class="tv-cat-hint">Product, Engineering, and Design teams</div>
+<div class="cap-action-box">
+  <div class="cap-action-title">✦ Recommendation</div>
+  <div class="cap-action-item train"><span class="cap-action-icon">📚</span> <strong>Retrain:</strong> User Research is the biggest gap — 6 product managers could cross-train with Design team</div>
+  <div class="cap-action-item good"><span class="cap-action-icon">✓</span> Roadmapping and Technical Planning are strong — maintain with quarterly refreshers</div>
+</div>
       </div>
 
       <div class="tv-cat-panel" id="wf-cat-data">
@@ -5222,6 +5286,11 @@ body {
         <div class="tv-cat-sub-skill"><span class="tv-cat-sub-name">Data Pipelines</span><div class="tv-cat-sub-bar-wrap"><div class="tv-cat-sub-bar" style="width:50%;background:var(--blue-500)"></div></div><span class="tv-cat-sub-count" style="color:var(--blue-500)">14/28</span></div>
         <div class="tv-cat-sub-skill"><span class="tv-cat-sub-name">Data Visualization</span><div class="tv-cat-sub-bar-wrap"><div class="tv-cat-sub-bar" style="width:32%;background:var(--orange-500)"></div></div><span class="tv-cat-sub-count" style="color:var(--orange-500)">9/28</span></div>
         <div class="tv-cat-hint">Engineering and Product teams</div>
+<div class="cap-action-box">
+  <div class="cap-action-title">✦ Recommendation</div>
+  <div class="cap-action-item train"><span class="cap-action-icon">📚</span> <strong>Retrain:</strong> 8 engineers with SQL skills could upskill to Data Pipelines (adjacent skill, 6-week program)</div>
+  <div class="cap-action-item train"><span class="cap-action-icon">📊</span> <strong>Retrain:</strong> Data Visualization gap — pair with Design team for cross-functional workshop</div>
+</div>
       </div>
 
       <div class="tv-cat-panel" id="wf-cat-cs">
@@ -5230,6 +5299,12 @@ body {
         <div class="tv-cat-sub-skill"><span class="tv-cat-sub-name">Product Knowledge</span><div class="tv-cat-sub-bar-wrap"><div class="tv-cat-sub-bar" style="width:65%;background:var(--blue-500)"></div></div><span class="tv-cat-sub-count" style="color:var(--blue-500)">26/40</span></div>
         <div class="tv-cat-sub-skill"><span class="tv-cat-sub-name">Negotiation</span><div class="tv-cat-sub-bar-wrap"><div class="tv-cat-sub-bar" style="width:20%;background:var(--red-500)"></div></div><span class="tv-cat-sub-count" style="color:var(--red-500)">8/40</span></div>
         <div class="tv-cat-hint">⚠ CS team 27pts below target — contributing to Q3 delivery risk</div>
+<div class="cap-action-box warn">
+  <div class="cap-action-title">✦ Recommendation — urgent</div>
+  <div class="cap-action-item hire"><span class="cap-action-icon">👤</span> <strong>Hire:</strong> 2 senior account managers with negotiation experience (critical for Q3 renewals)</div>
+  <div class="cap-action-item train"><span class="cap-action-icon">📚</span> <strong>Retrain:</strong> Run negotiation bootcamp for existing CS team (5 people, 4-week program)</div>
+  <div class="cap-action-item risk"><span class="cap-action-icon">⚠</span> <strong>Risk:</strong> Without action, Q3 renewal targets at risk — 27pts below readiness threshold</div>
+</div>
       </div>
 
       <div class="tv-cat-panel" id="wf-cat-design">
@@ -5238,6 +5313,11 @@ body {
         <div class="tv-cat-sub-skill"><span class="tv-cat-sub-name">UX Research</span><div class="tv-cat-sub-bar-wrap"><div class="tv-cat-sub-bar" style="width:31%;background:var(--orange-500)"></div></div><span class="tv-cat-sub-count" style="color:var(--orange-500)">5/16</span></div>
         <div class="tv-cat-sub-skill"><span class="tv-cat-sub-name">Design Systems</span><div class="tv-cat-sub-bar-wrap"><div class="tv-cat-sub-bar" style="width:25%;background:var(--orange-500)"></div></div><span class="tv-cat-sub-count" style="color:var(--orange-500)">4/16</span></div>
         <div class="tv-cat-hint">Design and Product teams</div>
+<div class="cap-action-box">
+  <div class="cap-action-title">✦ Recommendation</div>
+  <div class="cap-action-item hire"><span class="cap-action-icon">👤</span> <strong>Hire:</strong> 1 senior UX researcher — critical for product-led growth initiative</div>
+  <div class="cap-action-item train"><span class="cap-action-icon">📚</span> <strong>Retrain:</strong> 3 designers can cross-train on Design Systems (internal mentorship program)</div>
+</div>
       </div>
 
       <div class="tv-cat-panel" id="wf-cat-security">
@@ -5246,6 +5326,12 @@ body {
         <div class="tv-cat-sub-skill"><span class="tv-cat-sub-name">Penetration Testing</span><div class="tv-cat-sub-bar-wrap"><div class="tv-cat-sub-bar" style="width:10%;background:var(--red-500)"></div></div><span class="tv-cat-sub-count" style="color:var(--red-500)">2/20</span></div>
         <div class="tv-cat-sub-skill"><span class="tv-cat-sub-name">Compliance</span><div class="tv-cat-sub-bar-wrap"><div class="tv-cat-sub-bar" style="width:15%;background:var(--red-500)"></div></div><span class="tv-cat-sub-count" style="color:var(--red-500)">3/20</span></div>
         <div class="tv-cat-hint">⚠ Major gap — only 4 people with any security skills across the org</div>
+<div class="cap-action-box crit">
+  <div class="cap-action-title">✦ Recommendation — critical</div>
+  <div class="cap-action-item hire"><span class="cap-action-icon">👤</span> <strong>Hire:</strong> 2 senior security engineers — fastest path to close gap (no internal candidates with adjacent skills)</div>
+  <div class="cap-action-item train"><span class="cap-action-icon">📚</span> <strong>Retrain:</strong> 3 backend engineers with DevOps experience could train on Security Auditing (12-week program)</div>
+  <div class="cap-action-item risk"><span class="cap-action-icon">⚠</span> <strong>Risk:</strong> SOC2 audit in Q3 2026 requires minimum 6 certified security professionals. Currently at 4.</div>
+</div>
       </div>
     </div>
 
@@ -7357,9 +7443,24 @@ body {
           <div class="tv-section">
             <div class="tv-section-title">
               <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg>
-              Skill Map · Backend Squad
+              Team Capabilities · Backend Squad
               <span style="font-size:10px;color:var(--gray-400);font-weight:500;margin-left:4px">Click any category to expand</span>
             </div>
+
+            <div class="cap-health-strip">
+  <div class="cap-health-main">
+    <span class="cap-health-score">78%</span>
+    <span class="cap-health-label">team readiness</span>
+    <span class="cap-health-sep">·</span>
+    <span class="cap-health-bench">Org avg: 72%</span>
+    <span class="cap-health-delta positive">↑ 6pts above</span>
+  </div>
+  <div class="cap-health-tags">
+    <span class="cap-health-tag good">3 healthy</span>
+    <span class="cap-health-tag warn">1 needs attention</span>
+    <span class="cap-health-tag crit">1 critical gap</span>
+  </div>
+</div>
 
             <div class="tv-cat-cloud">
 
@@ -7425,6 +7526,10 @@ body {
                 <span class="tv-cat-sub-count" style="color:var(--orange-500)">8/20</span>
               </div>
               <div class="tv-cat-hint">📡 Data from GitHub commits + Jira ticket labels · Last sync 2h ago</div>
+<div class="cap-action-box">
+  <div class="cap-action-title">✦ Recommendation</div>
+  <div class="cap-action-item good"><span class="cap-action-icon">✓</span> Strong foundation — close Testing/pytest gap by pairing junior devs with Maria G. (top pytest contributor)</div>
+</div>
             </div>
 
             <div class="tv-cat-panel" id="cat-arch">
@@ -7450,6 +7555,12 @@ body {
                 <span class="tv-cat-sub-count" style="color:var(--red-500)">4/20</span>
               </div>
               <div class="tv-cat-hint">⚠️ Blocks Q2 Infra Migration — recommend upskilling plan · via Hibob assessments</div>
+<div class="cap-action-box crit">
+  <div class="cap-action-title">✦ Recommendation — critical</div>
+  <div class="cap-action-item hire"><span class="cap-action-icon">👤</span> <strong>Hire:</strong> 1 cloud architect to lead team upskilling (no one at Proficient level yet)</div>
+  <div class="cap-action-item train"><span class="cap-action-icon">📚</span> <strong>Retrain:</strong> Maria G. is closest (AWS cert in progress) — fast-track her as internal cloud champion</div>
+  <div class="cap-action-item risk"><span class="cap-action-icon">⚠</span> <strong>Risk:</strong> Cloud migration planned for Q4 — team not ready without intervention</div>
+</div>
             </div>
 
             <div class="tv-cat-panel" id="cat-db">
@@ -7470,6 +7581,10 @@ body {
                 <span class="tv-cat-sub-count" style="color:var(--orange-500)">4/20</span>
               </div>
               <div class="tv-cat-hint">📡 Detected via Jira ticket labels &amp; GitHub repo analysis · Last sync 2h ago</div>
+<div class="cap-action-box">
+  <div class="cap-action-title">✦ Recommendation</div>
+  <div class="cap-action-item good"><span class="cap-action-icon">✓</span> Excellent coverage — consider cross-training 2 members on Redis to support caching initiative</div>
+</div>
             </div>
 
             <div class="tv-cat-panel" id="cat-devops">
@@ -7490,6 +7605,11 @@ body {
                 <span class="tv-cat-sub-count" style="color:var(--red-500)">2/20</span>
               </div>
               <div class="tv-cat-hint">📡 GitHub Actions workflows + Hibob self-assessments · Last sync 2h ago</div>
+<div class="cap-action-box warn">
+  <div class="cap-action-title">✦ Recommendation</div>
+  <div class="cap-action-item train"><span class="cap-action-icon">📚</span> <strong>Retrain:</strong> 3 engineers with Docker skills can upskill to Kubernetes (adjacent, 8-week CKA prep)</div>
+  <div class="cap-action-item hire"><span class="cap-action-icon">👤</span> <strong>Hire:</strong> Consider 1 DevOps/SRE engineer to accelerate CI/CD maturity</div>
+</div>
             </div>
 
             <div class="tv-cat-panel" id="cat-api">
@@ -7510,6 +7630,10 @@ body {
                 <span class="tv-cat-sub-count" style="color:var(--green-600)">11/20</span>
               </div>
               <div class="tv-cat-hint">📡 Detected from PR descriptions &amp; Jira tickets · Last sync 2h ago</div>
+<div class="cap-action-box">
+  <div class="cap-action-title">✦ Recommendation</div>
+  <div class="cap-action-item train"><span class="cap-action-icon">📚</span> <strong>Retrain:</strong> GraphQL gap affects 3 upcoming projects — assign 2 engineers to internal GraphQL workshop</div>
+</div>
             </div>
 
             <div class="tv-cat-panel" id="cat-fe">
@@ -7525,6 +7649,10 @@ body {
                 <span class="tv-cat-sub-count" style="color:var(--orange-500)">6/20</span>
               </div>
               <div class="tv-cat-hint">Frontend is not a core requirement for this team — tracked for cross-functional awareness</div>
+<div class="cap-action-box">
+  <div class="cap-action-title">✦ Recommendation</div>
+  <div class="cap-action-item good"><span class="cap-action-icon">✓</span> Expected for a backend team — current React coverage is sufficient for admin tooling needs</div>
+</div>
             </div>
 
             <div class="tv-bubble-legend" style="margin-top:14px">
@@ -8140,6 +8268,123 @@ body {
         </div>
       </div>
 
+      <!-- ── ROLE MATCH (full width) ──────────────────────── -->
+      <div class="sp-rolematch" style="margin-bottom:16px">
+        <div class="sp-section-title" style="margin-bottom:10px">
+          <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Role Match
+        </div>
+        <!-- Role chips -->
+        <div class="sp-rm-roles" style="position:relative">
+          <span class="sp-rm-role-chip active" onclick="switchRoleMatch('backend-lead',this)">Backend Lead · Backend Squad <span class="sp-rm-primary-tag">Primary</span></span>
+          <span class="sp-rm-role-chip inactive" onclick="switchRoleMatch('senior-eng-lead',this)">Senior Eng Lead · Eng</span>
+          <span class="sp-rm-role-chip inactive" onclick="switchRoleMatch('api-lead',this)">API Lead · Platform</span>
+        </div>
+        <!-- 2-col body -->
+        <div class="sp-rm-body">
+          <!-- LEFT: score + bars + history -->
+          <div class="sp-rm-left">
+            <div class="sp-rm-num" id="sp-rm-num">91%</div>
+            <div style="font-size:11px;color:var(--gray-500);margin:2px 0 6px" id="sp-rm-label">vs Backend Lead · Backend Squad</div>
+            <div style="position:relative;margin-bottom:10px">
+              <button class="sp-rm-specifics-btn" onclick="toggleRoleSpecifics()">Role specifics ↗</button>
+              <!-- Role expectations floating popover (anchored here) -->
+              <div class="sp-rm-exp-popover" id="sp-rm-exp-popover" style="display:none;top:calc(100% + 6px);left:0">
+                <div class="sp-rm-exp-title" id="sp-rm-exp-title">Role Expectations · Backend Lead</div>
+                <div class="sp-rm-exp-body" id="sp-rm-exp-body">
+                  <div class="sp-rm-exp-row"><span class="sp-rm-exp-lbl">Team</span><span class="sp-rm-exp-val">Backend Squad (team-specific)</span></div>
+                  <div class="sp-rm-exp-row"><span class="sp-rm-exp-lbl">Cloud infra</span><span class="sp-rm-exp-val sp-rm-exp-higher">+12% vs Eng-wide ↑</span></div>
+                  <div class="sp-rm-exp-row"><span class="sp-rm-exp-lbl">Focus</span><span class="sp-rm-exp-val">Backend delivery, API quality, reliability</span></div>
+                  <div class="sp-rm-exp-note">Same role title ≠ same bar. Expectations are layered per team context.</div>
+                </div>
+              </div>
+            </div>
+            <div class="sp-rm-bars-stack">
+              <div class="sp-rm-bar-row">
+                <div class="sp-rm-bar-header"><span class="sp-rm-bar-name">✅ Good match</span><span class="sp-rm-bar-pct" id="sp-rm-pct-good" style="color:#059669">78%</span></div>
+                <div class="sp-rm-bar-track"><div class="sp-rm-bar-fill good" id="sp-rm-fill-good" style="width:78%"></div></div>
+              </div>
+              <div class="sp-rm-bar-row">
+                <div class="sp-rm-bar-header"><span class="sp-rm-bar-name">🟡 Training needed</span><span class="sp-rm-bar-pct" id="sp-rm-pct-train" style="color:#D97706">13%</span></div>
+                <div class="sp-rm-bar-track"><div class="sp-rm-bar-fill train" id="sp-rm-fill-train" style="width:13%"></div></div>
+              </div>
+              <div class="sp-rm-bar-row">
+                <div class="sp-rm-bar-header"><span class="sp-rm-bar-name">🔴 Critical gap</span><span class="sp-rm-bar-pct" id="sp-rm-pct-crit" style="color:#DC2626">9%</span></div>
+                <div class="sp-rm-bar-track"><div class="sp-rm-bar-fill crit" id="sp-rm-fill-crit" style="width:9%"></div></div>
+              </div>
+            </div>
+            <!-- Match history toggle -->
+            <button class="sp-rm-hist-toggle" id="sp-rm-hist-btn" onclick="toggleMatchHistory()">
+              <svg class="sp-rm-hist-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+              Match history
+            </button>
+            <div class="sp-rm-history-list" id="sp-rm-history-list" style="display:none">
+              <div class="sp-rm-hi">
+                <div class="sp-rm-hi-dot recent"></div>
+                <div>
+                  <div class="sp-rm-hi-date">Mar 2025</div>
+                  <div class="sp-rm-hi-detail"><span class="sp-rm-hi-badge">91%</span>&nbsp;↑ from&nbsp;<span class="sp-rm-hi-badge prev">87%</span></div>
+                  <div class="sp-rm-hi-skills">+PostgreSQL cert · +REST API project merged</div>
+                </div>
+              </div>
+              <div class="sp-rm-hi">
+                <div class="sp-rm-hi-dot"></div>
+                <div>
+                  <div class="sp-rm-hi-date">Nov 2024</div>
+                  <div class="sp-rm-hi-detail"><span class="sp-rm-hi-badge">87%</span>&nbsp;↑ from&nbsp;<span class="sp-rm-hi-badge prev">82%</span></div>
+                  <div class="sp-rm-hi-skills">+Django 3yr milestone · +System Design reviewed</div>
+                </div>
+              </div>
+              <div class="sp-rm-hi">
+                <div class="sp-rm-hi-dot"></div>
+                <div>
+                  <div class="sp-rm-hi-date">Jun 2024</div>
+                  <div class="sp-rm-hi-detail"><span class="sp-rm-hi-badge">82%</span>&nbsp;↑ from&nbsp;<span class="sp-rm-hi-badge prev">76%</span></div>
+                  <div class="sp-rm-hi-skills">+MongoDB cert earned · +Stakeholder Mgmt rated</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- RIGHT: rec box + skill chips -->
+          <div class="sp-rm-right">
+            <div class="sp-rm-rec-box" id="sp-rm-rec-box">
+              <div class="sp-rm-rec-box-title" id="sp-rm-rec-target">🎯 You're a great fit for Backend Lead</div>
+              <div class="sp-rm-rec-item" id="sp-rm-rec-focus"><span style="flex-shrink:0">→</span><span>Keep leveling up <strong>Cloud Architecture</strong> and <strong>Kubernetes</strong> to also unlock Senior Eng Lead (89% with those skills)</span></div>
+            </div>
+            <div class="sp-rm-skill-section">
+              <div class="sp-rm-skill-sec-label">Strong match</div>
+              <div class="sp-rm-skill-chips" id="sp-rm-strong-chips">
+                <span class="sp-rm-skill-chip strong">Python</span>
+                <span class="sp-rm-skill-chip strong">REST APIs</span>
+                <span class="sp-rm-skill-chip strong">Django</span>
+                <span class="sp-rm-skill-chip strong">PostgreSQL</span>
+                <span class="sp-rm-skill-chip strong">API Architecture</span>
+                <span class="sp-rm-skill-chip strong">System Design</span>
+                <span class="sp-rm-skill-chip strong">Technical Writing</span>
+              </div>
+            </div>
+            <div class="sp-rm-skill-section">
+              <div class="sp-rm-skill-sec-label">Training needed</div>
+              <div class="sp-rm-skill-chips" id="sp-rm-train-chips">
+                <span class="sp-rm-skill-chip train">FastAPI</span>
+                <span class="sp-rm-skill-chip train">Docker</span>
+                <span class="sp-rm-skill-chip train">Team Leadership</span>
+              </div>
+            </div>
+            <div class="sp-rm-skill-section">
+              <div class="sp-rm-skill-sec-label">Critical gaps</div>
+              <div class="sp-rm-skill-chips" id="sp-rm-gap-chips">
+                <span class="sp-rm-skill-chip gap">Kubernetes</span>
+                <span class="sp-rm-skill-chip gap">Cloud Architecture</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── AMBITION + GROWTH PATH + DEV PATH (combined) ── -->
+      <div class="sp-growth-combined">
+
       <!-- ── AMBITION ─────────────────────────────────────── -->
       <div class="sp-ambition">
         <div class="sp-section-title">
@@ -8445,330 +8690,7 @@ body {
         </div>
       </div>
 
-      <!-- ── LEARNING & CERTIFICATIONS ──────────────────────── -->
-      <div class="sp-learn">
-        <div class="sp-section-title" style="margin-bottom:0">
-          <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-          Learning &amp; Certifications
-          <button class="sp-learn-add" style="margin-left:auto" onclick="switchLearnTab('training')">+ Add training</button>
-        </div>
-        <div class="sp-learn-tabs">
-          <div class="sp-learn-tab active" onclick="switchLearnTab('training',this)">📚 Training</div>
-          <div class="sp-learn-tab" onclick="switchLearnTab('certs',this)">🏅 Certifications</div>
-        </div>
-
-        <!-- TRAINING PANE -->
-        <div class="sp-learn-pane active" id="sp-learn-training">
-          <div class="sp-learn-row" style="flex-wrap:wrap;gap:6px 10px">
-            <div style="flex:1;min-width:160px">
-              <div class="sp-learn-name">System Design Mastery</div>
-              <div class="sp-learn-meta">Educative · Self-paced · Completed Jan 2026</div>
-              <div class="sp-learn-rels">
-                <span class="sp-learn-rel-chip skill">Cloud Architecture</span>
-                <span class="sp-learn-rel-chip skill">API Design</span>
-                <span class="sp-learn-rel-chip role">Senior Eng Lead</span>
-                <span class="sp-learn-rel-chip team">Backend Squad</span>
-              </div>
-            </div>
-            <span class="sp-learn-status completed">✓ Completed</span>
-          </div>
-          <div class="sp-learn-row" style="flex-wrap:wrap;gap:6px 10px">
-            <div style="flex:1;min-width:160px">
-              <div class="sp-learn-name">AWS Cloud Practitioner Essentials</div>
-              <div class="sp-learn-meta">Coursera · 12h · Started Feb 2026</div>
-              <div class="sp-learn-rels">
-                <span class="sp-learn-rel-chip skill">Cloud Architecture</span>
-                <span class="sp-learn-rel-chip skill">AWS</span>
-                <span class="sp-learn-rel-chip role">Senior Eng Lead</span>
-                <span class="sp-learn-rel-chip team">Platform Squad</span>
-              </div>
-            </div>
-            <span class="sp-learn-status inprogress">● In progress</span>
-          </div>
-          <div class="sp-learn-row" style="flex-wrap:wrap;gap:6px 10px">
-            <div style="flex:1;min-width:160px">
-              <div class="sp-learn-name">Kubernetes Fundamentals (LFS258)</div>
-              <div class="sp-learn-meta">CNCF · 30h · Planned · Q3 2026</div>
-              <div class="sp-learn-rels">
-                <span class="sp-learn-rel-chip skill">Kubernetes</span>
-                <span class="sp-learn-rel-chip skill">Docker</span>
-                <span class="sp-learn-rel-chip role">Platform Architect</span>
-                <span class="sp-learn-rel-chip team">Platform Squad</span>
-              </div>
-            </div>
-            <span class="sp-learn-status planned">Planned</span>
-          </div>
-          <div class="sp-learn-row" style="flex-wrap:wrap;gap:6px 10px">
-            <div style="flex:1;min-width:160px">
-              <div class="sp-learn-name">Engineering Management Foundations</div>
-              <div class="sp-learn-meta">Reforge · 8h · Planned · Q4 2026</div>
-              <div class="sp-learn-rels">
-                <span class="sp-learn-rel-chip skill">Team Leadership</span>
-                <span class="sp-learn-rel-chip skill">Eng Mentorship</span>
-                <span class="sp-learn-rel-chip role">Engineering Manager</span>
-              </div>
-            </div>
-            <span class="sp-learn-status planned">Planned</span>
-          </div>
-        </div>
-
-        <!-- CERTIFICATIONS PANE -->
-        <div class="sp-learn-pane" id="sp-learn-certs">
-          <!-- Expiry alert -->
-          <div class="sp-learn-expiry-alert">
-            ⚠ <span>1 certification expired — <strong>Google Cloud Professional</strong> expired Mar 2024. Renewal recommended.</span>
-          </div>
-          <div class="sp-learn-row" style="flex-wrap:wrap;gap:6px 10px">
-            <div style="flex:1;min-width:160px">
-              <div class="sp-learn-name">AWS Solutions Architect – Associate</div>
-              <div class="sp-learn-meta">Amazon Web Services · Target: Jun 2026 · Expires 3yr after earn</div>
-              <div class="sp-learn-rels">
-                <span class="sp-learn-rel-chip skill">Cloud Architecture</span>
-                <span class="sp-learn-rel-chip skill">AWS</span>
-                <span class="sp-learn-rel-chip role">Senior Eng Lead</span>
-                <span class="sp-learn-rel-chip team">Platform Squad</span>
-              </div>
-            </div>
-            <span class="sp-learn-status inprogress">● In progress</span>
-          </div>
-          <div class="sp-learn-row" style="flex-wrap:wrap;gap:6px 10px">
-            <div style="flex:1;min-width:160px">
-              <div class="sp-learn-name">Certified Kubernetes Administrator (CKA)</div>
-              <div class="sp-learn-meta">CNCF · Target: Q4 2026 · Expires 3yr after earn</div>
-              <div class="sp-learn-rels">
-                <span class="sp-learn-rel-chip skill">Kubernetes</span>
-                <span class="sp-learn-rel-chip skill">Docker</span>
-                <span class="sp-learn-rel-chip role">Platform Architect</span>
-                <span class="sp-learn-rel-chip team">Platform Squad</span>
-              </div>
-            </div>
-            <span class="sp-learn-status aspirational">Aspirational</span>
-          </div>
-          <div class="sp-learn-row" style="flex-wrap:wrap;gap:6px 10px">
-            <div style="flex:1;min-width:160px">
-              <div class="sp-learn-name">Google Cloud Professional Data Engineer</div>
-              <div class="sp-learn-meta">Google Cloud · Earned: Mar 2022</div>
-              <div class="sp-learn-rels">
-                <span class="sp-learn-rel-chip skill">Cloud Architecture</span>
-                <span class="sp-learn-rel-chip role">Platform Architect</span>
-                <span class="sp-learn-rel-chip team">Platform Squad</span>
-              </div>
-            </div>
-            <span class="sp-learn-status expired">Expired</span>
-            <span class="sp-learn-expiry warn">⚠ Mar 2024</span>
-          </div>
-          <div class="sp-learn-row" style="flex-wrap:wrap;gap:6px 10px">
-            <div style="flex:1;min-width:160px">
-              <div class="sp-learn-name">MongoDB Certified Developer</div>
-              <div class="sp-learn-meta">MongoDB University · Earned: Nov 2023 · Expires Nov 2026</div>
-              <div class="sp-learn-rels">
-                <span class="sp-learn-rel-chip skill">PostgreSQL</span>
-                <span class="sp-learn-rel-chip skill">API Design</span>
-                <span class="sp-learn-rel-chip team">Backend Squad</span>
-              </div>
-            </div>
-            <span class="sp-learn-status completed">✓ Active</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── PROJECT HISTORY ──────────────────────────────── -->
-      <div class="sp-section">
-        <div class="sp-section-title">
-          <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-          Project History
-        </div>
-        <div class="sp-proj-list">
-
-          <div class="sp-proj-row">
-            <div class="sp-proj-left">
-              <div class="sp-proj-name">Q1 API Platform Refactor</div>
-              <div class="sp-proj-meta">
-                <span class="sp-proj-client">ACME Corp</span>
-                <span class="sp-proj-sep">·</span>
-                <span class="sp-proj-team">Backend Squad</span>
-                <span class="sp-proj-sep">·</span>
-                <span class="sp-proj-dur">Jan – Mar 2026 · 3 mo</span>
-              </div>
-              <div class="sp-proj-desc">Led full API refactor across 18 endpoints. Achieved 40% perf improvement, 0 regressions. Comparable to Platform Architect scope.</div>
-              <div class="sp-proj-chips">
-                <span class="sp-proj-chip role">Lead Engineer</span>
-                <span class="sp-proj-chip skill">REST APIs</span>
-                <span class="sp-proj-chip skill">PostgreSQL</span>
-                <span class="sp-proj-chip skill">System Design</span>
-              </div>
-            </div>
-            <div class="sp-proj-right">
-              <span class="sp-proj-status active">Active</span>
-              <div class="sp-proj-comparable">Comparable: Platform Architect</div>
-            </div>
-          </div>
-
-          <div class="sp-proj-row sp-proj-hidden" id="sp-proj-history-extra">
-            <div class="sp-proj-left">
-              <div class="sp-proj-name">Auth Module Security Overhaul</div>
-              <div class="sp-proj-meta">
-                <span class="sp-proj-client">ACME Corp</span>
-                <span class="sp-proj-sep">·</span>
-                <span class="sp-proj-team">Backend Squad</span>
-                <span class="sp-proj-sep">·</span>
-                <span class="sp-proj-dur">Oct – Dec 2025 · 3 mo</span>
-              </div>
-              <div class="sp-proj-desc">Redesigned auth flows (OAuth 2.0 + JWT). Merged 12 PRs, reduced auth latency by 30%. First solo security-critical delivery.</div>
-              <div class="sp-proj-chips">
-                <span class="sp-proj-chip role">Engineer</span>
-                <span class="sp-proj-chip skill">Python</span>
-                <span class="sp-proj-chip skill">Django</span>
-                <span class="sp-proj-chip skill">Security</span>
-              </div>
-            </div>
-            <div class="sp-proj-right">
-              <span class="sp-proj-status completed">Completed</span>
-              <div class="sp-proj-comparable">Comparable: Backend Lead</div>
-            </div>
-          </div>
-
-          <div class="sp-proj-row sp-proj-hidden" id="sp-proj-history-extra2">
-            <div class="sp-proj-left">
-              <div class="sp-proj-name">Notification Service (Microservice)</div>
-              <div class="sp-proj-meta">
-                <span class="sp-proj-client">ACME Corp</span>
-                <span class="sp-proj-sep">·</span>
-                <span class="sp-proj-team">Platform Squad</span>
-                <span class="sp-proj-sep">·</span>
-                <span class="sp-proj-dur">Jun – Sep 2025 · 4 mo</span>
-              </div>
-              <div class="sp-proj-desc">Built async notification service from scratch using Celery + Redis. Cross-team collaboration with Platform Squad. Shipped on time.</div>
-              <div class="sp-proj-chips">
-                <span class="sp-proj-chip role">Engineer</span>
-                <span class="sp-proj-chip skill">Celery</span>
-                <span class="sp-proj-chip skill">Redis</span>
-                <span class="sp-proj-chip skill">FastAPI</span>
-              </div>
-            </div>
-            <div class="sp-proj-right">
-              <span class="sp-proj-status completed">Completed</span>
-              <div class="sp-proj-comparable">Cross-team project</div>
-            </div>
-          </div>
-
-        </div>
-        <button class="sp-proj-toggle" id="sp-proj-toggle-btn" onclick="toggleProjHistory()">Show full history (2 projects) ↓</button>
-      </div>
-
-      <!-- ── ROLE MATCH (full width) ──────────────────────── -->
-      <div class="sp-rolematch" style="margin-bottom:16px">
-        <div class="sp-section-title" style="margin-bottom:10px">
-          <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          Role Match
-        </div>
-        <!-- Role chips -->
-        <div class="sp-rm-roles" style="position:relative">
-          <span class="sp-rm-role-chip active" onclick="switchRoleMatch('backend-lead',this)">Backend Lead · Backend Squad <span class="sp-rm-primary-tag">Primary</span></span>
-          <span class="sp-rm-role-chip inactive" onclick="switchRoleMatch('senior-eng-lead',this)">Senior Eng Lead · Eng</span>
-          <span class="sp-rm-role-chip inactive" onclick="switchRoleMatch('api-lead',this)">API Lead · Platform</span>
-        </div>
-        <!-- 2-col body -->
-        <div class="sp-rm-body">
-          <!-- LEFT: score + bars + history -->
-          <div class="sp-rm-left">
-            <div class="sp-rm-num" id="sp-rm-num">91%</div>
-            <div style="font-size:11px;color:var(--gray-500);margin:2px 0 6px" id="sp-rm-label">vs Backend Lead · Backend Squad</div>
-            <div style="position:relative;margin-bottom:10px">
-              <button class="sp-rm-specifics-btn" onclick="toggleRoleSpecifics()">Role specifics ↗</button>
-              <!-- Role expectations floating popover (anchored here) -->
-              <div class="sp-rm-exp-popover" id="sp-rm-exp-popover" style="display:none;top:calc(100% + 6px);left:0">
-                <div class="sp-rm-exp-title" id="sp-rm-exp-title">Role Expectations · Backend Lead</div>
-                <div class="sp-rm-exp-body" id="sp-rm-exp-body">
-                  <div class="sp-rm-exp-row"><span class="sp-rm-exp-lbl">Team</span><span class="sp-rm-exp-val">Backend Squad (team-specific)</span></div>
-                  <div class="sp-rm-exp-row"><span class="sp-rm-exp-lbl">Cloud infra</span><span class="sp-rm-exp-val sp-rm-exp-higher">+12% vs Eng-wide ↑</span></div>
-                  <div class="sp-rm-exp-row"><span class="sp-rm-exp-lbl">Focus</span><span class="sp-rm-exp-val">Backend delivery, API quality, reliability</span></div>
-                  <div class="sp-rm-exp-note">Same role title ≠ same bar. Expectations are layered per team context.</div>
-                </div>
-              </div>
-            </div>
-            <div class="sp-rm-bars-stack">
-              <div class="sp-rm-bar-row">
-                <div class="sp-rm-bar-header"><span class="sp-rm-bar-name">✅ Good match</span><span class="sp-rm-bar-pct" id="sp-rm-pct-good" style="color:#059669">78%</span></div>
-                <div class="sp-rm-bar-track"><div class="sp-rm-bar-fill good" id="sp-rm-fill-good" style="width:78%"></div></div>
-              </div>
-              <div class="sp-rm-bar-row">
-                <div class="sp-rm-bar-header"><span class="sp-rm-bar-name">🟡 Training needed</span><span class="sp-rm-bar-pct" id="sp-rm-pct-train" style="color:#D97706">13%</span></div>
-                <div class="sp-rm-bar-track"><div class="sp-rm-bar-fill train" id="sp-rm-fill-train" style="width:13%"></div></div>
-              </div>
-              <div class="sp-rm-bar-row">
-                <div class="sp-rm-bar-header"><span class="sp-rm-bar-name">🔴 Critical gap</span><span class="sp-rm-bar-pct" id="sp-rm-pct-crit" style="color:#DC2626">9%</span></div>
-                <div class="sp-rm-bar-track"><div class="sp-rm-bar-fill crit" id="sp-rm-fill-crit" style="width:9%"></div></div>
-              </div>
-            </div>
-            <!-- Match history toggle -->
-            <button class="sp-rm-hist-toggle" id="sp-rm-hist-btn" onclick="toggleMatchHistory()">
-              <svg class="sp-rm-hist-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-              Match history
-            </button>
-            <div class="sp-rm-history-list" id="sp-rm-history-list" style="display:none">
-              <div class="sp-rm-hi">
-                <div class="sp-rm-hi-dot recent"></div>
-                <div>
-                  <div class="sp-rm-hi-date">Mar 2025</div>
-                  <div class="sp-rm-hi-detail"><span class="sp-rm-hi-badge">91%</span>&nbsp;↑ from&nbsp;<span class="sp-rm-hi-badge prev">87%</span></div>
-                  <div class="sp-rm-hi-skills">+PostgreSQL cert · +REST API project merged</div>
-                </div>
-              </div>
-              <div class="sp-rm-hi">
-                <div class="sp-rm-hi-dot"></div>
-                <div>
-                  <div class="sp-rm-hi-date">Nov 2024</div>
-                  <div class="sp-rm-hi-detail"><span class="sp-rm-hi-badge">87%</span>&nbsp;↑ from&nbsp;<span class="sp-rm-hi-badge prev">82%</span></div>
-                  <div class="sp-rm-hi-skills">+Django 3yr milestone · +System Design reviewed</div>
-                </div>
-              </div>
-              <div class="sp-rm-hi">
-                <div class="sp-rm-hi-dot"></div>
-                <div>
-                  <div class="sp-rm-hi-date">Jun 2024</div>
-                  <div class="sp-rm-hi-detail"><span class="sp-rm-hi-badge">82%</span>&nbsp;↑ from&nbsp;<span class="sp-rm-hi-badge prev">76%</span></div>
-                  <div class="sp-rm-hi-skills">+MongoDB cert earned · +Stakeholder Mgmt rated</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- RIGHT: rec box + skill chips -->
-          <div class="sp-rm-right">
-            <div class="sp-rm-rec-box" id="sp-rm-rec-box">
-              <div class="sp-rm-rec-box-title" id="sp-rm-rec-target">🎯 You're a great fit for Backend Lead</div>
-              <div class="sp-rm-rec-item" id="sp-rm-rec-focus"><span style="flex-shrink:0">→</span><span>Keep leveling up <strong>Cloud Architecture</strong> and <strong>Kubernetes</strong> to also unlock Senior Eng Lead (89% with those skills)</span></div>
-            </div>
-            <div class="sp-rm-skill-section">
-              <div class="sp-rm-skill-sec-label">Strong match</div>
-              <div class="sp-rm-skill-chips" id="sp-rm-strong-chips">
-                <span class="sp-rm-skill-chip strong">Python</span>
-                <span class="sp-rm-skill-chip strong">REST APIs</span>
-                <span class="sp-rm-skill-chip strong">Django</span>
-                <span class="sp-rm-skill-chip strong">PostgreSQL</span>
-                <span class="sp-rm-skill-chip strong">API Architecture</span>
-                <span class="sp-rm-skill-chip strong">System Design</span>
-                <span class="sp-rm-skill-chip strong">Technical Writing</span>
-              </div>
-            </div>
-            <div class="sp-rm-skill-section">
-              <div class="sp-rm-skill-sec-label">Training needed</div>
-              <div class="sp-rm-skill-chips" id="sp-rm-train-chips">
-                <span class="sp-rm-skill-chip train">FastAPI</span>
-                <span class="sp-rm-skill-chip train">Docker</span>
-                <span class="sp-rm-skill-chip train">Team Leadership</span>
-              </div>
-            </div>
-            <div class="sp-rm-skill-section">
-              <div class="sp-rm-skill-sec-label">Critical gaps</div>
-              <div class="sp-rm-skill-chips" id="sp-rm-gap-chips">
-                <span class="sp-rm-skill-chip gap">Kubernetes</span>
-                <span class="sp-rm-skill-chip gap">Cloud Architecture</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      </div><!-- /sp-growth-combined -->
 
       <!-- ── SKILLS (full width) ───────────────────────────── -->
       <div class="sp-skill3-section">
@@ -9088,6 +9010,8 @@ body {
           <span class="sp-activity-source">ConnectWise</span>
         </div>
 
+        <button class="sp-activity-toggle" id="sp-activity-toggle-btn" onclick="toggleActivityHistory()">Show more activity (6 items) ↓</button>
+        <div id="sp-activity-extra" style="display:none">
         <!-- Last week -->
         <div style="font-size:10px;font-weight:700;color:var(--gray-400);text-transform:uppercase;letter-spacing:0.5px;padding:10px 0 2px">Last week</div>
         <div class="sp-activity-row">
@@ -9141,6 +9065,7 @@ body {
           </div>
           <span class="sp-activity-source">ConnectWise</span>
         </div>
+        </div><!-- /sp-activity-extra -->
       </div>
 
       <!-- data sources strip removed — now in AI strip at top -->
@@ -11426,138 +11351,168 @@ body {
     <!-- GROWTH TAB -->
     <div id="sp-ctx-profile" style="display:none">
 
-      <!-- Development paths (current) -->
-      <div style="margin-bottom:16px">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-          <div style="font-size:11px;font-weight:800;color:var(--black);text-transform:uppercase;letter-spacing:.04em">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline;margin-right:3px;vertical-align:-1px"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-            Development paths
+      <!-- Development paths -->
+      <div class="sp-ctx-ev-section">
+        <div class="sp-ctx-ev-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="sp-ctx-ev-icon" style="background:#F5F3FF;color:#7C3AED">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
           </div>
+          <div class="sp-ctx-ev-title">Development paths</div>
+          <span class="sp-ctx-ev-count">2</span>
+          <span class="sp-ctx-ev-chev">▾</span>
         </div>
-        <!-- Active path: Senior Backend Lead -->
-        <div style="padding:12px 14px;background:linear-gradient(135deg,#F5F3FF,#EDE9FE);border:1.5px solid #DDD6FE;border-radius:10px;margin-bottom:8px">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-            <div style="width:28px;height:28px;border-radius:7px;background:#7C3AED;display:flex;align-items:center;justify-content:center;flex-shrink:0">
-              <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        <div class="sp-ctx-ev-body">
+          <!-- Active path: Senior Backend Lead -->
+          <div style="padding:12px 14px;background:linear-gradient(135deg,#F5F3FF,#EDE9FE);border:1.5px solid #DDD6FE;border-radius:10px;margin-bottom:8px">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+              <div style="width:28px;height:28px;border-radius:7px;background:#7C3AED;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+              </div>
+              <div style="flex:1">
+                <div style="font-size:12.5px;font-weight:800;color:#5B21B6">Senior Backend Lead</div>
+                <div style="font-size:10px;color:#7C3AED;font-weight:600">Active development path · Target Q3 2026</div>
+              </div>
+              <div style="font-size:10px;font-weight:800;color:#059669;background:#D1FAE5;padding:2px 8px;border-radius:4px">78%</div>
             </div>
-            <div style="flex:1">
-              <div style="font-size:12.5px;font-weight:800;color:#5B21B6">Senior Backend Lead</div>
-              <div style="font-size:10px;color:#7C3AED;font-weight:600">Active development path · Target Q3 2026</div>
+            <div style="display:flex;align-items:center;gap:0;margin-bottom:8px">
+              <div style="flex:1;height:4px;background:#7C3AED;border-radius:2px 0 0 2px"></div>
+              <div style="flex:1;height:4px;background:#7C3AED"></div>
+              <div style="flex:1;height:4px;background:#7C3AED"></div>
+              <div style="flex:0.22;height:4px;background:#DDD6FE;border-radius:0 2px 2px 0"></div>
             </div>
-            <div style="font-size:10px;font-weight:800;color:#059669;background:#D1FAE5;padding:2px 8px;border-radius:4px">78%</div>
+            <div style="display:flex;gap:4px;flex-wrap:wrap">
+              <span style="font-size:9.5px;font-weight:600;color:#059669;background:#D1FAE5;padding:2px 6px;border-radius:4px">✓ System Design</span>
+              <span style="font-size:9.5px;font-weight:600;color:#059669;background:#D1FAE5;padding:2px 6px;border-radius:4px">✓ Team Leadership</span>
+              <span style="font-size:9.5px;font-weight:600;color:#D97706;background:#FEF3C7;padding:2px 6px;border-radius:4px">↻ Cloud Architecture</span>
+              <span style="font-size:9.5px;font-weight:600;color:var(--gray-400);background:var(--gray-100);padding:2px 6px;border-radius:4px">○ Strategic Planning</span>
+            </div>
           </div>
-          <!-- Mini progress timeline -->
-          <div style="display:flex;align-items:center;gap:0;margin-bottom:8px">
-            <div style="flex:1;height:4px;background:#7C3AED;border-radius:2px 0 0 2px"></div>
-            <div style="flex:1;height:4px;background:#7C3AED"></div>
-            <div style="flex:1;height:4px;background:#7C3AED"></div>
-            <div style="flex:0.22;height:4px;background:#DDD6FE;border-radius:0 2px 2px 0"></div>
-          </div>
-          <div style="display:flex;gap:4px;flex-wrap:wrap">
-            <span style="font-size:9.5px;font-weight:600;color:#059669;background:#D1FAE5;padding:2px 6px;border-radius:4px">✓ System Design</span>
-            <span style="font-size:9.5px;font-weight:600;color:#059669;background:#D1FAE5;padding:2px 6px;border-radius:4px">✓ Team Leadership</span>
-            <span style="font-size:9.5px;font-weight:600;color:#D97706;background:#FEF3C7;padding:2px 6px;border-radius:4px">↻ Cloud Architecture</span>
-            <span style="font-size:9.5px;font-weight:600;color:var(--gray-400);background:var(--gray-100);padding:2px 6px;border-radius:4px">○ Strategic Planning</span>
-          </div>
-        </div>
-        <!-- Secondary path -->
-        <div style="padding:10px 12px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:9px">
-          <div style="display:flex;align-items:center;gap:8px">
-            <div style="width:24px;height:24px;border-radius:6px;background:var(--gray-200);display:flex;align-items:center;justify-content:center;flex-shrink:0">
-              <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="var(--gray-500)" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          <!-- Secondary path -->
+          <div style="padding:10px 12px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:9px">
+            <div style="display:flex;align-items:center;gap:8px">
+              <div style="width:24px;height:24px;border-radius:6px;background:var(--gray-200);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="var(--gray-500)" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+              </div>
+              <div style="flex:1">
+                <div style="font-size:12px;font-weight:700;color:var(--black)">Engineering Manager</div>
+                <div style="font-size:10px;color:var(--gray-400)">Exploring · Long-term interest</div>
+              </div>
+              <div style="font-size:10px;font-weight:700;color:var(--gray-400);background:var(--gray-100);padding:2px 8px;border-radius:4px">45%</div>
             </div>
-            <div style="flex:1">
-              <div style="font-size:12px;font-weight:700;color:var(--black)">Engineering Manager</div>
-              <div style="font-size:10px;color:var(--gray-400)">Exploring · Long-term interest</div>
-            </div>
-            <div style="font-size:10px;font-weight:700;color:var(--gray-400);background:var(--gray-100);padding:2px 8px;border-radius:4px">45%</div>
           </div>
         </div>
       </div>
 
       <!-- Goals -->
-      <div style="margin-bottom:16px">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-          <div style="font-size:11px;font-weight:800;color:var(--black);text-transform:uppercase;letter-spacing:.04em">
-            <span style="margin-right:3px">🎯</span> Goals
+      <div class="sp-ctx-ev-section">
+        <div class="sp-ctx-ev-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="sp-ctx-ev-icon" style="background:#FEF3C7;color:#D97706">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
           </div>
-          <button style="font-size:10px;font-weight:700;color:#7C3AED;background:none;border:none;cursor:pointer">+ Add</button>
+          <div class="sp-ctx-ev-title">Goals</div>
+          <span class="sp-ctx-ev-count">2</span>
+          <span class="sp-ctx-ev-chev">▾</span>
         </div>
-        <div style="padding:10px 12px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:9px;margin-bottom:6px">
-          <div style="font-size:12px;font-weight:700;color:var(--black)">Get promoted to Senior Backend Lead</div>
-          <div style="font-size:10.5px;color:var(--gray-500);margin-top:2px">Target: Q3 2026 · <span style="color:#059669;font-weight:700">On track</span></div>
-        </div>
-        <div style="padding:10px 12px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:9px">
-          <div style="font-size:12px;font-weight:700;color:var(--black)">Complete AWS Solutions Architect certification</div>
-          <div style="font-size:10.5px;color:var(--gray-500);margin-top:2px">Target: Q2 2026 · <span style="color:#D97706;font-weight:700">In progress</span></div>
+        <div class="sp-ctx-ev-body">
+          <div class="sp-ctx-ev-item">
+            <div class="sp-ctx-ev-item-title">Get promoted to Senior Backend Lead</div>
+            <div class="sp-ctx-ev-item-date">Target: Q3 2026 · <span style="color:#059669;font-weight:700">On track</span></div>
+          </div>
+          <div class="sp-ctx-ev-item">
+            <div class="sp-ctx-ev-item-title">Complete AWS Solutions Architect certification</div>
+            <div class="sp-ctx-ev-item-date">Target: Q2 2026 · <span style="color:#D97706;font-weight:700">In progress</span></div>
+          </div>
         </div>
       </div>
 
       <!-- Learning Paths -->
-      <div style="margin-bottom:16px">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-          <div style="font-size:11px;font-weight:800;color:var(--black);text-transform:uppercase;letter-spacing:.04em">
-            <span style="margin-right:3px">📚</span> Learning paths
+      <div class="sp-ctx-ev-section">
+        <div class="sp-ctx-ev-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="sp-ctx-ev-icon" style="background:#EFF6FF;color:#2563EB">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
           </div>
-          <button style="font-size:10px;font-weight:700;color:#7C3AED;background:none;border:none;cursor:pointer">+ Add</button>
+          <div class="sp-ctx-ev-title">Learning paths</div>
+          <span class="sp-ctx-ev-count">2</span>
+          <span class="sp-ctx-ev-chev">▾</span>
         </div>
-        <div style="padding:10px 12px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:9px;margin-bottom:6px">
-          <div style="display:flex;align-items:center;gap:8px">
-            <div style="width:28px;height:28px;border-radius:6px;background:#FEF3C7;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0">☁️</div>
-            <div style="flex:1">
-              <div style="font-size:12px;font-weight:700;color:var(--black)">Cloud Architecture Fundamentals</div>
-              <div style="font-size:10.5px;color:var(--gray-500)">AWS · 12 modules</div>
+        <div class="sp-ctx-ev-body">
+          <div class="sp-ctx-ev-item">
+            <div style="display:flex;align-items:center;gap:8px">
+              <div style="width:24px;height:24px;border-radius:6px;background:#FEF3C7;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0">☁️</div>
+              <div style="flex:1">
+                <div class="sp-ctx-ev-item-title">Cloud Architecture Fundamentals</div>
+                <div class="sp-ctx-ev-item-date">AWS · 12 modules</div>
+              </div>
+              <div style="font-size:10px;font-weight:800;color:#059669;background:#D1FAE5;padding:2px 8px;border-radius:4px">65%</div>
             </div>
-            <div style="font-size:10px;font-weight:800;color:#059669;background:#D1FAE5;padding:2px 8px;border-radius:4px">65%</div>
           </div>
-        </div>
-        <div style="padding:10px 12px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:9px">
-          <div style="display:flex;align-items:center;gap:8px">
-            <div style="width:28px;height:28px;border-radius:6px;background:#EDE9FE;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0">🏗️</div>
-            <div style="flex:1">
-              <div style="font-size:12px;font-weight:700;color:var(--black)">System Design for Tech Leads</div>
-              <div style="font-size:10.5px;color:var(--gray-500)">Internal · 8 modules</div>
+          <div class="sp-ctx-ev-item">
+            <div style="display:flex;align-items:center;gap:8px">
+              <div style="width:24px;height:24px;border-radius:6px;background:#EDE9FE;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0">🏗️</div>
+              <div style="flex:1">
+                <div class="sp-ctx-ev-item-title">System Design for Tech Leads</div>
+                <div class="sp-ctx-ev-item-date">Internal · 8 modules</div>
+              </div>
+              <div style="font-size:10px;font-weight:800;color:var(--gray-400);background:var(--gray-100);padding:2px 8px;border-radius:4px">Not started</div>
             </div>
-            <div style="font-size:10px;font-weight:800;color:var(--gray-400);background:var(--gray-100);padding:2px 8px;border-radius:4px">Not started</div>
           </div>
         </div>
       </div>
 
       <!-- Achievements -->
-      <div style="margin-bottom:16px">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-          <div style="font-size:11px;font-weight:800;color:var(--black);text-transform:uppercase;letter-spacing:.04em">
-            <span style="margin-right:3px">🏆</span> Achievements
+      <div class="sp-ctx-ev-section">
+        <div class="sp-ctx-ev-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="sp-ctx-ev-icon" style="background:#FEF3C7;color:#92400E">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
           </div>
-          <button style="font-size:10px;font-weight:700;color:#7C3AED;background:none;border:none;cursor:pointer">+ Add</button>
+          <div class="sp-ctx-ev-title">Achievements</div>
+          <span class="sp-ctx-ev-count">3</span>
+          <span class="sp-ctx-ev-chev">▾</span>
         </div>
-        <div style="display:flex;flex-wrap:wrap;gap:6px">
-          <div style="display:flex;align-items:center;gap:5px;padding:6px 10px;background:#FEF3C7;border:1px solid #FDE68A;border-radius:8px;font-size:11px;font-weight:600;color:#92400E">⭐ Top performer Q4 2025</div>
-          <div style="display:flex;align-items:center;gap:5px;padding:6px 10px;background:#D1FAE5;border:1px solid #A7F3D0;border-radius:8px;font-size:11px;font-weight:600;color:#065F46">🚀 Shipped Payments v1 on time</div>
-          <div style="display:flex;align-items:center;gap:5px;padding:6px 10px;background:#EDE9FE;border:1px solid #DDD6FE;border-radius:8px;font-size:11px;font-weight:600;color:#5B21B6">🎓 AWS Cloud Practitioner</div>
+        <div class="sp-ctx-ev-body">
+          <div style="display:flex;flex-wrap:wrap;gap:6px;padding:2px 0">
+            <div style="display:flex;align-items:center;gap:5px;padding:6px 10px;background:#FEF3C7;border:1px solid #FDE68A;border-radius:8px;font-size:11px;font-weight:600;color:#92400E">⭐ Top performer Q4 2025</div>
+            <div style="display:flex;align-items:center;gap:5px;padding:6px 10px;background:#D1FAE5;border:1px solid #A7F3D0;border-radius:8px;font-size:11px;font-weight:600;color:#065F46">🚀 Shipped Payments v1 on time</div>
+            <div style="display:flex;align-items:center;gap:5px;padding:6px 10px;background:#EDE9FE;border:1px solid #DDD6FE;border-radius:8px;font-size:11px;font-weight:600;color:#5B21B6">🎓 AWS Cloud Practitioner</div>
+          </div>
         </div>
       </div>
 
-      <!-- Notes & Docs -->
-      <div style="margin-bottom:16px">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-          <div style="font-size:11px;font-weight:800;color:var(--black);text-transform:uppercase;letter-spacing:.04em">
-            <span style="margin-right:3px">📎</span> Documents & notes
+      <!-- Documents & notes -->
+      <div class="sp-ctx-ev-section">
+        <div class="sp-ctx-ev-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="sp-ctx-ev-icon">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           </div>
-          <button style="font-size:10px;font-weight:700;color:#7C3AED;background:none;border:none;cursor:pointer">+ Upload</button>
+          <div class="sp-ctx-ev-title">Documents & notes</div>
+          <button onclick="event.stopPropagation();alert('Upload — coming soon')" style="background:none;border:none;cursor:pointer;color:var(--gray-300);padding:2px;display:flex;align-items:center;transition:color .15s;margin-left:auto;margin-right:4px" onmouseover="this.style.color='#7C3AED'" onmouseout="this.style.color='var(--gray-300)'"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></button>
+          <span class="sp-ctx-ev-count">2</span>
+          <span class="sp-ctx-ev-chev">▾</span>
         </div>
-        <div style="padding:8px 10px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:8px;margin-bottom:6px;display:flex;align-items:center;gap:8px">
-          <span style="font-size:13px">📄</span>
-          <div style="flex:1"><div style="font-size:11.5px;font-weight:600;color:var(--black)">Maria-2025-PerfReview.pdf</div><div style="font-size:10px;color:var(--gray-400)">Uploaded Dec 2025 · 1.2 MB</div></div>
-        </div>
-        <div style="padding:8px 10px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:8px;display:flex;align-items:center;gap:8px">
-          <span style="font-size:13px">📝</span>
-          <div style="flex:1"><div style="font-size:11.5px;font-weight:600;color:var(--black)">1:1 Notes — March 2026</div><div style="font-size:10px;color:var(--gray-400)">Added by Giorgio S. · Mar 7</div></div>
+        <div class="sp-ctx-ev-body">
+          <div class="sp-ctx-ev-item">
+            <div style="display:flex;align-items:center;gap:8px">
+              <span style="font-size:13px">📄</span>
+              <div style="flex:1">
+                <div class="sp-ctx-ev-item-title">Maria-2025-PerfReview.pdf</div>
+                <div class="sp-ctx-ev-item-date">Uploaded Dec 2025 · 1.2 MB</div>
+              </div>
+            </div>
+          </div>
+          <div class="sp-ctx-ev-item">
+            <div style="display:flex;align-items:center;gap:8px">
+              <span style="font-size:13px">📝</span>
+              <div style="flex:1">
+                <div class="sp-ctx-ev-item-title">1:1 Notes — March 2026</div>
+                <div class="sp-ctx-ev-item-date">Added by Giorgio S. · Mar 7</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- Add custom field -->
-      <button onclick="alert('Add custom field — coming soon')" style="display:flex;align-items:center;justify-content:center;gap:6px;width:100%;padding:10px;border:1.5px dashed var(--gray-200);border-radius:9px;background:none;font-size:11px;font-weight:600;color:var(--gray-400);cursor:pointer;transition:all .15s" onmouseover="this.style.borderColor='#7C3AED';this.style.color='#7C3AED'" onmouseout="this.style.borderColor='var(--gray-200)';this.style.color='var(--gray-400)'">
+      <button onclick="alert('Add custom field — coming soon')" style="display:flex;align-items:center;justify-content:center;gap:6px;width:100%;padding:10px;border:1.5px dashed var(--gray-200);border-radius:9px;background:none;font-size:11px;font-weight:600;color:var(--gray-400);cursor:pointer;transition:all .15s;margin-top:8px" onmouseover="this.style.borderColor='#7C3AED';this.style.color='#7C3AED'" onmouseout="this.style.borderColor='var(--gray-200)';this.style.color='var(--gray-400)'">
         <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
         Add custom field
       </button>
@@ -13439,9 +13394,10 @@ body {
     const panel = document.getElementById('wf-kpi-chart-panel');
     if (!panel) return;
     document.querySelectorAll('.wf-kpi').forEach(c => c.classList.remove('active'));
-    // Close skill map if open
-    const skillMap = document.getElementById('wf-skill-map-section');
-    if (skillMap) skillMap.classList.remove('open');
+
+    // Close any open skill cat panels (exclusive toggle)
+    document.querySelectorAll('#wf-skill-map-section .tv-cat-panel').forEach(p => p.classList.remove('open'));
+    document.querySelectorAll('#wf-skill-map-section .tv-cat-bubble').forEach(b => b.classList.remove('active'));
 
     if (_wfActiveKpi === key) {
       _wfActiveKpi = null;
@@ -13509,28 +13465,38 @@ body {
   }
 
   function wfToggleSkillMap(cardEl) {
+    // Close KPI chart panel (exclusive toggle — only 1 thing open)
+    const kpiPanel = document.getElementById('wf-kpi-chart-panel');
+    if (kpiPanel) kpiPanel.classList.remove('open');
+    _wfActiveKpi = null;
+    document.querySelectorAll('.wf-kpi').forEach(c => c.classList.remove('active'));
+
     const section = document.getElementById('wf-skill-map-section');
     if (!section) return;
-    document.querySelectorAll('.wf-kpi').forEach(c => c.classList.remove('active'));
-    // Close chart panel if open
-    const chartPanel = document.getElementById('wf-kpi-chart-panel');
-    if (chartPanel) { chartPanel.classList.remove('open'); _wfActiveKpi = null; }
-
-    if (section.classList.contains('open')) {
-      section.classList.remove('open');
-      return;
+    const isHidden = section.style.display === 'none';
+    if (isHidden) {
+      section.style.display = '';
+      if (cardEl) cardEl.classList.add('active');
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      section.style.display = 'none';
+      // Close any open sub-panels
+      document.querySelectorAll('#wf-skill-map-section .tv-cat-panel').forEach(p => p.classList.remove('open'));
+      document.querySelectorAll('#wf-skill-map-section .tv-cat-bubble').forEach(b => b.classList.remove('active'));
     }
-    cardEl.classList.add('active');
-    section.classList.add('open');
   }
 
   function wfCloseSkillMap() {
-    const section = document.getElementById('wf-skill-map-section');
-    if (section) section.classList.remove('open');
-    document.querySelectorAll('.wf-kpi').forEach(c => c.classList.remove('active'));
+    // No-op — skill map is always visible
   }
 
   function wfToggleSkillCat(id) {
+    // Close KPI chart panel (exclusive toggle)
+    const kpiPanel = document.getElementById('wf-kpi-chart-panel');
+    if (kpiPanel) kpiPanel.classList.remove('open');
+    _wfActiveKpi = null;
+    document.querySelectorAll('.wf-kpi').forEach(c => c.classList.remove('active'));
+
     const panel = document.getElementById(id);
     if (!panel) return;
     const isOpen = panel.classList.contains('open');
@@ -13565,6 +13531,18 @@ body {
     const open  = steps[0].classList.contains('sp-devpath-hidden');
     steps.forEach(s => s && s.classList.toggle('sp-devpath-hidden', !open));
     btn.textContent = open ? 'Show fewer steps ↑' : 'Show all steps (3 remaining) ↓';
+  }
+
+  function toggleActivityHistory() {
+    var el = document.getElementById('sp-activity-extra');
+    var btn = document.getElementById('sp-activity-toggle-btn');
+    if (el.style.display === 'none') {
+      el.style.display = 'block';
+      btn.textContent = 'Show less ↑';
+    } else {
+      el.style.display = 'none';
+      btn.textContent = 'Show more activity (6 items) ↓';
+    }
   }
 
   function renderDotCell(el) {
